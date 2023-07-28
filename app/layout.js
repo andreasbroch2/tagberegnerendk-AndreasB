@@ -1,3 +1,5 @@
+'use client'
+
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import WebsiteHeader from "./_components/WebsiteHeader";

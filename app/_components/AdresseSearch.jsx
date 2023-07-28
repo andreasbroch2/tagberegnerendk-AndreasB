@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { event } from "nextjs-google-analytics";
 
 // Eksporter AdresseSearch-komponenten
 const AdresseSearch = (props) => {
@@ -14,8 +15,13 @@ const AdresseSearch = (props) => {
         setSearchText(value);
         props.onSearchTextChange(value);
     };
-
-    const fetchAutocompleteResults = async (searchText) => {
+    const adressEvent = () => {
+        event("adress_search", {
+            category: "Search",
+            label: 'Adress search',
+          });
+    }
+        const fetchAutocompleteResults = async (searchText) => {
         if (searchText.trim() !== "") {
             try {
                 const response = await fetch(
@@ -81,7 +87,7 @@ const AdresseSearch = (props) => {
                                     </div>
                                 )}
                                 {autocompleteResults.map((result) => (
-                                    <Link key={result.tekst} href={`/beregning/${result.tekst}`}>
+                                    <Link onClick={adressEvent()} key={result.tekst} href={`/beregning/${result.tekst}`}>
                                         {autocompleteResults.length > 0 && (
                                             <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
                                                 {result.tekst}

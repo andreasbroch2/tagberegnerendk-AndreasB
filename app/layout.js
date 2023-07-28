@@ -6,7 +6,6 @@ import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Script from "next/script";
 import TagManager from 'react-gtm-module';
-import { useEffect } from "react";
 
 
 const poppins = Poppins({

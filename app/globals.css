@@ -1,0 +1,537 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #14C200;
+}
+
+
+
+
+body {
+  background: linear-gradient(180deg, #EFF7FF 25.62%, #FFFFFF 68.75%);
+  min-height: 100vh !important;
+  color: #0D1F3C;
+  margin: auto;
+  font-family: var(--font-poppins) !important;
+  font-size: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+  color: #0C1A2A !important;
+}
+
+section {
+  margin-top: 6rem !important;
+  margin-bottom: 8rem !important;
+}
+
+
+Footer {
+  min-width: 100% !important;
+  background-color: #0C1A2A !important;
+  margin: 0px !important;
+  margin-top: auto !important;
+
+}
+
+.container {
+  margin: auto;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  max-width: 1300px !important;
+}
+
+.tagrenoveringspan {
+  color: var(--green);
+}
+
+p {
+  line-height: 1.7 !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.beregnKnap {
+  background: var(--green);
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  color: #fff;
+}
+
+.beregnKnap:hover {
+  background: var(--green);
+}
+
+.linkKnap {
+  background: var(--green);
+  border-radius: 10px;
+  padding: 15px 25px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.beregnerStart {
+  background: linear-gradient(0deg, rgba(12, 26, 42, 1), rgba(12, 26, 42, 0.9));
+  box-shadow: 0px 4px 23px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.adresseInput {
+  width: 100%;
+}
+
+.artikelTekst {
+  white-space: 'pre-line';
+  margin-bottom: '10px',
+}
+
+.menuDropdown {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  z-index: 1;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 23px 5px rgba(0, 0, 0, 0.20);
+}
+
+.menuDropdown li {
+  padding: 15px 50px 15px 20px;
+  width: 100% !important;
+  text-align: start;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.menuDropdown li:hover {
+  width: 100% !important;
+  background: #F3F9FF;
+  color: black;
+}
+
+.menuDropdown Link {
+  width: 100% !important;
+}
+
+.mobileMenu {
+  position: relative;
+  display: inline-block;
+}
+
+
+.calculator {
+  width: 100%;
+  background: linear-gradient(153.37deg, #0C1A2A 6.94%, rgba(12, 26, 42, 0.87) 88.51%);
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+
+}
+
+.forslagsListe {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px !important;
+}
+
+.forslagsListe li {
+  padding: 15px 20px;
+  width: 100%;
+  text-align: start;
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.forslagsListe li:hover {
+  background: #F3F9FF;
+  color: black;
+}
+
+
+.boligOplysninger {
+  background: #0C1A2A;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+}
+
+.boligInput {
+  height: 50px;
+  background: white;
+  color: #0C1A2A;
+  border-radius: 10px;
+}
+
+.inputLabel {
+  font-weight: 200;
+  color: #D7D7D7;
+}
+
+.renoType {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+
+.iconBox {
+  width: 60px;
+  height: 60px;
+  background: #233447;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.numberBox {
+  width: 30px;
+  height: 30px;
+  background: #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.iconBoxLight {
+  width: 60px;
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+
+
+
+.renoType{
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.renoType:hover{
+  scale: 1.1;
+}
+
+.teglTag {
+  background-image:  url(https://www.jjtotalbyg.dk/CustomerData/Files/Images/Archive/2-content/nyt-tag_253.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+.stålTag {
+  background-image: url(https://jydsktagteknik.dk/wp-content/uploads/2019/04/jydsk-tagteknik-decra-elegance-sort.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+.betonTegl {
+
+  background-image: url(https://ibf-dk.b-cdn.net/media/5d/f4/c7/1612772658/IBF_Dobbelt-S_Antracit_4.jpg?width=3000&height=);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+.tagPap {
+  background-image: url(https://www.byggematerialer.dk/isola-platon/tag-13/produkt-files/th1515100.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+
+}
+
+
+.eternit {
+  background-image:  url(https://www.bygma.dk/globalassets/produktsider/byggematerialer/tag/eternitplader/bygma-boelgeplader-eternit-udvalg.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+.stråTag {
+  background-image: url(https://usercontent.one/wp/www.casparhall.dk/wp-content/uploads/caspar-hall-tid-til-straatag.jpg?media=1685523185);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+
+}
+
+
+
+.levende {
+  background-image:  url(https://grønne-tage.dk/wp-content/uploads/2021/01/NINNA-villa-Gront-tag-pa-huset-768x439.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+
+.naturSkifer {
+  background-image:  url(https://komproment.dk/wp-content/uploads/2021/04/koncept-roof.jpg);
+  background-size: cover;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: white !important;
+}
+
+
+.pricerange-line {
+  width: 100%;
+  height: 10px;
+  background: var(--green);
+  border-radius: 10px;
+}
+
+/* Center all content */
+.pricerange-lowprice {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pricerange-lowpriceline {
+  width: 10px;
+  height: 20px;
+  background: var(--green);
+  border-radius: 10px;
+}
+
+.pricerange-middlepriceline {
+  width: 10px;
+  height: 35px;
+  background: var(--green);
+  border-radius: 10px;
+  min-height: fit-content;
+}
+
+.pricerange-highpriceline {
+  width: 10px;
+  height: 45px;
+  background: var(--green);
+  border-radius: 10px;
+}
+
+.råd {
+  width: 100%;
+  background: #F3F9FF;
+  color: #0C1A2A !important;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  color: white;
+}
+
+.artikel {
+  width: 100%;
+  background: #F3F9FF;
+  color: #0C1A2A !important;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.forfatterBillede {
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.faq-item {
+  background: #F3F9FF;
+  color: #0C1A2A !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.faq-item:hover {
+  scale: 1.02;
+}
+
+.faq-item .answer {
+  margin-top: 20px;
+}
+
+.lavHældning {
+  border-radius: 4px;
+background: #13BA00;
+width: 84px;
+height: 9px;
+flex-shrink: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #13BA00;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.inputLeads {
+  height: 60px !important;
+}
+
+.rådgiverFoto {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+
+
+/* Mobile view */
+
+@media (max-width: 800px) {
+
+  .forslagsListe {
+  position: relative;
+  margin: auto;
+  z-index: 9999;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px !important;
+}
+
+body {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  main {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
+section {
+  margin-top: 4rem !important;
+  margin-bottom: 4rem !important;
+}
+
+.titleHeader {
+    font-size: 3.6rem !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
+}
+
+h2 {
+  font-size: 2.3rem !important;
+  line-height: 1.3 !important;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+h3 {
+  font-size: 2.7rem !important;
+  line-height: 1.3 !important;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+
+/* Large view */
+
+@media (min-width: 800px) {
+
+  .artikel:hover {
+
+  scale: 1.02;
+}
+
+  main {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+  .titleHeader {
+    font-size: 4.5rem !important;
+    line-height: 1.3 !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
+}
+
+@media (min-width: 1150px) {
+
+
+
+  .titleHeader {
+    font-size: 5.4rem !important;
+  }
+}

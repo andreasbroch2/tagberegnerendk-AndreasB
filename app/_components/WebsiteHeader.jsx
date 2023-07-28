@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserButton, SignedOut, SignedIn } from "@clerk/clerk-react";
 import { GoogleAnalytics } from "nextjs-google-analytics";
+import TagManager from 'react-gtm-module';
+
 
 export default function WebsiteHeader() {
     const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
@@ -11,7 +13,9 @@ export default function WebsiteHeader() {
         setIsNavOpen(!isNavOpen); // toggle the state of isNavOpen
         console.log(isNavOpen);
     }
-
+    useEffect(() => {
+        TagManager.initialize({ gtmId: 'GTM-WPWLFM6B' });
+    }, []);
     return (
         <header>
             <GoogleAnalytics />

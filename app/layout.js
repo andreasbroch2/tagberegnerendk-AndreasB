@@ -1,5 +1,3 @@
-'use client'
-
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import WebsiteHeader from "./_components/WebsiteHeader";
@@ -7,8 +5,6 @@ import WebsiteFooter from "./_components/WebsiteFooter";
 import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Script from "next/script";
-import TagManager from 'react-gtm-module';
-
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -17,9 +13,7 @@ const poppins = Poppins({
 });
 
 export default function RootLayout({ children }) {
-    if (process.browser) {
-        TagManager.initialize({ gtmId: 'GTM-WPWLFM6B' });
-      }
+
     return (
         <ClerkProvider>
             <html lang="da-dk">

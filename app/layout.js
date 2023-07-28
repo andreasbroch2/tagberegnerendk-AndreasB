@@ -15,7 +15,9 @@ const poppins = Poppins({
 });
 
 export default function RootLayout({ children }) {
-    TagManager.initialize({ gtmId: 'GTM-WPWLFM6B' });
+    if (process.browser) {
+        TagManager.initialize({ gtmId: 'GTM-WPWLFM6B' });
+      }
     return (
         <ClerkProvider>
             <html lang="da-dk">

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useSearchParams } from "next/navigation";
 import Script from "next/script";
+import Link from "next/link";
 
 export default function Pris() {
     const searchParams = useSearchParams();

@@ -81,7 +81,7 @@ export default function Pris() {
                     <div className="col-span-3 lg:col-span-2 gap-5">
                         {priceData.nyTagTypeTekst == "Tagmaling" ? null : (
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
-                                <a
+                                <Link
                                     href="#price"
                                     onClick={() => setPickedPrice("lavSamletPris")}
                                     className={`${
@@ -91,8 +91,8 @@ export default function Pris() {
                                     } rounded-lg shadow-lg p-5 text-center flex gap-2 justify-center`}>
                                     <p className="font-semibold">Laveste pris</p>
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href="#price"
                                     onClick={() => setPickedPrice("samletPris")}
                                     className={`${
@@ -101,8 +101,8 @@ export default function Pris() {
                                     <p className="font-semibold">Middel pris</p>
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href="#price"
                                     onClick={() => setPickedPrice("hojSamletPris")}
                                     className={`${
@@ -114,7 +114,7 @@ export default function Pris() {
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
                                     <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </a>
+                                </Link>
                             </div>
                         )}
 
@@ -283,11 +283,11 @@ export default function Pris() {
                                     </div>
                                 </div>
                                 <div className="mt-5 lg:my-auto">
-                                    <a href="tel:41974444">
+                                    <Link href="tel:41974444">
                                         <button className="bg-mygreen w-full lg:w-fit text-white font-semibold p-3 lg:p-5 rounded-lg shadow-sm">
                                             Kontakt håndværker
                                         </button>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

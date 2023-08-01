@@ -27,6 +27,8 @@ let lavSamletPris;
 let højSamletPris;
 let tagMalingPris;
 let skorsten = false;
+let tagrender = false;
+let udhæng = false;
 
 export async function calculator(search) {
     const getGrundData = async (search) => {
@@ -37,9 +39,6 @@ export async function calculator(search) {
             const res = await fetch(url);
             if (res.ok) {
                 const data = await res.json();
-                //adresseID = data[0].adgangsadresse.id;
-                //if there is no adresseID, then console.log error
-                console.log(data);
                 return data;
             } else {
                 console.error("Error:", res.status);
@@ -59,14 +58,11 @@ export async function calculator(search) {
             const res = await fetch(url);
             if (res.ok) {
                 const data = await res.json();
-                //If there is no data, then console.log error
                 if (data.length == 0) {
                     console.log("No data found");
                     return;
                 }
                 //If there is data, then set the data
-                console.log("Here is the data");
-                console.log(data);
                 return data;
             } else {
                 console.error("Error:", res.status);
@@ -103,8 +99,6 @@ export async function calculator(search) {
                 }
             }
         });
-        console.log("Største bygning:");
-        console.log(størsteBygning);
         return størsteBygning;
     };
 
@@ -185,7 +179,6 @@ export async function calculator(search) {
         } else if (Array.isArray(bolig.etageList)) {
             etager = bolig.etageList.length;
         }
-        /* console.log("Antal etager: " + etager); */
         return [etager, stuehus];
     };
 
@@ -210,7 +203,6 @@ export async function calculator(search) {
     async function beregnTagvinkel() {
         let tagvinkel = 0;
         //Beregn tagvinkel
-        /* console.log(stuehus, tagetageAreal, grundplansareal, fladttag); */
         if (stuehus) {
             tagvinkel = 25;
 
@@ -221,10 +213,8 @@ export async function calculator(search) {
             tagvinkel = 45;
         } else if (!stuehus && fladtTag) {
             tagvinkel = 0;
-            /* console.log("Tagvinkel4: " + tagvinkel); */
         } else {
             tagvinkel = 25;
-            /* console.log("Tagvinkel5: " + tagvinkel); */
         }
         return tagvinkel;
     }
@@ -240,7 +230,6 @@ export async function calculator(search) {
         else {
             højdeTagfod = bolig.byg054AntalEtager * 2.5;
         }
-        /* console.log("Højde til tagfod: " + højdeTagfod); */
         return højdeTagfod;
     }
 
@@ -372,8 +361,6 @@ export async function calculator(search) {
         " " +
         grundData[0].adgangsadresse.postnummer.navn;
 
-    console.log(grundData);
-    console.log(postnummer, by, "calculator");
     bygninger = await getBoligData();
     bolig = await findBoligPåGrund();
     boligGrundPlan = bolig.byg041BebyggetAreal;
@@ -423,7 +410,14 @@ export async function calculator(search) {
     };
 }
 
-export async function updatePrice(nyTagType, tagVinkel, tagFladeArealCustom, skorstenBool) {
+export async function updatePrice(
+    nyTagType,
+    tagVinkel,
+    tagFladeArealCustom,
+    skorstenBool,
+    tagrenderBool,
+    udhængBool
+) {
     async function beregnTagareal(tagVinkel) {
         let tagFlade;
         // Konverterer tagvinklen til radianer
@@ -551,6 +545,12 @@ export async function updatePrice(nyTagType, tagVinkel, tagFladeArealCustom, sko
         if (skorsten == true) {
             pris = pris + 10000;
         }
+        if (tagrenderBool == true) {
+            pris = pris + 10000;
+        }
+        if (udhængBool == true) {
+            pris = pris + 10000;
+        }
 
         lavSamletPris = pris * 0.8;
         lavSamletPris = Math.ceil(lavSamletPris);
@@ -581,6 +581,18 @@ export async function updatePrice(nyTagType, tagVinkel, tagFladeArealCustom, sko
         skorsten = true;
     } else {
         skorsten = false;
+    }
+
+    if (tagrenderBool == true) {
+        tagrender = true;
+    } else {
+        tagrender = false;
+    }
+
+    if (udhængBool == true) {
+        udhæng = true;
+    } else {
+        udhæng = false;
     }
 
     prisNedtagning = await beregnPrisNedtagning();

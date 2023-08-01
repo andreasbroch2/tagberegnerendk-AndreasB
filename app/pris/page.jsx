@@ -21,7 +21,6 @@ export default function Pris() {
         try {
             const leadsData = await getPriceData(priceID);
             setPriceData(leadsData);
-            console.log(priceData);
         } catch (error) {
             console.error("Error fetching leads:", error);
         }

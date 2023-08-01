@@ -1,26 +1,21 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserButton, SignedOut, SignedIn } from "@clerk/clerk-react";
 import { GoogleAnalytics } from "nextjs-google-analytics";
-import TagManager from 'react-gtm-module';
-
 
 export default function WebsiteHeader() {
     const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
 
     function handleNavToggle() {
         setIsNavOpen(!isNavOpen); // toggle the state of isNavOpen
-        console.log(isNavOpen);
     }
-    useEffect(() => {
-        TagManager.initialize({ gtmId: 'GTM-WPWLFM6B' });
-    }, []);
+
     return (
         <header>
             <GoogleAnalytics />
             <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
-                <p>Gratis prisberegning på nyt tag og tagmaling</p>
+                <p>Gratis og præcis prisberegning på nyt tag og tagmaling</p>
             </div>
             <div className="container px-3 lg:px-0">
                 <div className="mt-5 flex flex-wrap justify-between">

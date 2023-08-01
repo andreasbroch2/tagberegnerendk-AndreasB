@@ -1,7 +1,7 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { createCheckoutSession } from "./checkoutsession";
 
-export async function checkout({ lineItems, userId, leadId, customer }) {
+export async function checkout({ lineItems, userId, credits }) {
     let stripePromise = null;
 
     const getStripe = () => {
@@ -13,7 +13,7 @@ export async function checkout({ lineItems, userId, leadId, customer }) {
 
     const stripe = await getStripe();
 
-    const session = await createCheckoutSession(lineItems, userId, leadId, customer);
+    const session = await createCheckoutSession(lineItems, userId, credits);
 
     await stripe.redirectToCheckout({
         sessionId: session.id,

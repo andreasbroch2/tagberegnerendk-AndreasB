@@ -12,7 +12,6 @@ const convertToPlainObject = (data) => {
 export const getBoughtLeads = async (userId) => {
     try {
         const user = await currentUser();
-        console.log(user.emailAddresses[0].emailAddress);
         if (user.emailAddresses[0].emailAddress == process.env.ADMIN_EMAIL) {
             const leadsData = await Lead.find();
             const plainLeadsData = convertToPlainObject(leadsData);
@@ -28,7 +27,8 @@ export const getBoughtLeads = async (userId) => {
 
 export async function getLeads() {
     try {
-        const leads = await Lead.find();
+        //exclude leads that has bought set to true
+        const leads = await Lead.find({ bought: false }).sort({ _id: -1 });
         const plainLeads = convertToPlainObject(leads);
         return plainLeads;
     } catch (error) {
@@ -68,11 +68,12 @@ export const createLead = async (
     leadPriceId,
     by,
     postnummer,
+    udhæng,
+    tagrender,
     time
 ) => {
     //Convert adresse to string
     try {
-        console.log(by);
         postnummer = parseInt(postnummer);
         //convert højSamletPris to number
         let værdi;
@@ -81,14 +82,14 @@ export const createLead = async (
         } else if (nyTagTypeTekst !== "Tagmaling") {
             værdi = samletPris;
         }
-        console.log(værdi);
         // Remove all . and , from the string
         værdi = værdi.replace(/\./g, "");
         værdi = parseInt(værdi);
-        console.log(værdi);
 
         if (nyTagTypeTekst == "Tagmaling") {
             samletPris = tagMalingPris;
+            lavSamletPris = tagMalingPris * 0.8;
+            højSamletPris = tagMalingPris * 1.2;
         }
 
         //split date from time time is in format 19.7.2023 12:00:00
@@ -132,12 +133,13 @@ export const createLead = async (
             origin: "Tagberegneren",
             beskrivelse: beskrivelse,
             opgave: nyTagTypeTekst,
+            udhaeng: udhæng,
+            tagrender: tagrender,
         });
 
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen
         await newLead.save();
-        console.log("Lead oprettet:", newLead);
     } catch (error) {
         console.error("Fejl ved oprettelse af lead:", error);
     }
@@ -177,7 +179,6 @@ export async function sendEmail(type, by) {
             subject: "Nyt lead",
             html: `<h1>${type} ${by}</h1>`,
         });
-        console.log("Email sent");
         return data;
     } catch (error) {
         return error;

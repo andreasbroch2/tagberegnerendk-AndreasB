@@ -19,9 +19,9 @@ const AdresseSearch = (props) => {
         event("adress_search", {
             category: "Search",
             label: 'Adress search',
-          });
+        });
     }
-        const fetchAutocompleteResults = async (searchText) => {
+    const fetchAutocompleteResults = async (searchText) => {
         if (searchText.trim() !== "") {
             try {
                 const response = await fetch(
@@ -78,9 +78,8 @@ const AdresseSearch = (props) => {
                                 }}
                             />
                             <div
-                                className={`bg-white p-5 gap-1 text-black shadow-lg ${
-                                    searchText === "" ? "hidden" : "block"
-                                } forslagsListe`}>
+                                className={`bg-white p-5 gap-1 text-black shadow-lg ${searchText === "" ? "hidden" : "block"
+                                    } forslagsListe`}>
                                 {autocompleteResults.length === 0 && (
                                     <div className="bg-white p-5 w-full text-start rounded-lg">
                                         Indtast gyldig adresse

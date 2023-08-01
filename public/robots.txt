@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://tagberegneren.dk
+
+# Sitemaps
+Sitemap: https://tagberegneren.dk/sitemap.xml

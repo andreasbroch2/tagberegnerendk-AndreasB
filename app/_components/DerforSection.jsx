@@ -21,7 +21,7 @@ export default function DerforSection() {
                                 />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
-                                Automitisk beregning
+                                Automatisk beregning
                             </h4>
                             <p className="font-light text-darkblue mt-4">
                                 Tagberegneren.dk giver dig en nøjagtig pris på dit nye tag eller din
@@ -39,7 +39,7 @@ export default function DerforSection() {
                                 />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
-                                100% Gratis beregner
+                                100% Gratis tag beregner
                             </h4>
                             <p className="font-light text-darkblue mt-4">
                                 Mange prisberegnere på nettet er ikke gratis. Det er

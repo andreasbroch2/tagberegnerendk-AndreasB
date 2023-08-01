@@ -2,6 +2,12 @@ import Råd from "../_components/Råd";
 import { goderåd } from "../utils/goderåd";
 import { navne } from "../utils/navne";
 
+export const metadata = {
+    title: "Gode råd omkring nyt tag eller tagmaling",
+    description:
+        "Gode råd til dig der skal have lavet en tagrenovering i form af nyt tag eller tagmaling.",
+};
+
 export default function Page() {
     return (
         <div className="mb-20">

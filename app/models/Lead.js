@@ -37,6 +37,8 @@ try {
         origin: String,
         beskrivelse: String,
         opgave: String,
+        udhaeng: String,
+        tagrender: String,
     });
 
     Lead = mongoose.model("Lead", leadSchema);

@@ -122,7 +122,6 @@ export const findBoligPåGrund = async () => {
     let størsteBygning = null;
 
     bygninger.forEach((element) => {
-        console.log(element.byg021BygningensAnvendelse);
         if (
             element.byg021BygningensAnvendelse == "110" ||
             element.byg021BygningensAnvendelse == "120" ||
@@ -143,8 +142,6 @@ export const findBoligPåGrund = async () => {
 
     if (størsteBygning) {
         bolig = størsteBygning;
-        console.log("Bolig: ");
-        console.log(bolig);
         findGrundplansareal();
     }
 };
@@ -239,7 +236,6 @@ const findBoligEtager = async () => {
     } else if (Array.isArray(bolig.etageList) && bolig.etageList.length > 1) {
         stuehus = false;
     }
-    console.log("Stuehus: " + stuehus);
     if (kælder && Array.isArray(bolig.etageList)) {
         etager = bolig.etageList.length - 1;
     } else if (Array.isArray(bolig.etageList)) {
@@ -272,14 +268,12 @@ async function beregnTagvinkel() {
     /* console.log(stuehus, tagetageAreal, grundplansareal, fladttag); */
     if (stuehus) {
         tagvinkel = 25;
-        console.log("Tagvinkel1: " + tagvinkel);
         if (fladttag) {
             tagvinkel = 0;
             console.log("Tagvinkel2: " + tagvinkel);
         }
     } else if (!stuehus && tagetageAreal > 0 && tagetageAreal < grundplansareal && !fladttag) {
         tagvinkel = 45;
-        console.log("Tagvinkel3: " + tagvinkel);
     } else if (!stuehus && fladttag) {
         tagvinkel = 0;
         /* console.log("Tagvinkel4: " + tagvinkel); */
@@ -303,7 +297,6 @@ async function beregnTagareal() {
     // Returnerer tagarealet
     tagareal = Math.round(tagareal);
     tagFlade = tagareal;
-    console.log("Tagflade: " + tagFlade);
 }
 
 async function beregnPrisNedtagning() {

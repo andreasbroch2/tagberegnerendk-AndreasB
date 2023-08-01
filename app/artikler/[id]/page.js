@@ -2,6 +2,26 @@ import React from "react";
 
 import { artikler } from "../../utils/artikler";
 
+export async function generateMetadata({ params }) {
+    function decodeURL(string) {
+        return decodeURIComponent(string.replace(/\+/g, " "));
+    }
+    function removeSymbols(string) {
+        return string.replace(/[^\w\s]/g, "");
+    }
+
+    var encodedString = params.id;
+    var decodedString = decodeURL(encodedString);
+
+    // Find the article with the matching title
+    var article = artikler.find(
+        (artikel) => removeSymbols(artikel.title) === removeSymbols(decodedString)
+    );
+    return {
+      title: article.title,
+    }
+  }
+
 export default function Page({ params }) {
     function decodeURL(string) {
         return decodeURIComponent(string.replace(/\+/g, " "));
@@ -9,8 +29,6 @@ export default function Page({ params }) {
 
     var encodedString = params.id;
     var decodedString = decodeURL(encodedString);
-
-    console.log(decodedString);
 
     // Find the article with the matching title
     var article = artikler.find(

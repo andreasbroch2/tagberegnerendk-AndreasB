@@ -8,6 +8,7 @@ import { createLead } from "@/app/utils/Serveractions/serverActions.js";
 import { v4 as uuidv4 } from "uuid";
 import va from "@vercel/analytics";
 import { sendEmail } from "@/app/utils/Serveractions/serverActions.js";
+import Image from "next/image";
 
 const leadPriceId = uuidv4();
 
@@ -38,6 +39,8 @@ export default function Beregning({ params }) {
     const [højSamletPris, setHøjSamletPris] = useState(0);
     const [tagMalingPris, setTagMalingPris] = useState(0);
     const [kælder, setKælder] = useState(false);
+    const [tagrender, setTagrender] = useState(false);
+    const [udhæng, setUdhæng] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -62,15 +65,17 @@ export default function Beregning({ params }) {
         fetchData();
     }, [params.adresse]);
 
-    function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten) {
-        updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten).then((result) => {
-            setSamletPris(result.middelSamletPris);
-            setLavSamletPris(result.lavSamletPris);
-            setHøjSamletPris(result.højSamletPris);
-            setTagMalingPris(result.tagMalingPris);
-            setTagfladeareal(result.tagFladeAreal);
-            setNyTagTypeTekst(result.nyTagTypeTekst);
-        });
+    function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhæng) {
+        updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhæng).then(
+            (result) => {
+                setSamletPris(result.middelSamletPris);
+                setLavSamletPris(result.lavSamletPris);
+                setHøjSamletPris(result.højSamletPris);
+                setTagMalingPris(result.tagMalingPris);
+                setTagfladeareal(result.tagFladeAreal);
+                setNyTagTypeTekst(result.nyTagTypeTekst);
+            }
+        );
     }
 
     if (loading) return <div>Loading...</div>;
@@ -635,6 +640,80 @@ export default function Beregning({ params }) {
                                             </h4>
                                         </div>
                                     </div>
+                                    <div className="mt-20">
+                                        <h4 className="font-bold text-3xl">Vælg ekstra</h4>
+                                        <p className="mt-5 w-full  font-light">
+                                            Vælg om du også vil have nye tagrender og eller udhæng
+                                            med i beregningen.
+                                        </p>
+                                        <div className="grid grid-cols-2 gap-5 mt-5">
+                                            <div
+                                                onClick={() => {
+                                                    handlePriceUpdate(
+                                                        nyTagType,
+                                                        tagVinkel,
+                                                        tagfladeareal,
+                                                        skorsten,
+                                                        !tagrender,
+                                                        udhæng
+                                                    );
+                                                    setTagrender(!tagrender);
+                                                }}
+                                                className={`${
+                                                    tagrender == true
+                                                        ? "bg-green-200 border-green-400 border-2"
+                                                        : "bg-white"
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                <div className="flex flex-col gap-1">
+                                                    <Image
+                                                        className="mx-auto"
+                                                        width={100}
+                                                        height={100}
+                                                        alt="Tagrender"
+                                                        src="/gutter.png"
+                                                    />
+                                                    <p className="font-semibold text-center my-auto mx-auto">
+                                                        Tagrender
+                                                    </p>
+                                                    <p className="font-light text-sm text-center">
+                                                        Check af hvis du ønsker nye tagrender
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                onClick={() => {
+                                                    setUdhæng(!udhæng);
+                                                    handlePriceUpdate(
+                                                        nyTagType,
+                                                        tagVinkel,
+                                                        tagfladeareal,
+                                                        skorsten,
+                                                        tagrender,
+                                                        !udhæng
+                                                    );
+                                                }}
+                                                className={`${
+                                                    udhæng == true
+                                                        ? "bg-green-200 border-green-400 border-2"
+                                                        : "bg-white"
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                <div className="flex flex-col gap-1">
+                                                    <Icon
+                                                        className="mx-auto"
+                                                        icon="mdi:house-minus-outline"
+                                                        height={100}
+                                                        color="#7ddb72"
+                                                    />
+                                                    <p className="font-semibold text-center my-auto mx-auto">
+                                                        Udhæng
+                                                    </p>
+                                                    <p className="font-light text-sm text-center">
+                                                        Check af hvis du ønsker nyt udhæng
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
 
@@ -729,6 +808,8 @@ export default function Beregning({ params }) {
                                                         leadPriceId,
                                                         by,
                                                         postnummer,
+                                                        udhæng,
+                                                        tagrender,
                                                         new Date().toLocaleString()
                                                     );
                                                     await sendEmail(nyTagTypeTekst, by);

@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 
 import Lead from "@/app/models/Lead";
 import BoughtLead from "@/app/models/boughtLead";
+import User from "@/app/models/user";
+
+const convertToPlainObject = (data) => {
+    return JSON.parse(JSON.stringify(data));
+};
 
 const connectToDatabase = async () => {
     try {
@@ -19,63 +24,33 @@ const connectToDatabase = async () => {
     }
 };
 
-const buyLead = async (leadId, userId) => {
+const buyCredits = async (userId, credits) => {
+    //Find user by id
+    let user = await User.findOne({ userId: userId });
+
+    credits = parseInt(credits);
     try {
-        const foundLead = await Lead.findById(leadId);
-        if (!foundLead) {
-            console.log("Lead not found:", leadId);
-        } else {
-            const boughtLead = new BoughtLead({
-                userId: userId,
-                leadId: leadId.toString(),
-                fornavn: foundLead.fornavn,
-                efternavn: foundLead.efternavn,
-                email: foundLead.email,
-                telefon: foundLead.telefon,
-                nyTagType: foundLead.nyTagType,
-                nyTagTypeTekst: foundLead.nyTagTypeTekst,
-                boligTagType: foundLead.boligTagType,
-                boligTagTypeTekst: foundLead.boligTagTypeTekst,
-                tagVinkel: foundLead.tagVinkel,
-                tagfladeareal: foundLead.tagfladeareal,
-                skorsten: foundLead.skorsten,
-                lavSamletPris: foundLead.lavSamletPris,
-                højSamletPris: foundLead.højSamletPris,
-                samletPris: foundLead.samletPris,
-                tagMalingPris: foundLead.tagMalingPris,
-                højdeTilTagrende: foundLead.højdeTilTagrende,
-                adresse: foundLead.adresse,
-                by: foundLead.by,
-                postnummer: foundLead.postnummer,
-                boligGrundPlan: foundLead.boligGrundPlan,
-                leadPriceId: foundLead.leadPriceId,
-                time: foundLead.time,
-                buyTime: new Date().toISOString(),
-                // Copy more fields from the foundLead to the boughtLead as needed
-            });
-
-            await boughtLead.save();
-            console.log("Purchase successful:", boughtLead);
-
-            await Lead.deleteOne({ _id: leadId });
-            console.log("Lead deleted:", leadId);
-        }
+        //Update user points
+        const userWithUpdatedPoints = await User.findOneAndUpdate(
+            { userId: userId },
+            { points: user.points + credits }
+        );
+        //convert to plain object
+        const plainUserWithUpdatedPoints = convertToPlainObject(userWithUpdatedPoints);
+        return plainUserWithUpdatedPoints;
     } catch (error) {
-        console.error("Error during purchase:", error);
+        throw new Error("Failed to buy credits: " + error.message);
     }
 };
 
 export async function POST(request) {
     const body = await request.json();
-    const { leadId, userId, passId } = body;
+    const { userId, credits } = body;
 
     // Check if the provided leadId is valid before proceeding
-    if (passId !== process.env.PASS_ID) {
-        return NextResponse.json({ error: "Invalid Identifaction" }, { status: 400 });
-    }
 
     await connectToDatabase();
-    await buyLead(leadId, userId);
+    await buyCredits(userId, credits);
 
     return NextResponse.json({ message: "Success!" });
 }

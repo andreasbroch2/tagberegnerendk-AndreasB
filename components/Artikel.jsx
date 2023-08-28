@@ -1,8 +1,9 @@
+import { useState } from "react";
 import Link from "next/link";
 // Eksporter Artikel-funktionen som standard eksport
 export default function Artikel(props) {
     //Show only the first 50 characters of the article
-    const article = props.article.substring(0, 80) + "...";
+    const [article, setArticle] = useState(props.article.substring(0, 80) + "...");
 
     return (
         <Link href={`/artikler/${props.title}`}>

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { getUserData } from "../utils/Serveractions/getUserData";
-import { SignInButton } from "@clerk/nextjs";
 
 export default function WebsiteFooter() {
     return (
@@ -34,13 +32,7 @@ export default function WebsiteFooter() {
                         </ul>
                     </div>
                     <div className="text-white">
-                        <><p className="font-semibold text-xl">Partnere</p><ul>
-                                <li className="mt-4">
-                                    <SignInButton mode="modal" afterSignInUrl="/partner/leads">
-                                        <button>Partnerlogin</button>
-                                    </SignInButton>
-                                </li>
-                            </ul></>
+                        <p className="font-semibold text-xl">Partnere</p>
                     </div>
                 </div>
             </div>

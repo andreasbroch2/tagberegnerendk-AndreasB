@@ -1,40 +1,10 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs";
 import Lead from "../../models/Lead";
-import BoughtLead from "../../models/boughtLead";
-import { Resend } from "resend";
 
 const convertToPlainObject = (data) => {
     return JSON.parse(JSON.stringify(data));
 };
-
-export const getBoughtLeads = async (userId) => {
-    try {
-        const user = await currentUser();
-        if (user.emailAddresses[0].emailAddress == process.env.ADMIN_EMAIL) {
-            const leadsData = await Lead.find();
-            const plainLeadsData = convertToPlainObject(leadsData);
-            return plainLeadsData;
-        }
-        const leadsData = await BoughtLead.find({ userId });
-        const plainLeadsData = convertToPlainObject(leadsData);
-        return plainLeadsData;
-    } catch (error) {
-        throw new Error("Error fetching bought leads: " + error.message);
-    }
-};
-
-export async function getLeads() {
-    try {
-        //exclude leads that has bought set to true
-        const leads = await Lead.find({ bought: false }).sort({ _id: -1 });
-        const plainLeads = convertToPlainObject(leads);
-        return plainLeads;
-    } catch (error) {
-        throw new Error("Failed to fetch leads: " + error.message);
-    }
-}
 
 export async function getPriceData(leadPriceId) {
     try {
@@ -87,9 +57,9 @@ export const createLead = async (
         værdi = parseInt(værdi);
 
         if (nyTagTypeTekst == "Tagmaling") {
-            samletPris = tagMalingPris;
-            lavSamletPris = tagMalingPris * 0.8;
-            højSamletPris = tagMalingPris * 1.2;
+            samletPris = værdi;
+            lavSamletPris = værdi * 0.8;
+            højSamletPris = værdi * 1.2;
         }
 
         //split date from time time is in format 19.7.2023 12:00:00
@@ -166,21 +136,5 @@ export async function getPlaceIdFromAddress(address, apiKey) {
         }
     } catch (error) {
         throw new Error("Failed to retrieve the Place ID from the address.");
-    }
-}
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export async function sendEmail(type, by) {
-    try {
-        const data = await resend.emails.send({
-            from: "lead@leadbasen.dk",
-            to: "esbenvh@gmail.com",
-            subject: "Nyt lead",
-            html: `<h1>${type} ${by}</h1>`,
-        });
-        return data;
-    } catch (error) {
-        return error;
     }
 }

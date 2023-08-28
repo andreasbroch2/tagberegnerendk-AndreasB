@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
@@ -7,15 +7,15 @@ import { calculator, updatePrice } from "@/app/utils/calculator";
 import { createLead } from "@/app/utils/Serveractions/serverActions.js";
 import { v4 as uuidv4 } from "uuid";
 import va from "@vercel/analytics";
-import { sendEmail } from "@/app/utils/Serveractions/serverActions.js";
 import Image from "next/image";
-
+import { event } from "nextjs-google-analytics";
+ 
 const leadPriceId = uuidv4();
 
 export default function Beregning({ params }) {
     const [loading, setLoading] = useState(true);
     const [adresse, setAdresse] = useState("");
-    const [by, setBy] = useState("");
+    const [by, setBy] = useState(""); 
     const [postnummer, setPostnummer] = useState("");
     const [boligGrundPlan, setBoligGrundPlan] = useState(0);
     const [boligDataÅben, setBoligDataÅben] = useState(false);
@@ -41,10 +41,21 @@ export default function Beregning({ params }) {
     const [kælder, setKælder] = useState(false);
     const [tagrender, setTagrender] = useState(false);
     const [udhæng, setUdhæng] = useState(false);
+    const [boligFound, setBoligFound] = useState(true);
 
     useEffect(() => {
+        va.track("Beregning");
+        event("Beregning", {
+            category: "Beregning",
+            label: 'Beregning',
+        });
         async function fetchData() {
             const result = await calculator(params.adresse);
+            if(!result.boligGrundPlan){
+                setBoligFound(false);
+                setLoading(false);
+                return;
+            }
             setAdresse(result.adresse);
             setBy(result.by);
             setPostnummer(result.postnummer);
@@ -78,37 +89,151 @@ export default function Beregning({ params }) {
         );
     }
 
-    if (loading) return <div>Loading...</div>;
+    // Create function for handling setting of renoveringType
+    function handleRenoveringType(renoveringType) {
+        setRenoveringType(renoveringType);
+        if (renoveringType == 1) {
+            va.track("nyt_tag");
+            event("nyt_tag", {
+                category: "Beregning",
+                label: 'Nyt tag',
+            });
+        } else if (renoveringType == 2) {
+            va.track("tagmaling");
+            event("tagmaling", {
+                category: "Beregning",
+                label: 'Tagmaling',
+            });
+        }
+    }
+    // Function to change submit button text to "Beregner din pris..."
+    async function changeButtonText() {
+        document.getElementById("submitButton").innerHTML = "Beregner din pris...";
+    }
 
+
+    if (loading) return <div className="text-center my-24 font-bold">Beregner boligdata...</div>;
+    if(!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
+
+    const formHtml = (
+        <><div className="mt-20">
+            <h4 className="font-bold text-3xl">Udfyld dine informationer</h4>
+            <p className="mt-5 w-full  font-light">
+                Udfyld dine informationer så vi kan gemme pris og så du kan
+                finde den senere.
+            </p>
+        </div><form id="leadform" name="leadform">
+                <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-5">
+                    <div>
+                        <label className="font-semibold">Fornavn</label>
+                        <input
+                            onChange={(e) => setFornavn(e.target.value)}
+                            value={fornavn}
+                            name="firstname"
+                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
+                            placeholder="Indtast fornavn"
+                            type="text" />
+                    </div>
+                    <div>
+                        <label className="font-semibold">Efternavn</label>
+                        <input
+                            onChange={(e) => setEfternavn(e.target.value)}
+                            value={efternavn}
+                            name="lastname"
+                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
+                            placeholder="Indtast efternavn"
+                            type="text" />
+                    </div>
+                    <div>
+                        <label className="font-semibold">Telefon</label>
+                        <input
+                            onChange={(e) => setTelefon(e.target.value)}
+                            value={telefon}
+                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
+                            placeholder="Indtast telefonnummer"
+                            type="tel" />
+                    </div>
+                    <div>
+                        <label className="font-semibold">Email</label>
+                        <input
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
+                            placeholder="Indtast email"
+                            type="email" />
+                    </div>
+                </div>
+                <p className="mt-8 text-center font-light text-sm opacity-50">
+                    Ved beregning af pris, accepterer du, at du får muligheden for
+                    at modtage tilbud fra én vores samarbejdspartnere. Du kan altid
+                    sige nej tak til tilbuddene.
+                </p>
+                <div className="mt-10">
+                    {fornavn.length > 2 &&
+                        efternavn.length > 4 &&
+                        email.match(
+                            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+                        ) &&
+                        telefon.match(/^[0-9]{8}$/) ? (
+                        <Link href={`/pris?id=${leadPriceId}`}>
+                            <button
+                                type="submit"
+                                id="submitButton"
+                                onClick={async () => {
+                                    va.track("GetPrice");
+                                    event("GetPrice", {
+                                        category: "Lead",
+                                        label: 'GetPrice',
+                                    });
+                                    // Change button text
+                                    await changeButtonText();
+                                    await createLead(
+                                        fornavn,
+                                        efternavn,
+                                        email,
+                                        telefon,
+                                        nyTagType,
+                                        nyTagTypeTekst,
+                                        boligTagType,
+                                        boligTagTypeTekst,
+                                        tagVinkel,
+                                        tagfladeareal,
+                                        skorsten,
+                                        lavSamletPris,
+                                        højSamletPris,
+                                        samletPris,
+                                        tagMalingPris,
+                                        højdeTilTagrende,
+                                        adresse,
+                                        boligGrundPlan,
+                                        leadPriceId,
+                                        by,
+                                        postnummer,
+                                        udhæng,
+                                        tagrender,
+                                        new Date().toLocaleString()
+                                    );
+                                }}
+                                className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
+                                Beregn pris
+                            </button>
+                        </Link>
+                    ) : (
+                        <div className="bg-gray-300 p-5 font-semibold text-lg text-center text-white rounded-lg w-full">
+                            Udfyld dine informationer
+                        </div>
+                    )}
+
+                </div>
+            </form></>
+    );
     return (
         <>
             <section>
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         <div className="col-span-3 lg:col-span-1">
-                            <div className="hidden lg:block bg-white rounded-xl p-5 shadow-xl">
-                                <div className=" flex justify-between gap-5">
-                                    <img
-                                        src="https://asset.dr.dk/imagescaler01/https%3A%2F%2Fwww.dr.dk%2Fimages%2Fother%2F2015%2F04%2F18%2Fa236298c-17fa-4447-b907-0d955c327895_20140307-120447-a-1000x667-we.jpg&w=620"
-                                        alt="rådgiverFoto"
-                                        className="rådgiverFoto rounded-full object-cover my-auto"
-                                    />
-                                    <div>
-                                        <p className="font-light text-sm">
-                                            Din personlige rådgiver
-                                        </p>
-                                        <h4 className="font-bold text-lg lg:text-1xl">
-                                            Martin Larsen
-                                        </h4>
-                                    </div>
-                                    <div className="my-auto">
-                                        <button className="px-2 lg:px-5 py-1 bg-mygreen rounded-lg text-white font-medium">
-                                            Kontakt
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="lg:hidden bg-white shadow-xl rounded-xl p-5 mt-5">
+                            <div className="lg:hidden bg-white shadow-xl rounded-xl p-5">
                                 <div className="flex justify-between">
                                     <div className="my-auto">
                                         <h4 className="font-bold text-lg lg:text-2xl">
@@ -120,7 +245,7 @@ export default function Beregning({ params }) {
                                     <div className="my-auto">
                                         <button
                                             onClick={() => setBoligDataÅben(!boligDataÅben)}
-                                            className="px-3 lg:px-5 py-1 bg-mygreen-500 rounded-lg text-white font-medium">
+                                            className="px-3 lg:px-5 py-1 bg-mygreen rounded-lg text-white font-medium">
                                             Se Boligdata
                                         </button>
                                     </div>
@@ -155,8 +280,8 @@ export default function Beregning({ params }) {
                                     </div>
                                 )}
                             </div>
-                            <div className="hidden lg:block bg-white shadow-xl rounded-xl p-5 mt-5">
-                                <div className="mt-5">
+                            <div className="hidden lg:block bg-white shadow-xl rounded-xl p-5">
+                                <div className="">
                                     <h4 className="font-bold text-2xl">Din boligdata</h4>
                                     <p className="font-light text-sm">Hentet fra BBR</p>
                                 </div>
@@ -194,9 +319,9 @@ export default function Beregning({ params }) {
                             <div className="bg-white shadow-lg rounded-lg font-semibold text-lg w-full p-5 text-start flex justify-between align-middle">
                                 <div className="my-auto">
                                     {seBeregning ? (
-                                        <p>Skjul beregning og tilvalg</p>
+                                        <p>Skjul</p>
                                     ) : (
-                                        <p>Se beregning og tilvalg</p>
+                                        <p>Ændre boligdata</p>
                                     )}
                                 </div>
 
@@ -240,11 +365,10 @@ export default function Beregning({ params }) {
                                                 setTagVinkel(0);
                                                 handlePriceUpdate(nyTagType, 0, 0, skorsten);
                                             }}
-                                            className={`${
-                                                tagVinkel == 0
+                                            className={`${tagVinkel == 0
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105 transition-all `}>
+                                                } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105 transition-all `}>
                                             <div className="flex flex-col gap-1">
                                                 <div className="lavHældning mx-auto m-0"></div>
                                                 <p className="font-semibold text-center my-auto mx-auto">
@@ -260,11 +384,10 @@ export default function Beregning({ params }) {
                                                 setTagVinkel(25);
                                                 handlePriceUpdate(nyTagType, 25, 0, skorsten);
                                             }}
-                                            className={`${
-                                                tagVinkel == 25
+                                            className={`${tagVinkel == 25
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
+                                                } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
                                                     className="mx-auto my-auto"
@@ -291,11 +414,10 @@ export default function Beregning({ params }) {
                                                 setTagVinkel(45);
                                                 handlePriceUpdate(nyTagType, 45, 0, skorsten);
                                             }}
-                                            className={`${
-                                                tagVinkel == 45
+                                            className={`${tagVinkel == 45
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
+                                                } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
                                                     className="my-auto mx-auto"
@@ -399,11 +521,10 @@ export default function Beregning({ params }) {
                                                     !skorsten
                                                 );
                                             }}
-                                            className={`${
-                                                skorsten
+                                            className={`${skorsten
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
                                                     className="mx-auto"
@@ -428,19 +549,18 @@ export default function Beregning({ params }) {
                                 </div>
                             )}
 
-                            <div className="mt-20">
+                            <div className="mt-10">
                                 <h4 className="font-bold text-3xl">Hvad ønsker du pris på</h4>
                                 <p className="mt-5 w-full font-light">
                                     Vælg den type renovering du ønsker at beregne pris på.
                                 </p>
                                 <div className="grid grid-cols-2 gap-5 mt-5">
                                     <div
-                                        onClick={() => setRenoveringType(1)}
-                                        className={`${
-                                            renoveringType == 1
+                                        onClick={() => handleRenoveringType(1)}
+                                        className={`${renoveringType == 1
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                        } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
                                             <Icon
                                                 className="mx-auto"
@@ -458,14 +578,13 @@ export default function Beregning({ params }) {
                                     </div>
                                     <div
                                         onClick={() => {
-                                            setRenoveringType(2);
+                                            handleRenoveringType(2);
                                             setNyTagTypeTekst("Tagmaling");
                                         }}
-                                        className={`${
-                                            renoveringType == 2
+                                        className={`${renoveringType == 2
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                        } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
                                             <Icon
                                                 className="mx-auto"
@@ -497,11 +616,10 @@ export default function Beregning({ params }) {
                                                 setNyTagType(1);
                                                 handlePriceUpdate(1, tagVinkel, tagfladeareal);
                                             }}
-                                            className={`teglTag ${
-                                                nyTagType == "1"
+                                            className={`teglTag ${nyTagType == "1"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Tegltag
                                             </h4>
@@ -516,11 +634,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`stålTag ${
-                                                nyTagType == "2"
+                                            className={`stålTag ${nyTagType == "2"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Ståltag
                                             </h4>
@@ -535,11 +652,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`betonTegl ${
-                                                nyTagType == "3"
+                                            className={`betonTegl ${nyTagType == "3"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Betontegl
                                             </h4>
@@ -554,11 +670,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`tagPap ${
-                                                nyTagType == "4"
+                                            className={`tagPap ${nyTagType == "4"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Tagpap
                                             </h4>
@@ -573,11 +688,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`eternit ${
-                                                nyTagType == "5"
+                                            className={`eternit ${nyTagType == "5"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Eternit
                                             </h4>
@@ -592,11 +706,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`stråTag ${
-                                                nyTagType == "6"
+                                            className={`stråTag ${nyTagType == "6"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Stråtag
                                             </h4>
@@ -611,11 +724,10 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`levende ${
-                                                nyTagType == "7"
+                                            className={`levende ${nyTagType == "7"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Levendetag
                                             </h4>
@@ -630,201 +742,92 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`naturSkifer ${
-                                                nyTagType == "8"
+                                            className={`naturSkifer ${nyTagType == "8"
                                                     ? "bg-green-200 border-green-400 border-2"
                                                     : "bg-white"
-                                            } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Naturskifer
                                             </h4>
                                         </div>
                                     </div>
-                                    <div className="mt-20">
-                                        <h4 className="font-bold text-3xl">Vælg ekstra</h4>
-                                        <p className="mt-5 w-full  font-light">
-                                            Vælg om du også vil have nye tagrender og eller udhæng
-                                            med i beregningen.
-                                        </p>
-                                        <div className="grid grid-cols-2 gap-5 mt-5">
-                                            <div
-                                                onClick={() => {
-                                                    handlePriceUpdate(
-                                                        nyTagType,
-                                                        tagVinkel,
-                                                        tagfladeareal,
-                                                        skorsten,
-                                                        !tagrender,
-                                                        udhæng
-                                                    );
-                                                    setTagrender(!tagrender);
-                                                }}
-                                                className={`${
-                                                    tagrender == true
-                                                        ? "bg-green-200 border-green-400 border-2"
-                                                        : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                                <div className="flex flex-col gap-1">
-                                                    <Image
-                                                        className="mx-auto"
-                                                        width={100}
-                                                        height={100}
-                                                        alt="Tagrender"
-                                                        src="/gutter.png"
-                                                    />
-                                                    <p className="font-semibold text-center my-auto mx-auto">
-                                                        Tagrender
-                                                    </p>
-                                                    <p className="font-light text-sm text-center">
-                                                        Check af hvis du ønsker nye tagrender
-                                                    </p>
+                                    {nyTagType > 0 && (
+                                        <div className="mt-20">
+                                            <h4 className="font-bold text-3xl">Vælg ekstra</h4>
+                                            <p className="mt-5 w-full  font-light">
+                                                Vælg om du også vil have nye tagrender og eller udhæng
+                                                med i beregningen.
+                                            </p>
+                                            <div className="grid grid-cols-2 gap-5 mt-5">
+                                                <div
+                                                    onClick={() => {
+                                                        handlePriceUpdate(
+                                                            nyTagType,
+                                                            tagVinkel,
+                                                            tagfladeareal,
+                                                            skorsten,
+                                                            !tagrender,
+                                                            udhæng
+                                                        );
+                                                        setTagrender(!tagrender);
+                                                    }}
+                                                    className={`${tagrender == true
+                                                            ? "bg-green-200 border-green-400 border-2"
+                                                            : "bg-white"
+                                                        } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                    <div className="flex flex-col gap-1">
+                                                        <Image
+                                                            className="mx-auto"
+                                                            width={100}
+                                                            height={100}
+                                                            alt="Tagrender"
+                                                            src="/gutter.png"
+                                                        />
+                                                        <p className="font-semibold text-center my-auto mx-auto">
+                                                            Tagrender
+                                                        </p>
+                                                        <p className="font-light text-sm text-center">
+                                                            Check af hvis du ønsker nye tagrender
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    onClick={() => {
+                                                        setUdhæng(!udhæng);
+                                                        handlePriceUpdate(
+                                                            nyTagType,
+                                                            tagVinkel,
+                                                            tagfladeareal,
+                                                            skorsten,
+                                                            tagrender,
+                                                            !udhæng
+                                                        );
+                                                    }}
+                                                    className={`${udhæng == true
+                                                            ? "bg-green-200 border-green-400 border-2"
+                                                            : "bg-white"
+                                                        } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                                    <div className="flex flex-col gap-1">
+                                                        <Icon
+                                                            className="mx-auto"
+                                                            icon="mdi:house-minus-outline"
+                                                            height={100}
+                                                            color="#7ddb72"
+                                                        />
+                                                        <p className="font-semibold text-center my-auto mx-auto">
+                                                            Udhæng
+                                                        </p>
+                                                        <p className="font-light text-sm text-center">
+                                                            Check af hvis du ønsker nyt udhæng
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div
-                                                onClick={() => {
-                                                    setUdhæng(!udhæng);
-                                                    handlePriceUpdate(
-                                                        nyTagType,
-                                                        tagVinkel,
-                                                        tagfladeareal,
-                                                        skorsten,
-                                                        tagrender,
-                                                        !udhæng
-                                                    );
-                                                }}
-                                                className={`${
-                                                    udhæng == true
-                                                        ? "bg-green-200 border-green-400 border-2"
-                                                        : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                                <div className="flex flex-col gap-1">
-                                                    <Icon
-                                                        className="mx-auto"
-                                                        icon="mdi:house-minus-outline"
-                                                        height={100}
-                                                        color="#7ddb72"
-                                                    />
-                                                    <p className="font-semibold text-center my-auto mx-auto">
-                                                        Udhæng
-                                                    </p>
-                                                    <p className="font-light text-sm text-center">
-                                                        Check af hvis du ønsker nyt udhæng
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            <div className="mt-20">
-                                <h4 className="font-bold text-3xl">Udfyld dine informationer</h4>
-                                <p className="mt-5 w-full  font-light">
-                                    Udfyld dine informationer så vi kan gemme pris og så du kan
-                                    finde den senere.
-                                </p>
-                            </div>
-                            <form id="leadform" name="leadform">
-                                <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-5">
-                                    <div>
-                                        <label className="font-semibold">Fornavn</label>
-                                        <input
-                                            onChange={(e) => setFornavn(e.target.value)}
-                                            value={fornavn}
-                                            name="firstname"
-                                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                                            placeholder="Indtast fornavn"
-                                            type="text"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="font-semibold">Efternavn</label>
-                                        <input
-                                            onChange={(e) => setEfternavn(e.target.value)}
-                                            value={efternavn}
-                                            name="lastname"
-                                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                                            placeholder="Indtast efternavn"
-                                            type="text"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="font-semibold">Telefon</label>
-                                        <input
-                                            onChange={(e) => setTelefon(e.target.value)}
-                                            value={telefon}
-                                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                                            placeholder="Indtast telefonnummer"
-                                            type="tel"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="font-semibold">Email</label>
-                                        <input
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            value={email}
-                                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                                            placeholder="Indtast email"
-                                            type="email"
-                                        />
-                                    </div>
-                                </div>
-                                <p className="mt-8 text-center font-light text-sm opacity-50">
-                                    Ved beregning af pris, accepterer du, at du får muligheden for
-                                    at modtage 3 tilbud fra vores samarbejdspartnere. Du kan altid
-                                    sige nej tak til tilbuddene.
-                                </p>
-                                <div className="mt-10">
-                                    {fornavn.length > 2 &&
-                                    efternavn.length > 4 &&
-                                    email.match(
-                                        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-                                    ) &&
-                                    telefon.match(/^[0-9]{8}$/) ? (
-                                        <Link href={`/pris?id=${leadPriceId}`}>
-                                            <button
-                                                type="submit"
-                                                onClick={async () => {
-                                                    va.track("GetPrice");
-                                                    await createLead(
-                                                        fornavn,
-                                                        efternavn,
-                                                        email,
-                                                        telefon,
-                                                        nyTagType,
-                                                        nyTagTypeTekst,
-                                                        boligTagType,
-                                                        boligTagTypeTekst,
-                                                        tagVinkel,
-                                                        tagfladeareal,
-                                                        skorsten,
-                                                        lavSamletPris,
-                                                        højSamletPris,
-                                                        samletPris,
-                                                        tagMalingPris,
-                                                        højdeTilTagrende,
-                                                        adresse,
-                                                        boligGrundPlan,
-                                                        leadPriceId,
-                                                        by,
-                                                        postnummer,
-                                                        udhæng,
-                                                        tagrender,
-                                                        new Date().toLocaleString()
-                                                    );
-                                                    await sendEmail(nyTagTypeTekst, by);
-                                                }}
-                                                className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
-                                                Beregn pris
-                                            </button>
-                                        </Link>
-                                    ) : (
-                                        <div className="bg-gray-300 p-5 font-semibold text-lg text-center text-white rounded-lg w-full">
-                                            Udfyld dine informationer
                                         </div>
                                     )}
                                 </div>
-                            </form>
+                            )}
+                            {(renoveringType == 1 && nyTagType) && formHtml || renoveringType == 2 && formHtml}
                         </div>
                     </div>
                 </div>

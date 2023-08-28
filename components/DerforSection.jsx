@@ -1,5 +1,3 @@
-'use client'
-
 import { Icon } from "@iconify/react";
 
 export default function DerforSection() {
@@ -41,7 +39,7 @@ export default function DerforSection() {
                                 />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
-                                100% Gratis beregner
+                                100% Gratis tag beregner
                             </h4>
                             <p className="font-light text-darkblue mt-4">
                                 Mange prisberegnere på nettet er ikke gratis. Det er

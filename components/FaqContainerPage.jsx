@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from "react";
 import { faqData } from "../utils/faqData";
 import Link from "next/link";

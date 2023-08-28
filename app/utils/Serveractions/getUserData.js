@@ -12,7 +12,7 @@ export async function getUserData() {
     const user = await currentUser();
     // Check if the user exist in mongodb user model and if not, create it
     if (user) {
-        const userInDb = await User.findOne({ userId: user.id });
+        const userInDb = await User.findOne({ email: user.emailAddresses[0].emailAddress });
         if (!userInDb) {
             const newUser = new User({
                 userId: user.id,
@@ -48,7 +48,7 @@ export async function getUserData() {
         }
     }
     if (!user) {
-        throw new Error("You must be signed in to use this feature");
+        return "You must be signed in to use this feature";
     }
     const serverData = {
         user: user,

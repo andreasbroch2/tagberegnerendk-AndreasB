@@ -1,15 +1,14 @@
-'use client';
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { UserButton, SignedOut, SignedIn } from "@clerk/clerk-react";
+import { useState } from "react";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 
 export default function WebsiteHeader() {
     const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
+
     function handleNavToggle() {
         setIsNavOpen(!isNavOpen); // toggle the state of isNavOpen
     }
+
     return (
         <header>
             <GoogleAnalytics />
@@ -35,29 +34,13 @@ export default function WebsiteHeader() {
                         <li className="mr-4 hover:underline md:mr-6">
                             <Link href="/omos">Om os</Link>
                         </li>
-                        <SignedIn>
-                            <div className="flex font-medium">
-                                <li className="mr-4 hover:underline md:mr-6">|</li>
-                                <li className="mr-4 hover:underline md:mr-6">
-                                    <Link href="/partner/leads">Leads</Link>
-                                </li>
-                                <li className="mr-4 hover:underline md:mr-6">
-                                    <Link href="/partner/mineleads">Mine Leads</Link>
-                                </li>
-                            </div>
-                        </SignedIn>
                     </ul>
-                    <div className="hidden lg:block">
-                        <UserButton afterSignOutUrl="/" />
-                    </div>
 
-                    <SignedOut>
                         <Link href="/">
                             <button className="beregnKnap hidden lg:block font-medium">
                                 Beregn pris
                             </button>
                         </Link>
-                    </SignedOut>
 
                     <button onClick={handleNavToggle} className="lg:hidden mobileMenu">
                         <div className="space-y-2">
@@ -66,8 +49,9 @@ export default function WebsiteHeader() {
                             <div className="w-8 h-0.5 bg-gray-600"></div>
                         </div>
                         <div
-                            className={`lg:hidden ${isNavOpen ? "block" : "hidden"
-                                } menuDropdown mt-5`}>
+                            className={`lg:hidden ${
+                                isNavOpen ? "block" : "hidden"
+                            } menuDropdown mt-5`}>
                             <div className="flex flex-col items-start justify-start">
                                 <Link href="/goderaad" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Gode råd</p>
@@ -81,18 +65,6 @@ export default function WebsiteHeader() {
                                 <Link href="/omos" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Om os</p>
                                 </Link>
-                                <SignedIn>
-                                    <hr className="w-full" />
-                                    <Link href="/partner/leads" className="w-full">
-                                        <p className="px-5 py-4 w-full text-start">Leads</p>
-                                    </Link>
-                                    <Link href="/partner/mineleads" className="w-full">
-                                        <p className="px-5 py-4 w-full text-start">Mine Leads </p>
-                                    </Link>
-                                    <div className="px-5 py-4 w-full text-start">
-                                        <UserButton afterSignOutUrl="/" />
-                                    </div>
-                                </SignedIn>
                             </div>
                         </div>
                     </button>

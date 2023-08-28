@@ -60,7 +60,7 @@ export async function calculator(search) {
                 const data = await res.json();
                 if (data.length == 0) {
                     console.log("No data found");
-                    return;
+                    return null;
                 }
                 //If there is data, then set the data
                 return data;
@@ -362,6 +362,7 @@ export async function calculator(search) {
         grundData[0].adgangsadresse.postnummer.navn;
 
     bygninger = await getBoligData();
+    if(bygninger){
     bolig = await findBoligPåGrund();
     boligGrundPlan = bolig.byg041BebyggetAreal;
     kælder = await tjekKælder();
@@ -408,6 +409,9 @@ export async function calculator(search) {
         by,
         loading: false,
     };
+    } else {
+        return 'No data found';
+    }
 }
 
 export async function updatePrice(

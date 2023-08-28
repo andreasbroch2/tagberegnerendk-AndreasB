@@ -1,8 +1,9 @@
-// Importér nødvendige moduler og komponenter
+import dynamic from "next/dynamic";
 import { Poppins } from "next/font/google";
-import GodeRåd from "../_components/GodeRåd";
-import DerforSection from "../_components/DerforSection";
-import TitleSection from "../_components/TitleSection";
+const GodeRåd = dynamic(() => import("./GodeRåd"));
+import TitleSection from "./TitleSection";
+import { useEffect, useState } from "react";
+const DerforSection = dynamic(() => import("./DerforSection"));
 
 // Definér fontindstillinger for Poppins-fonten
 const poppins = Poppins({
@@ -12,13 +13,14 @@ const poppins = Poppins({
 });
 
 export default function LandingPage() {
+    const [adresse, setAdresse] = useState("");
 
     // Render hjemmesiden
     return (
         <>
             <main className={`${poppins.className}`}>
                 {/* Render TitleSection-komponenten */}
-                <TitleSection home={true} />
+                <TitleSection setAdresse={setAdresse} home={true} />
 
                 {/* Render DerforSection-komponenten */}
                 <DerforSection />

@@ -39,6 +39,7 @@ try {
         opgave: String,
         udhaeng: String,
         tagrender: String,
+        gratisTagTjek: Boolean,
     });
 
     Lead = mongoose.model("Lead", leadSchema);

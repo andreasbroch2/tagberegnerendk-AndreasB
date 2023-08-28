@@ -2,7 +2,6 @@ import "./globals.css";
 import WebsiteHeader from "./_components/WebsiteHeader";
 import WebsiteFooter from "./_components/WebsiteFooter";
 import { Poppins } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -12,7 +11,6 @@ const poppins = Poppins({
 
 export default function RootLayout({ children }) {
     return (
-            <ClerkProvider>
                 <html lang="da-dk">
                     <body className={`${poppins.className}`}>
                         <WebsiteHeader />
@@ -20,6 +18,5 @@ export default function RootLayout({ children }) {
                         <WebsiteFooter />
                     </body>
                 </html>
-            </ClerkProvider>
     );
 }

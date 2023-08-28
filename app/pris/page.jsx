@@ -8,6 +8,10 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import va from "@vercel/analytics";
 import { event } from "nextjs-google-analytics";
+import Image from "next/image";
+import journalist from "../../assets/journalist.jpg";
+import jydskTagTeknik from "../../assets/jydsk-tagteknik.png";
+import trustpilot from "../../assets/trustpilot-4.5.png";
 
 export default function Pris() {
     const searchParams = useSearchParams();
@@ -18,7 +22,7 @@ export default function Pris() {
 
     useEffect(() => {
         fetchLeads();
-    }, []);
+    }, [priceID]);
 
     const fetchLeads = async () => {
         try {
@@ -283,7 +287,7 @@ export default function Pris() {
                             </div>
                         )}
 
-                        <div className="hidden bg-white rounded-xl shadow-lg border p-10 mt-10 border border-green-300">
+                        <div className="bg-white rounded-xl shadow-lg border p-10 mt-10 border border-green-300">
                             <h4 className="font-semibold text-2xl">Vi anbefaler</h4>
                             <p className="font-light mt-3">
                                 Ud fra dine indtaste informationer har vi vha. vores algoritmer
@@ -292,8 +296,8 @@ export default function Pris() {
                             </p>
                             <div className="flex flex-col lg:flex-row justify-between mt-5">
                                 <div className="flex gap-5">
-                                    <img
-                                        src="https://total-byg.com/wp-content/uploads/2022/08/Total-byg-danmark.png"
+                                    <Image
+                                        src={journalist}
                                         alt="Billede af håndværker"
                                         className="w-20 h-20 rounded-full object-cover border border-green-400"
                                     />
@@ -367,8 +371,8 @@ export default function Pris() {
                                 <h4 className="mb-4">Om Jydsk Tagteknik</h4>
                                 <p>Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
                                 <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
-                                    <img src="/images/jydsk-tagteknik.png" className="h-fit" alt="Jydsk Tagteknik - Logo" />
-                                    <img src="/images/trustpilot-4.5.png" alt="Trustpilot - 4.5 Stjerner" />
+                                    <Image src={jydskTagTeknik} className="h-fit" alt="Jydsk Tagteknik - Logo" />
+                                    <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" />
                                 </div>
                             </div>
                         </div>

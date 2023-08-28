@@ -26,9 +26,6 @@ export default function WebsiteHeader() {
                             <Link href="/goderaad">Gode råd</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/artikler">Artikler</Link>
-                        </li>
-                        <li className="mr-4 hover:underline md:mr-6">
                             <Link href="/hurtigesvar">Hurtige svar</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">

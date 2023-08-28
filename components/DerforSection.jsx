@@ -1,4 +1,6 @@
-import { Icon } from "@iconify/react";
+import Image from "next/image";
+import calculator from "../assets/calculator.svg";
+import free from "../assets/free.svg";
 
 export default function DerforSection() {
     return (
@@ -13,12 +15,7 @@ export default function DerforSection() {
                     <div className="grid grid-cols 1 lg:grid-cols-2 gap-10 lg:gap-20">
                         <div className="text-darkblue">
                             <div className="iconBoxLight shadow-xl">
-                                <Icon
-                                    icon="mdi:calculator"
-                                    width={30}
-                                    height={50}
-                                    color="#13BA00"
-                                />
+                                <Image src={calculator} alt="Lommeregner" />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
                                 Automatisk beregning
@@ -31,12 +28,7 @@ export default function DerforSection() {
                         </div>
                         <div className="text-darkblue">
                             <div className="iconBoxLight shadow-xl">
-                                <Icon
-                                    icon="material-symbols:money-off"
-                                    height={30}
-                                    width={30}
-                                    color="#13ba00"
-                                />
+                                <Image src={free} alt="Gratis" />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
                                 100% Gratis tag beregner

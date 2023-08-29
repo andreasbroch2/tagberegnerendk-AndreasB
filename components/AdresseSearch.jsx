@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { event } from "nextjs-google-analytics";
+import LoadingModal from "./LoadingModal";
 
 // Eksporter AdresseSearch-komponenten
 const AdresseSearch = (props) => {
@@ -12,12 +12,13 @@ const AdresseSearch = (props) => {
         const value = e.target.value;
         setSearchText(value);
         props.onSearchTextChange(value);
+        e.stopPropagation();
     };
     const adressEvent = () => {
-        event("adress_search", {
-            category: "Search",
-            label: 'Adress search',
-        });
+        // Find element with id of "loadingModal" and set position to fixed
+        const loadingModal = document.getElementById("loadingModal");
+        loadingModal.style.position = "fixed";
+        loadingModal.style.display = "flex";
     }
     const fetchAutocompleteResults = async (searchText) => {
         if (searchText.trim() !== "") {
@@ -58,46 +59,49 @@ const AdresseSearch = (props) => {
 
     // Render AdresseSearch-komponenten
     return (
-        <div className="w-full lg:w-8/12 mx-auto">
-            <div className="content-center">
-                <div className="searchInput">
-                    <div className="text-center">
-                        <div className="autoCompleteDiv relative">
-                            {/* Render en tekstinput til søgeteksten */}
-                            <input
-                                className="p-7 border border-3 border-zinc-400 shadow-2xl rounded-2xl w-full text-black"
-                                type="text"
-                                autoComplete="street-address"
-                                value={searchText}
-                                placeholder="Indtast adresse"
-                                onChange={(e) => {
-                                    handleSearchTextChange(e);
-                                    setSearchText(e.target.value);
-                                }}
-                            />
-                            <div
-                                className={`bg-white p-5 gap-1 text-black shadow-lg ${searchText === "" ? "hidden" : "block"
-                                    } forslagsListe`}>
-                                {autocompleteResults.length === 0 && (
-                                    <div className="bg-white p-5 w-full text-start rounded-lg">
-                                        Indtast gyldig adresse
-                                    </div>
-                                )}
-                                {autocompleteResults.map((result) => (
-                                    <Link onClick={adressEvent()} key={result.tekst} href={`/beregning/${result.tekst}`}>
-                                        {autocompleteResults.length > 0 && (
-                                            <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
-                                                {result.tekst}
-                                            </div>
-                                        )}
-                                    </Link>
-                                ))}
+        <>
+            <LoadingModal />
+            <div className="w-full lg:w-8/12 mx-auto">
+                <div className="content-center">
+                    <div className="searchInput">
+                        <div className="text-center">
+                            <div className="autoCompleteDiv relative">
+                                {/* Render en tekstinput til søgeteksten */}
+                                <input
+                                    className="p-7 border border-3 border-zinc-400 shadow-2xl rounded-2xl w-full text-black"
+                                    type="text"
+                                    value={searchText}
+                                    autoComplete="street-address"
+                                    placeholder="Indtast adresse"
+                                    onChange={(e) => {
+                                        handleSearchTextChange(e);
+                                        setSearchText(e.target.value);
+                                    }}
+                                />
+                                <div
+                                    className={`bg-white p-5 gap-1 text-black shadow-lg ${searchText === "" ? "hidden" : "block"
+                                        } forslagsListe`}>
+                                    {autocompleteResults.length === 0 && (
+                                        <div className="bg-white p-5 w-full text-start rounded-lg">
+                                            Indtast gyldig adresse
+                                        </div>
+                                    )}
+                                    {autocompleteResults.map((result) => (
+                                        <Link onClick={adressEvent} key={result.tekst} href={`/beregning/${result.tekst}`}>
+                                            {autocompleteResults.length > 0 && (
+                                                <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
+                                                    {result.tekst}
+                                                </div>
+                                            )}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

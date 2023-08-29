@@ -1,11 +1,8 @@
-import dynamic from "next/dynamic";
 import { Poppins } from "next/font/google";
-const GodeRåd = dynamic(() => import("./GodeRåd"));
+import GodeRåd from "./GodeRåd";
 import TitleSection from "./TitleSection";
-import { useEffect, useState } from "react";
-const DerforSection = dynamic(() => import("./DerforSection"));
+import DerforSection from "./DerforSection";
 
-// Definér fontindstillinger for Poppins-fonten
 const poppins = Poppins({
     subsets: ["latin"],
     weight: ["600", "100", "200", "300", "400", "500", "700"],
@@ -13,27 +10,19 @@ const poppins = Poppins({
 });
 
 export default function LandingPage() {
-    const [adresse, setAdresse] = useState("");
-
-    // Render hjemmesiden
     return (
         <>
             <main className={`${poppins.className}`}>
                 {/* Render TitleSection-komponenten */}
-                <TitleSection setAdresse={setAdresse} home={true} />
-
+                <TitleSection home={true} />
                 {/* Render DerforSection-komponenten */}
                 <DerforSection />
-
                 {/* Render GodeRåd-komponenten */}
                 <GodeRåd />
-
                 {/* Render SenesteArtikler-komponenten */}
                 {/* <SenesteArtikler home={true} /> */}
-
                 {/* Render Faq-komponenten */}
                 {/* <Faq home={true} /> */}
-
                 {/*  <FindHåndværker /> */}
             </main>
         </>

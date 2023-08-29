@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import pricetag from "../assets/pricetag.svg";
 import document from "../assets/document.svg";

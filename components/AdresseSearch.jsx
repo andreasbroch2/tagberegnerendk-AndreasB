@@ -3,7 +3,7 @@ import Link from "next/link";
 import LoadingModal from "./LoadingModal";
 
 // Eksporter AdresseSearch-komponenten
-const AdresseSearch = (props) => {
+const AdresseSearch = () => {
     // Tilstandsstyring med useState-hooks
     const [searchText, setSearchText] = useState("");
     const [autocompleteResults, setAutocompleteResults] = useState([]);
@@ -11,7 +11,6 @@ const AdresseSearch = (props) => {
     const handleSearchTextChange = (e) => {
         const value = e.target.value;
         setSearchText(value);
-        props.onSearchTextChange(value);
         e.stopPropagation();
     };
     const adressEvent = () => {

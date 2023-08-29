@@ -1,14 +1,16 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { calculator, updatePrice } from "@/app/utils/calculator";
 import { createLead } from "@/app/utils/Serveractions/serverActions.js";
 import { v4 as uuidv4 } from "uuid";
-import va from "@vercel/analytics";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
+import homeRoof from "@/assets/home-roof.svg";
+import paintBucket from "@/assets/paint-bucket.svg";
+import gutter from "@/assets/gutter.png";
+import houseOutline from "@/assets/house-outline.svg";
 
 const leadPriceId = uuidv4();
 
@@ -44,7 +46,6 @@ export default function Beregning({ params }) {
     const [boligFound, setBoligFound] = useState(true);
 
     useEffect(() => {
-        va.track("Beregning");
         event("Beregning", {
             category: "Beregning",
             label: 'Beregning',
@@ -93,13 +94,11 @@ export default function Beregning({ params }) {
     function handleRenoveringType(renoveringType) {
         setRenoveringType(renoveringType);
         if (renoveringType == 1) {
-            va.track("nyt_tag");
             event("nyt_tag", {
                 category: "Beregning",
                 label: 'Nyt tag',
             });
         } else if (renoveringType == 2) {
-            va.track("tagmaling");
             event("tagmaling", {
                 category: "Beregning",
                 label: 'Tagmaling',
@@ -202,7 +201,7 @@ export default function Beregning({ params }) {
                                         <p className="font-light text-sm">Hentet fra BBR</p>
                                     </div>
                                 </div>
-                                    { boligDataHtml }
+                                {boligDataHtml}
                             </div>
                             <div className="hidden lg:block bg-white shadow-xl rounded-xl p-5">
                                 <div className="">
@@ -459,11 +458,10 @@ export default function Beregning({ params }) {
                                             : "bg-white"
                                             } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
-                                            <Icon
+                                            <Image
+                                                src={homeRoof}
+                                                alt="Tag på hus"
                                                 className="mx-auto"
-                                                icon="mdi:home-roof"
-                                                height={100}
-                                                color="#7ddb72"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Nyt tag
@@ -483,11 +481,10 @@ export default function Beregning({ params }) {
                                             : "bg-white"
                                             } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
-                                            <Icon
+                                            <Image
+                                                src={paintBucket}
+                                                alt="Tagmaling"
                                                 className="mx-auto"
-                                                icon="bi:paint-bucket"
-                                                height={100}
-                                                color="#7ddb72"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Tagmaling
@@ -675,10 +672,8 @@ export default function Beregning({ params }) {
                                                     <div className="flex flex-col gap-1">
                                                         <Image
                                                             className="mx-auto"
-                                                            width={100}
-                                                            height={100}
                                                             alt="Tagrender"
-                                                            src="/gutter.png"
+                                                            src={gutter}
                                                         />
                                                         <p className="font-semibold text-center my-auto mx-auto">
                                                             Tagrender
@@ -705,11 +700,10 @@ export default function Beregning({ params }) {
                                                         : "bg-white"
                                                         } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                                     <div className="flex flex-col gap-1">
-                                                        <Icon
+                                                        <Image
                                                             className="mx-auto"
-                                                            icon="mdi:house-minus-outline"
-                                                            height={100}
-                                                            color="#7ddb72"
+                                                            src={houseOutline}
+                                                            alt="Udhæng"
                                                         />
                                                         <p className="font-semibold text-center my-auto mx-auto">
                                                             Udhæng

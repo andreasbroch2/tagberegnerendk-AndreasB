@@ -1,24 +1,12 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from "react";
+ 
+const AdresseSearch = dynamic(() => import('./AdresseSearch.jsx'), {
+  loading: () => <p>Loading...</p>,
+})
 
-// Importér dynamiske komponenter asynkront ved hjælp af Next.js dynamic-funktionen
-import AdresseSearch from "./AdresseSearch.jsx";
 
 export default function TitleSection(props) {
-    const [scrollToInput, setScrollToInput] = useState(true);
-    const adresseSearchRef = useRef(null);
-
-    const handleSearchTextChange = (value) => {
-        const isInputEmpty = value.trim() === "";
-        setScrollToInput(isInputEmpty);
-    };
-
-    if (!scrollToInput && adresseSearchRef.current) {
-        window.scrollTo({
-            top: adresseSearchRef.current.offsetTop,
-            behavior: "smooth",
-        });
-    }
 
     return (
         <>
@@ -42,7 +30,6 @@ export default function TitleSection(props) {
                             </>
 
                             <p
-                                ref={adresseSearchRef}
                                 className="lg:hidden font-medium text-2xl lg:text-2xl mt-5 lg:mt-20 text-center ">
                                 Beregn pris på{" "}
                                 <span className="tagrenoveringspan">30 sekunder</span>
@@ -53,8 +40,6 @@ export default function TitleSection(props) {
                         <div className="flex justify-start lg:justify-end mt-5 md:mt-0">
                             <AdresseSearch
                                 home={props.home}
-                                setAdresse={props.setAdresse}
-                                onSearchTextChange={handleSearchTextChange}
                             />
                         </div>
                     </div>

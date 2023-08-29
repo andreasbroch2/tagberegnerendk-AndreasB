@@ -1,12 +1,9 @@
 'use client';
 
 import { getPriceData } from "../utils/Serveractions/serverActions";
-import { gratisTagTjek } from "../utils/Serveractions/buyLead";
 import { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import va from "@vercel/analytics";
 import { event } from "nextjs-google-analytics";
 import Image from "next/image";
 import journalist from "../../assets/journalist.jpg";
@@ -18,7 +15,6 @@ export default function Pris() {
     const priceID = searchParams.get("id");
     const [priceData, setPriceData] = useState(null);
     const [pickedPrice, setPickedPrice] = useState("samletPris");
-    const [gratisTakTjekShow, setGratisTakTjekShow] = useState(true);
 
     useEffect(() => {
         fetchLeads();
@@ -60,28 +56,7 @@ export default function Pris() {
             </div>
         );
     }
-    function acceptTagTjek() {
-        gratisTagTjek(priceData._id, true);
-        va.track("Gratis Tagtjek - Accept");
-        event("Gratis Tagtjek - Accept", {
-            category: "Gratis Tagtjek",
-            label: 'Gratis Tagtjek',
-        });
-        setGratisTakTjekShow(false);
-        closeModal();
-    }
-    function declineTagTjek() {
-        gratisTagTjek(priceData._id, false);
-        va.track("Gratis Tagtjek - Decline");
-        event("Gratis Tagtjek - Decline", {
-            category: "Gratis Tagtjek",
-            label: 'Gratis Tagtjek',
-        });
-        setGratisTakTjekShow(false);
-        closeModal();
-    }
     function trackTilbudButton() {
-        va.track("Tilbud - Klik");
         event("Tilbud - Klik", {
             category: "Tilbud",
             label: 'Tilbud',
@@ -92,42 +67,6 @@ export default function Pris() {
             <div className="container">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div className="col-span-3 lg:col-span-3 gap-5 mx-auto">
-                        {priceData.nyTagTypeTekst == "Tagmaling" ? null : (
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10 hidden">
-                                <Link
-                                    href="#price"
-                                    onClick={() => setPickedPrice("lavSamletPris")}
-                                    className={`${pickedPrice === "lavSamletPris"
-                                        ? "bg-green-200"
-                                        : "bg-white"
-                                        } rounded-lg shadow-lg p-5 text-center flex gap-2 justify-center`}>
-                                    <p className="font-semibold">Laveste pris</p>
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </Link>
-                                <Link
-                                    href="#price"
-                                    onClick={() => setPickedPrice("samletPris")}
-                                    className={`${pickedPrice === "samletPris" ? "bg-green-200" : "bg-white"
-                                        } rounded-lg shadow-lg p-5 text-center flex gap-2 justify-center`}>
-                                    <p className="font-semibold">Middel pris</p>
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </Link>
-                                <Link
-                                    href="#price"
-                                    onClick={() => setPickedPrice("hojSamletPris")}
-                                    className={`${pickedPrice === "hojSamletPris"
-                                        ? "bg-green-200"
-                                        : "bg-white"
-                                        } rounded-lg shadow-lg p-5 text-center flex gap-2 justify-center`}>
-                                    <p className="font-semibold">Højeste pris</p>
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                    <Icon icon="ph:coin" color="#13BA00" className="my-auto" />
-                                </Link>
-                            </div>
-                        )}
-
                         <div id="price" className="bg-white rounded-xl shadow-lg border p-4 md:p-10">
                             <h3>Prisberegning</h3>
                             <div className="md:flex">
@@ -320,26 +259,6 @@ export default function Pris() {
                                             Total Byg Danmark
                                         </h4>
                                         <div className="flex gap-1">
-                                            <Icon
-                                                icon="material-symbols:star-outline"
-                                                color="#13BA00"
-                                            />
-                                            <Icon
-                                                icon="material-symbols:star-outline"
-                                                color="#13BA00"
-                                            />
-                                            <Icon
-                                                icon="material-symbols:star-outline"
-                                                color="#13BA00"
-                                            />
-                                            <Icon
-                                                icon="material-symbols:star-outline"
-                                                color="#13BA00"
-                                            />
-                                            <Icon
-                                                icon="material-symbols:star-outline"
-                                                color="#13BA00"
-                                            />
                                         </div>
                                         <p className="font-light text-sm">
                                             Vurderet af vores brugere

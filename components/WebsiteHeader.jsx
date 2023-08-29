@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useState } from "react";
-import { GoogleAnalytics } from "nextjs-google-analytics";
 
 export default function WebsiteHeader() {
     const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
@@ -11,7 +10,6 @@ export default function WebsiteHeader() {
 
     return (
         <header>
-            <GoogleAnalytics />
             <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
                 <p>Gratis og præcis prisberegning på nyt tag og tagmaling</p>
             </div>
@@ -33,11 +31,11 @@ export default function WebsiteHeader() {
                         </li>
                     </ul>
 
-                        <Link href="/">
-                            <button className="beregnKnap hidden lg:block font-medium">
-                                Beregn pris
-                            </button>
-                        </Link>
+                    <Link href="/">
+                        <button className="beregnKnap hidden lg:block font-medium">
+                            Beregn pris
+                        </button>
+                    </Link>
 
                     <button onClick={handleNavToggle} className="lg:hidden mobileMenu">
                         <div className="space-y-2">
@@ -46,9 +44,8 @@ export default function WebsiteHeader() {
                             <div className="w-8 h-0.5 bg-gray-600"></div>
                         </div>
                         <div
-                            className={`lg:hidden ${
-                                isNavOpen ? "block" : "hidden"
-                            } menuDropdown mt-5`}>
+                            className={`lg:hidden ${isNavOpen ? "block" : "hidden"
+                                } menuDropdown mt-5`}>
                             <div className="flex flex-col items-start justify-start">
                                 <Link href="/goderaad" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Gode råd</p>

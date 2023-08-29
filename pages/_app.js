@@ -1,9 +1,8 @@
 import "../styles/globals.css";
 import dynamic from 'next/dynamic'
 import WebsiteFooter from "./../components/WebsiteFooter";
-import Script from "next/script";
 import { Poppins } from "next/font/google";
-import NextApp from 'next/app';
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
     loading: () => <p>Loading...</p>,
@@ -20,6 +19,7 @@ const poppins = Poppins({
 function MyApp({ Component, pageProps, }) {
     return (
         <div className={`${poppins.className}`}>
+            <GoogleAnalytics trackPageViews />
             <WebsiteHeader />
             <main>
                 <Component {...pageProps} />

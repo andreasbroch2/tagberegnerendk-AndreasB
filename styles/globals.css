@@ -8,28 +8,28 @@
 
 h1 {
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 h3 {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 h4 {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -89,10 +89,18 @@ h1 {
 }
 
 section {
-  margin-top: 6rem !important;
-  margin-bottom: 8rem !important;
+  margin-top: 5rem !important;
+  margin-bottom: 5rem !important;
 }
-
+.blog-section{
+  h1, h2, h3, h4, h5, h6{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  p{
+    margin-bottom: 6px;
+  }
+}
 
 Footer {
   min-width: 100% !important;
@@ -305,108 +313,13 @@ p {
   scale: 1.1;
 }
 
-.teglTag {
-  background-image: url(https://www.jjtotalbyg.dk/CustomerData/Files/Images/Archive/2-content/nyt-tag_253.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
+.center-in-div{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.stålTag {
-  background-image: url(https://jydsktagteknik.dk/wp-content/uploads/2019/04/jydsk-tagteknik-decra-elegance-sort.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-}
-
-.betonTegl {
-
-  background-image: url(https://ibf-dk.b-cdn.net/media/5d/f4/c7/1612772658/IBF_Dobbelt-S_Antracit_4.jpg?width=3000&height=);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-}
-
-.tagPap {
-  background-image: url(https://www.byggematerialer.dk/isola-platon/tag-13/produkt-files/th1515100.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-
-}
-
-
-.eternit {
-  background-image: url(https://www.bygma.dk/globalassets/produktsider/byggematerialer/tag/eternitplader/bygma-boelgeplader-eternit-udvalg.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-}
-
-.stråTag {
-  background-image: url(https://usercontent.one/wp/www.casparhall.dk/wp-content/uploads/caspar-hall-tid-til-straatag.jpg?media=1685523185);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-
-}
-
-
-
-.levende {
-  background-image: url(https://grønne-tage.dk/wp-content/uploads/2021/01/NINNA-villa-Gront-tag-pa-huset-768x439.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-}
-
-
-.naturSkifer {
-  background-image: url(https://komproment.dk/wp-content/uploads/2021/04/koncept-roof.jpg);
-  background-size: cover;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  color: white !important;
-}
 
 
 .pricerange-line {

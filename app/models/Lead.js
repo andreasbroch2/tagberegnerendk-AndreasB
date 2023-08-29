@@ -37,8 +37,8 @@ try {
         origin: String,
         beskrivelse: String,
         opgave: String,
-        udhaeng: String,
-        tagrender: String,
+        udhaeng: Boolean,
+        tagrender: Boolean,
         gratisTagTjek: Boolean,
     });
 

@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./../styles/globals.css";
 import WebsiteHeader from "./_components/WebsiteHeader";
 import WebsiteFooter from "./_components/WebsiteFooter";
 import { Poppins } from "next/font/google";

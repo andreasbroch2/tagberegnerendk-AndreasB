@@ -6,8 +6,8 @@ import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
     loading: () => <p>Loading...</p>,
-  })
-  
+})
+
 
 
 const poppins = Poppins({

@@ -2,15 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { calculator, updatePrice } from "@/app/utils/calculator";
-import { createLead } from "@/app/utils/Serveractions/serverActions.js";
+import { calculator, updatePrice } from "../../utils/calculator";
+import { createLead } from "../../utils/Serveractions/serverActions.js";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
-import homeRoof from "@/assets/home-roof.svg";
-import paintBucket from "@/assets/paint-bucket.svg";
-import gutter from "@/assets/gutter.png";
-import houseOutline from "@/assets/house-outline.svg";
+import homeRoof from "../../../assets/home-roof.svg";
+import paintBucket from "../../../assets/paint-bucket.svg";
+import gutter from "../../../assets/gutter.png";
+import houseOutline from "../../../assets/house-outline.svg";
+import teglTag from "../../../assets/tegltag.jpg";
+import tagPap from "../../../assets/tagpap.jpg";
+import eternitTag from "../../../assets/eternittag.jpg";
+import straaTag from "../../../assets/straatag.jpg";
+import staalTag from "../../../assets/staaltag.jpg";
+import naturSkiferTag from "../../../assets/naturskifer-tag.jpg";
+import levendeTag from "../../../assets/levende-tag.jpg";
+import betonTegl from "../../../assets/betontegl.jpeg";
 
 const leadPriceId = uuidv4();
 
@@ -509,11 +517,16 @@ export default function Beregning({ params }) {
                                                 setNyTagType(1);
                                                 handlePriceUpdate(1, tagVinkel, tagfladeareal);
                                             }}
-                                            className={`teglTag ${nyTagType == "1"
+                                            className={`${nyTagType == "1"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl relative shadow-xl flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={teglTag}
+                                                alt="Tegltag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Tegltag
                                             </h4>
                                         </div>
@@ -527,11 +540,16 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`stålTag ${nyTagType == "2"
+                                            className={`${nyTagType == "2"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={staalTag}
+                                                alt="Ståltag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Ståltag
                                             </h4>
                                         </div>
@@ -545,11 +563,16 @@ export default function Beregning({ params }) {
                                                     skorsten
                                                 );
                                             }}
-                                            className={`betonTegl ${nyTagType == "3"
+                                            className={` ${nyTagType == "3"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={betonTegl}
+                                                alt="Beton tegl"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Betontegl
                                             </h4>
                                         </div>
@@ -566,8 +589,13 @@ export default function Beregning({ params }) {
                                             className={`tagPap ${nyTagType == "4"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={tagPap}
+                                                alt="Tagpap"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Tagpap
                                             </h4>
                                         </div>
@@ -584,8 +612,13 @@ export default function Beregning({ params }) {
                                             className={`eternit ${nyTagType == "5"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={eternitTag}
+                                                alt="Eternit tag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Eternit
                                             </h4>
                                         </div>
@@ -602,8 +635,13 @@ export default function Beregning({ params }) {
                                             className={`stråTag ${nyTagType == "6"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={straaTag}
+                                                alt="Stråtag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Stråtag
                                             </h4>
                                         </div>
@@ -620,9 +658,14 @@ export default function Beregning({ params }) {
                                             className={`levende ${nyTagType == "7"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
-                                                Levendetag
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={levendeTag}
+                                                alt="Levende tag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
+                                                Levende tag
                                             </h4>
                                         </div>
                                         <div
@@ -638,8 +681,13 @@ export default function Beregning({ params }) {
                                             className={`naturSkifer ${nyTagType == "8"
                                                 ? "bg-green-200 border-green-400 border-2"
                                                 : "bg-white"
-                                                } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
-                                            <h4 className="text-center font-semibold text-lg">
+                                                } rounded-xl shadow-xl relative flex flex-col justify-end hover:scale-105 transition-all w-full`}>
+                                            <Image
+                                                src={naturSkiferTag}
+                                                alt="Naturskifer tag"
+                                                className="rounded-xl w-full h-full object-cover"
+                                            />
+                                            <h4 className="center-in-div text-white">
                                                 Naturskifer
                                             </h4>
                                         </div>

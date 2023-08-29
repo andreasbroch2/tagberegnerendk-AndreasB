@@ -7,6 +7,7 @@ export default function Seo(props) {
         <NextSeo
             title={props.title}
             description={props.description}
+            canonical={props.canonical}
         />
     );
 }

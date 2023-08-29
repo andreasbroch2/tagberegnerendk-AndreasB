@@ -17,10 +17,6 @@ export async function getPriceData(leadPriceId) {
 }
 
 export const createLead = async (
-    fornavn,
-    efternavn,
-    email,
-    telefon,
     nyTagType,
     nyTagTypeTekst,
     boligTagType,
@@ -52,8 +48,6 @@ export const createLead = async (
         } else if (nyTagTypeTekst !== "Tagmaling") {
             værdi = samletPris;
         }
-        // Remove all . and , from the string
-        værdi = værdi.replace(/\./g, "");
         værdi = parseInt(værdi);
 
         if (nyTagTypeTekst == "Tagmaling") {
@@ -75,10 +69,6 @@ export const createLead = async (
         }
         // Opret en ny lead
         newLead = new Lead({
-            fornavn: fornavn,
-            efternavn: efternavn,
-            email: email,
-            telefon: telefon,
             nyTagType: nyTagType,
             nyTagTypeTekst: nyTagTypeTekst,
             boligTagType: boligTagType,

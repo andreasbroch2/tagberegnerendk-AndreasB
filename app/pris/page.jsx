@@ -60,22 +60,6 @@ export default function Pris() {
             </div>
         );
     }
-    // Show Modal
-    function showModal() {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "block";
-    }
-    function closeModal() {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "none";
-    }
-    // Show modal after 1 second
-    setTimeout(() => {
-        if (gratisTakTjekShow && !priceData.gratisTagTjek) {
-            showModal();
-        }
-    }, 3000);
-
     function acceptTagTjek() {
         gratisTagTjek(priceData._id, true);
         va.track("Gratis Tagtjek - Accept");
@@ -146,100 +130,130 @@ export default function Pris() {
 
                         <div id="price" className="bg-white rounded-xl shadow-lg border p-4 md:p-10">
                             <h3>Prisberegning</h3>
-                            <div>
-                                <p className="font-semibold mt-5">Dine oplysninger:</p>
-                                <p className="font-light">
-                                    {priceData.fornavn} {priceData.efternavn}
-                                </p>
-                                <p className="font-light">{priceData.adresse}</p>
-                                <p className="font-light">{priceData.email}</p>
-                                <p className="font-light">{priceData.telefon}</p>
-                            </div>
-                            <div>
-                                <p className="font-light mt-5">Din beregnede pris:</p>
-                                {pickedPrice === "lavSamletPris" ? (
-                                    <>
-                                        <h4 className="font-semibold text-2xl">
-                                            {priceData.lavSamletPris}
-                                        </h4>
-                                        <p className="font-light text-sm mt-2">
-                                            Dette er en lav pris. Det er denne pris du forventeligt
-                                            vil få i et tilbud fra de færreste håndværkere. Har
-                                            ingen skorsten, tagvinder ell. Kan prisen gå ned i den
-                                            lave pris. Du bør være varsom med at godtage priser
-                                            under denne pris, da det er vanskeligt at udføre et
-                                            ordentligt stykke arbejde til denne pris.
+                            <div className="md:flex">
+                                <div className="basis-1/2">
+                                    <div className="mt-5 flex flex-col gap-2">
+                                        <div>
+                                            <p className="font-light text-sm">Adresse</p>
+                                            <p className="font-medium">{priceData.adresse}</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-light text-sm">Tagtype</p>
+                                            <p className="font-medium">{priceData.boligTagTypeTekst}</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-light text-sm">Tagfladeareal</p>
+                                            <p className="font-medium">{priceData.tagfladeareal} m2</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-light text-sm">Højde til tagrende</p>
+                                            <p className="font-medium">{priceData.hojdeTilTagrende} m</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-light text-sm">Tagvinkel</p>
+                                            <p className="font-medium">{priceData.tagVinkel} grader</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="basis-1/2 md:mt-5">
+                                    <div>
+                                        <p className="font-light text-sm">Ny Tagtype</p>
+                                        <p className="font-medium">{priceData.nyTagTypeTekst}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-light text-sm">Udhæng</p>
+                                        <p className="font-medium">
+                                            {priceData.udhaeng ? "Ja" : "Nej"}
                                         </p>
-                                    </>
-                                ) : null}
-                                {pickedPrice === "samletPris" &&
-                                    priceData.nyTagTypeTekst !== "Tagmaling" ? (
-                                    <>
-                                        <h4 className="font-semibold text-2xl">
-                                            {priceData.samletPris}
-                                        </h4>
-                                        <p className="font-light text-sm mt-2">
-                                            Dette er en middel pris. Det er denne pris du
-                                            forventeligt vil få i et tilbud fra de fleste
-                                            håndværkere. Har du mange tagvinduer, skorsten ell. Kan
-                                            prisen gå op i den høje pris.
+                                    </div>
+                                    <div>
+                                        <p className="font-light text-sm">Tagrender</p>
+                                        <p className="font-medium">
+                                            {priceData.tagrender ? "Ja" : "Nej"}
                                         </p>
-                                    </>
-                                ) : null}
-                                {pickedPrice === "hojSamletPris" ? (
-                                    <>
-                                        <h4 className="font-semibold text-2xl">
-                                            {priceData.hojSamletPris}
-                                        </h4>
-                                        <p className="font-light text-sm mt-2">
-                                            Dette er en høj pris. Du kan støde på denne pris, hvis
-                                            dit tag er meget komplekst eller, hvis blot håndværkeren
-                                            har en høj timepris. Du bør være varsom med at godtage
-                                            priser over denne.
-                                        </p>
-                                    </>
-                                ) : null}
-                                {pickedPrice === "samletPris" &&
-                                    priceData.nyTagTypeTekst == "Tagmaling" ? (
-                                    <>
-                                        <h4 className="font-semibold text-2xl">
-                                            {priceData.tagMalingPris}
-                                        </h4>
-                                        <p className="font-light text-sm mt-2">
-                                            Dette er en mere eller mindre standard pris for
-                                            tagmaling af et tag som dit, med den tagvinkel du har.
-                                        </p>
-                                    </>
-                                ) : null}
-                            </div>
-                        </div>
-                        {priceData.nyTagTypeTekst !== "Tagmaling" ? (
-                        <div id="tilbud" className="bg-white rounded-xl shadow-lg border p-4 md:p-10 mt-5 md:mt-10">
-                            <h3 className="mb-5">Få tilbud på dit tagprojekt</h3>
-                            <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 gratis og ganske uforpligtende tilbud på dit projekt.</p>
-                            <p className="font-light mb-2">3byggetilbud er en gratis og uforpligtende online service, der hjælper dig med at finde den rette håndværker til dit projekt.</p>
-                            <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
-                            <p className="font-semibold mt-5 mb-2">Sådan fungerer det:</p>
-                            <ol className="list-decimal list-inside text-xl mb-5">
-                                <li className="font-light">Du udfylder formularen med dine oplysninger</li>
-                                <li className="font-light">Du modtager 3 tilbud fra håndværkere</li>
-                                <li className="font-light">Du vælger det tilbud, der passer dig bedst</li>
-                            </ol>
-                            <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
-                            <div className="bg-gray-100 rounded-lg p-5 mt-5">
-                                <p className="font-semibold">Opgavebeskrivelse:</p>
-                                <p className="font-light">Jeg skal have udskiftet mit tag. Taget er ca. {priceData.tagfladeareal} m2 og har en tagvinkel på {priceData.tagVinkel} grader. Der er {priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er {priceData.boligTagTypeTekst} og vi ønsker at skifte til {priceData.nyTagTypeTekst}.</p>
-                            {/* Button to copy above text */}
-                            <button className="bg-gray-500 hover:bg-green-600 text-sm text-white font-light py-2 px-4 rounded-lg shadow-sm mt-5" onClick={() => navigator.clipboard.writeText(`Jeg skal have udskiftet mit tag. Taget er ca. ${priceData.tagfladeareal} m2 og har en tagvinkel på ${priceData.tagVinkel} grader. Der er ${priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er ${priceData.boligTagTypeTekst} og vi ønsker at skifte til ${priceData.nyTagTypeTekst}.`)}>
-                                Kopier
-                            </button>
-                            </div>
-                           <div className="flex justify-center mt-5">
-                                <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                    <a onClick={trackTilbudButton()} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                    </div>
+                                    <p className="font-light mt-5">Din beregnede pris:</p>
+                                    {pickedPrice === "lavSamletPris" ? (
+                                        <>
+                                            <h4 className="font-semibold text-2xl">
+                                                {priceData.lavSamletPris}
+                                            </h4>
+                                            <p className="font-light text-sm mt-2">
+                                                Dette er en lav pris. Det er denne pris du forventeligt
+                                                vil få i et tilbud fra de færreste håndværkere. Har
+                                                ingen skorsten, tagvinder ell. Kan prisen gå ned i den
+                                                lave pris. Du bør være varsom med at godtage priser
+                                                under denne pris, da det er vanskeligt at udføre et
+                                                ordentligt stykke arbejde til denne pris.
+                                            </p>
+                                        </>
+                                    ) : null}
+                                    {pickedPrice === "samletPris" &&
+                                        priceData.nyTagTypeTekst !== "Tagmaling" ? (
+                                        <>
+                                            <h4 className="font-semibold text-2xl">
+                                                {priceData.samletPris}
+                                            </h4>
+                                            <p className="font-light text-sm mt-2">
+                                                Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed. Ønsker du en præcis pris på dit tagprojekt, så kig herunder.
+                                            </p>
+                                        </>
+                                    ) : null}
+                                    {pickedPrice === "hojSamletPris" ? (
+                                        <>
+                                            <h4 className="font-semibold text-2xl">
+                                                {priceData.hojSamletPris}
+                                            </h4>
+                                            <p className="font-light text-sm mt-2">
+                                                Dette er en høj pris. Du kan støde på denne pris, hvis
+                                                dit tag er meget komplekst eller, hvis blot håndværkeren
+                                                har en høj timepris. Du bør være varsom med at godtage
+                                                priser over denne.
+                                            </p>
+                                        </>
+                                    ) : null}
+                                    {pickedPrice === "samletPris" &&
+                                        priceData.nyTagTypeTekst == "Tagmaling" ? (
+                                        <>
+                                            <h4 className="font-semibold text-2xl">
+                                                {priceData.tagMalingPris}
+                                            </h4>
+                                            <p className="font-light text-sm mt-2">
+                                                Dette er en mere eller mindre standard pris for
+                                                tagmaling af et tag som dit, med den tagvinkel du har.
+                                            </p>
+                                        </>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>
+                        {priceData.nyTagTypeTekst !== "Tagmaling" ? (
+                            <div id="tilbud" className="bg-white rounded-xl shadow-lg border p-4 md:p-10 mt-5 md:mt-10">
+                                <h3 className="mb-5">Få tilbud på dit tagprojekt</h3>
+                                <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 gratis og ganske uforpligtende tilbud på dit projekt.</p>
+                                <p className="font-light mb-2">3byggetilbud er en gratis og uforpligtende online service, der hjælper dig med at finde den rette håndværker til dit projekt.</p>
+                                <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
+                                <p className="font-semibold mt-5 mb-2">Sådan fungerer det:</p>
+                                <ol className="list-decimal list-inside text-xl mb-5">
+                                    <li className="font-light">Du udfylder formularen med dine oplysninger</li>
+                                    <li className="font-light">Du modtager 3 tilbud fra håndværkere</li>
+                                    <li className="font-light">Du vælger det tilbud, der passer dig bedst</li>
+                                </ol>
+                                <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
+                                <div className="bg-gray-100 rounded-lg p-5 mt-5">
+                                    <p className="font-semibold">Opgavebeskrivelse:</p>
+                                    <p className="font-light">Jeg skal have udskiftet mit tag. Taget er ca. {priceData.tagfladeareal} m2 og har en tagvinkel på {priceData.tagVinkel} grader. Der er {priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er {priceData.boligTagTypeTekst} og vi ønsker at skifte til {priceData.nyTagTypeTekst}.</p>
+                                    {/* Button to copy above text */}
+                                    <button className="bg-gray-500 hover:bg-green-600 text-sm text-white font-light py-2 px-4 rounded-lg shadow-sm mt-5" onClick={() => navigator.clipboard.writeText(`Jeg skal have udskiftet mit tag. Taget er ca. ${priceData.tagfladeareal} m2 og har en tagvinkel på ${priceData.tagVinkel} grader. Der er ${priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er ${priceData.boligTagTypeTekst} og vi ønsker at skifte til ${priceData.nyTagTypeTekst}.`)}>
+                                        Kopier
+                                    </button>
+                                </div>
+                                <div className="flex justify-center mt-5">
+                                    <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                        <a onClick={trackTilbudButton()} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                    </div>
+                                </div>
+                            </div>
                         ) : null}
                         {priceData.nyTagTypeTekst !== "Tagmaling" ? (
                             <div className="bg-white rounded-xl shadow-lg border p-4 md:p-10 mt-5 md:mt-10">
@@ -287,7 +301,7 @@ export default function Pris() {
                             </div>
                         )}
 
-                        <div className="bg-white rounded-xl shadow-lg border p-10 mt-10 border border-green-300">
+                        <div className="hidden bg-white rounded-xl shadow-lg border p-10 mt-10 border border-green-300">
                             <h4 className="font-semibold text-2xl">Vi anbefaler</h4>
                             <p className="font-light mt-3">
                                 Ud fra dine indtaste informationer har vi vha. vores algoritmer
@@ -338,41 +352,6 @@ export default function Pris() {
                                             Kontakt håndværker
                                         </button>
                                     </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="myModal">
-                <div className="modal-overlay">
-                    <div className="modal-container bg-white">
-                        <div className="modal-content">
-                            <h3 className="font-semibold mb-4">Du er kvalificeret til et gratis tagtjek</h3>
-                            <p>På baggrund af dit tag og det område du bor, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
-                            <h4 className="my-4">Få styr på skaderne i tide og undgå dyre regninger</h4>
-                            <p className="mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
-                            <p className="my-4 font-bold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Ved accept herunder vil Jydsk Tagteknik kontakte dig og aftale et tidspunkt til dit gratis tagtjek.</p>
-                            <div className="flex justify-center mt-5">
-                                <div
-                                    onClick={acceptTagTjek}
-                                    className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg"
-                                >
-                                    Accepter
-                                </div>
-                                <button
-                                    onClick={declineTagTjek}
-                                    className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg ml-5"
-                                >
-                                    Afvis
-                                </button>
-                            </div>
-                            <div className="mt-4">
-                                <h4 className="mb-4">Om Jydsk Tagteknik</h4>
-                                <p>Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
-                                <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
-                                    <Image src={jydskTagTeknik} className="h-fit" alt="Jydsk Tagteknik - Logo" />
-                                    <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" />
                                 </div>
                             </div>
                         </div>

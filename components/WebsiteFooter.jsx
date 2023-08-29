@@ -21,18 +21,12 @@ export default function WebsiteFooter() {
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
                             <li className="mt-4">
-                                <Link href="/artikler">Artikler</Link>
-                            </li>
-                            <li className="mt-4">
                                 <Link href="/omos">Om os</Link>
                             </li>
                             <li className="mt-4">
                                 <Link href="/hurtigesvar">Hurtige svar</Link>
                             </li>
                         </ul>
-                    </div>
-                    <div className="text-white">
-                        <p className="font-semibold text-xl">Partnere</p>
                     </div>
                 </div>
             </div>

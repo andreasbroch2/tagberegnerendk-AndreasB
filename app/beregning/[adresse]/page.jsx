@@ -9,13 +9,13 @@ import { v4 as uuidv4 } from "uuid";
 import va from "@vercel/analytics";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
- 
+
 const leadPriceId = uuidv4();
 
 export default function Beregning({ params }) {
     const [loading, setLoading] = useState(true);
     const [adresse, setAdresse] = useState("");
-    const [by, setBy] = useState(""); 
+    const [by, setBy] = useState("");
     const [postnummer, setPostnummer] = useState("");
     const [boligGrundPlan, setBoligGrundPlan] = useState(0);
     const [boligDataÅben, setBoligDataÅben] = useState(false);
@@ -51,7 +51,7 @@ export default function Beregning({ params }) {
         });
         async function fetchData() {
             const result = await calculator(params.adresse);
-            if(!result.boligGrundPlan){
+            if (!result.boligGrundPlan) {
                 setBoligFound(false);
                 setLoading(false);
                 return;
@@ -113,120 +113,80 @@ export default function Beregning({ params }) {
 
 
     if (loading) return <div className="text-center my-24 font-bold">Beregner boligdata...</div>;
-    if(!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
+    if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
 
     const formHtml = (
         <><div className="mt-20">
-            <h4 className="font-bold text-3xl">Udfyld dine informationer</h4>
-            <p className="mt-5 w-full  font-light">
-                Udfyld dine informationer så vi kan gemme pris og så du kan
-                finde den senere.
-            </p>
         </div><form id="leadform" name="leadform">
-                <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-5">
-                    <div>
-                        <label className="font-semibold">Fornavn</label>
-                        <input
-                            onChange={(e) => setFornavn(e.target.value)}
-                            value={fornavn}
-                            name="firstname"
-                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                            placeholder="Indtast fornavn"
-                            type="text" />
-                    </div>
-                    <div>
-                        <label className="font-semibold">Efternavn</label>
-                        <input
-                            onChange={(e) => setEfternavn(e.target.value)}
-                            value={efternavn}
-                            name="lastname"
-                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                            placeholder="Indtast efternavn"
-                            type="text" />
-                    </div>
-                    <div>
-                        <label className="font-semibold">Telefon</label>
-                        <input
-                            onChange={(e) => setTelefon(e.target.value)}
-                            value={telefon}
-                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                            placeholder="Indtast telefonnummer"
-                            type="tel" />
-                    </div>
-                    <div>
-                        <label className="font-semibold">Email</label>
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            className="w-full bg-white shadow-lg border rounded-lg p-3 mt-2"
-                            placeholder="Indtast email"
-                            type="email" />
-                    </div>
-                </div>
-                <p className="mt-8 text-center font-light text-sm opacity-50">
-                    Ved beregning af pris, accepterer du, at du får muligheden for
-                    at modtage tilbud fra én vores samarbejdspartnere. Du kan altid
-                    sige nej tak til tilbuddene.
-                </p>
                 <div className="mt-10">
-                    {fornavn.length > 2 &&
-                        efternavn.length > 4 &&
-                        email.match(
-                            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-                        ) &&
-                        telefon.match(/^[0-9]{8}$/) ? (
-                        <Link href={`/pris?id=${leadPriceId}`}>
-                            <button
-                                type="submit"
-                                id="submitButton"
-                                onClick={async () => {
-                                    va.track("GetPrice");
-                                    event("GetPrice", {
-                                        category: "Lead",
-                                        label: 'GetPrice',
-                                    });
-                                    // Change button text
-                                    await changeButtonText();
-                                    await createLead(
-                                        fornavn,
-                                        efternavn,
-                                        email,
-                                        telefon,
-                                        nyTagType,
-                                        nyTagTypeTekst,
-                                        boligTagType,
-                                        boligTagTypeTekst,
-                                        tagVinkel,
-                                        tagfladeareal,
-                                        skorsten,
-                                        lavSamletPris,
-                                        højSamletPris,
-                                        samletPris,
-                                        tagMalingPris,
-                                        højdeTilTagrende,
-                                        adresse,
-                                        boligGrundPlan,
-                                        leadPriceId,
-                                        by,
-                                        postnummer,
-                                        udhæng,
-                                        tagrender,
-                                        new Date().toLocaleString()
-                                    );
-                                }}
-                                className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
-                                Beregn pris
-                            </button>
-                        </Link>
-                    ) : (
-                        <div className="bg-gray-300 p-5 font-semibold text-lg text-center text-white rounded-lg w-full">
-                            Udfyld dine informationer
-                        </div>
-                    )}
-
+                    <Link href={`/pris?id=${leadPriceId}`}>
+                        <button
+                            type="submit"
+                            id="submitButton"
+                            onClick={async () => {
+                                va.track("GetPrice");
+                                event("GetPrice", {
+                                    category: "Lead",
+                                    label: 'GetPrice',
+                                });
+                                // Change button text
+                                await changeButtonText();
+                                await createLead(
+                                    nyTagType,
+                                    nyTagTypeTekst,
+                                    boligTagType,
+                                    boligTagTypeTekst,
+                                    tagVinkel,
+                                    tagfladeareal,
+                                    skorsten,
+                                    lavSamletPris,
+                                    højSamletPris,
+                                    samletPris,
+                                    tagMalingPris,
+                                    højdeTilTagrende,
+                                    adresse,
+                                    boligGrundPlan,
+                                    leadPriceId,
+                                    by,
+                                    postnummer,
+                                    udhæng,
+                                    tagrender,
+                                    new Date().toLocaleString()
+                                );
+                            }}
+                            className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
+                            Beregn pris
+                        </button>
+                    </Link>
                 </div>
             </form></>
     );
+
+    const boligDataHtml = (
+        <div className="mt-5 flex flex-col gap-2">
+            <div>
+                <p className="font-light text-sm">Adresse</p>
+                <p className="font-medium">{adresse}</p>
+            </div>
+            <div>
+                <p className="font-light text-sm">Tagtype</p>
+                <p className="font-medium">{boligTagTypeTekst}</p>
+            </div>
+            <div>
+                <p className="font-light text-sm">Tagfladeareal</p>
+                <p className="font-medium">{tagfladeareal} m2</p>
+            </div>
+            <div>
+                <p className="font-light text-sm">Højde til tagrende</p>
+                <p className="font-medium">{højdeTilTagrende} m</p>
+            </div>
+            <div>
+                <p className="font-light text-sm">Tagvinkel</p>
+                <p className="font-medium">{tagVinkel} grader</p>
+            </div>
+        </div>
+    );
+
     return (
         <>
             <section>
@@ -241,78 +201,15 @@ export default function Beregning({ params }) {
                                         </h4>
                                         <p className="font-light text-sm">Hentet fra BBR</p>
                                     </div>
-
-                                    <div className="my-auto">
-                                        <button
-                                            onClick={() => setBoligDataÅben(!boligDataÅben)}
-                                            className="px-3 lg:px-5 py-1 bg-mygreen rounded-lg text-white font-medium">
-                                            Se Boligdata
-                                        </button>
-                                    </div>
                                 </div>
-                                {boligDataÅben && (
-                                    <div className="mt-5 flex flex-col gap-2">
-                                        <div>
-                                            <p className="font-light text-sm">Adresse</p>
-                                            <p className="font-medium">{adresse}</p>
-                                        </div>
-                                        <div>
-                                            <p className="font-light text-sm">Tagtype</p>
-                                            <p className="font-medium">{boligTagTypeTekst}</p>
-                                        </div>
-                                        <div>
-                                            <p className="font-light text-sm">Grundplansareal</p>
-                                            <p className="font-medium">{boligGrundPlan}</p>
-                                        </div>
-                                        <div>
-                                            <p className="font-light text-sm">
-                                                Antal etager eksl. kælder
-                                            </p>
-                                            <p className="font-medium">{boligEtager}</p>
-                                        </div>
-                                        <div>
-                                            <p className="font-light text-sm">
-                                                Har kælder eller underetage
-                                            </p>
-                                            {kælder && <p className="font-medium">Ja</p>}
-                                            {!kælder && <p className="font-medium">Nej</p>}
-                                        </div>
-                                    </div>
-                                )}
+                                    { boligDataHtml }
                             </div>
                             <div className="hidden lg:block bg-white shadow-xl rounded-xl p-5">
                                 <div className="">
                                     <h4 className="font-bold text-2xl">Din boligdata</h4>
                                     <p className="font-light text-sm">Hentet fra BBR</p>
                                 </div>
-                                <div className="mt-5 flex flex-col gap-2">
-                                    <div>
-                                        <p className="font-light text-sm">Adresse</p>
-                                        <p className="font-medium">{adresse}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-light text-sm">Tagtype</p>
-                                        <p className="font-medium">{boligTagTypeTekst}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-light text-sm">Grundplansareal</p>
-                                        <p className="font-medium">{boligGrundPlan}</p>
-                                    </div>
-
-                                    <div>
-                                        <p className="font-light text-sm">
-                                            Antal etager eksl. kælder
-                                        </p>
-                                        <p className="font-medium">{boligEtager}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-light text-sm">
-                                            Har kælder eller underetage
-                                        </p>
-                                        {kælder && <p className="font-medium">Ja</p>}
-                                        {!kælder && <p className="font-medium">Nej</p>}
-                                    </div>
-                                </div>
+                                {boligDataHtml}
                             </div>
                         </div>
                         <div className="col-span-3 lg:col-span-2 gap-5">
@@ -366,8 +263,8 @@ export default function Beregning({ params }) {
                                                 handlePriceUpdate(nyTagType, 0, 0, skorsten);
                                             }}
                                             className={`${tagVinkel == 0
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105 transition-all `}>
                                             <div className="flex flex-col gap-1">
                                                 <div className="lavHældning mx-auto m-0"></div>
@@ -385,8 +282,8 @@ export default function Beregning({ params }) {
                                                 handlePriceUpdate(nyTagType, 25, 0, skorsten);
                                             }}
                                             className={`${tagVinkel == 25
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
@@ -415,8 +312,8 @@ export default function Beregning({ params }) {
                                                 handlePriceUpdate(nyTagType, 45, 0, skorsten);
                                             }}
                                             className={`${tagVinkel == 45
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5  flex flex-col justify-end hover:scale-105  transition-all  `}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
@@ -522,8 +419,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`${skorsten
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <div className="flex flex-col gap-1">
                                                 <svg
@@ -558,8 +455,8 @@ export default function Beregning({ params }) {
                                     <div
                                         onClick={() => handleRenoveringType(1)}
                                         className={`${renoveringType == 1
-                                                ? "bg-green-200 border-green-400 border-2"
-                                                : "bg-white"
+                                            ? "bg-green-200 border-green-400 border-2"
+                                            : "bg-white"
                                             } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
                                             <Icon
@@ -582,8 +479,8 @@ export default function Beregning({ params }) {
                                             setNyTagTypeTekst("Tagmaling");
                                         }}
                                         className={`${renoveringType == 2
-                                                ? "bg-green-200 border-green-400 border-2"
-                                                : "bg-white"
+                                            ? "bg-green-200 border-green-400 border-2"
+                                            : "bg-white"
                                             } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                         <div className="flex flex-col gap-1">
                                             <Icon
@@ -617,8 +514,8 @@ export default function Beregning({ params }) {
                                                 handlePriceUpdate(1, tagVinkel, tagfladeareal);
                                             }}
                                             className={`teglTag ${nyTagType == "1"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Tegltag
@@ -635,8 +532,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`stålTag ${nyTagType == "2"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Ståltag
@@ -653,8 +550,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`betonTegl ${nyTagType == "3"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Betontegl
@@ -671,8 +568,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`tagPap ${nyTagType == "4"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Tagpap
@@ -689,8 +586,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`eternit ${nyTagType == "5"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Eternit
@@ -707,8 +604,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`stråTag ${nyTagType == "6"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Stråtag
@@ -725,8 +622,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`levende ${nyTagType == "7"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Levendetag
@@ -743,8 +640,8 @@ export default function Beregning({ params }) {
                                                 );
                                             }}
                                             className={`naturSkifer ${nyTagType == "8"
-                                                    ? "bg-green-200 border-green-400 border-2"
-                                                    : "bg-white"
+                                                ? "bg-green-200 border-green-400 border-2"
+                                                : "bg-white"
                                                 } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                             <h4 className="text-center font-semibold text-lg">
                                                 Naturskifer
@@ -772,8 +669,8 @@ export default function Beregning({ params }) {
                                                         setTagrender(!tagrender);
                                                     }}
                                                     className={`${tagrender == true
-                                                            ? "bg-green-200 border-green-400 border-2"
-                                                            : "bg-white"
+                                                        ? "bg-green-200 border-green-400 border-2"
+                                                        : "bg-white"
                                                         } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                                     <div className="flex flex-col gap-1">
                                                         <Image
@@ -804,8 +701,8 @@ export default function Beregning({ params }) {
                                                         );
                                                     }}
                                                     className={`${udhæng == true
-                                                            ? "bg-green-200 border-green-400 border-2"
-                                                            : "bg-white"
+                                                        ? "bg-green-200 border-green-400 border-2"
+                                                        : "bg-white"
                                                         } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>
                                                     <div className="flex flex-col gap-1">
                                                         <Icon

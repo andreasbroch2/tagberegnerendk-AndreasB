@@ -123,7 +123,6 @@ export default function Beregning({ params }) {
                             type="submit"
                             id="submitButton"
                             onClick={async () => {
-                                va.track("GetPrice");
                                 event("GetPrice", {
                                     category: "Lead",
                                     label: 'GetPrice',

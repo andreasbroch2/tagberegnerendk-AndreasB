@@ -1,6 +1,6 @@
 import LandingPage from "./../components/landingpage";
 import Seo from "./../components/Seo";
-import { getSinglePost } from "@/app/utils/wordpress";
+import { getSinglePost } from "../app/utils/wordpress";
 
 export default function Home(props) {
     return (

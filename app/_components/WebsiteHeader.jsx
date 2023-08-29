@@ -26,9 +26,6 @@ export default function WebsiteHeader() {
                             <Link href="/goderaad">Gode råd</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/artikler">Artikler</Link>
-                        </li>
-                        <li className="mr-4 hover:underline md:mr-6">
                             <Link href="/hurtigesvar">Hurtige svar</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">
@@ -53,9 +50,6 @@ export default function WebsiteHeader() {
                             <div className="flex flex-col items-start justify-start">
                                 <Link href="/goderaad" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Gode råd</p>
-                                </Link>
-                                <Link href="/artikler" className="w-full">
-                                    <p className="px-5 py-4 w-full text-start">Artikler</p>
                                 </Link>
                                 <Link href="/hurtigesvar" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Hurtige svar</p>

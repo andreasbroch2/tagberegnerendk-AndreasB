@@ -1,6 +1,9 @@
+import Seo from "./../components/Seo";
+
 export default function Page() {
     return (
         <>
+            <Seo title="Om os - Bag om Tagberegneren" description="Information om Tagberegneren.dk" canonical="https://tagberegneren.dk/omos" />
             <section>
                 <div className="lg:mx-auto lg:w-7/12">
                     <div className="container text-center w-10/12 lg:w-7/12">

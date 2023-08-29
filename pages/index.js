@@ -4,7 +4,7 @@ import Seo from "./../components/Seo";
 export default function Home() {
     return (
         <>
-        <Seo title="Forside" description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse." canonical="https://tagberegneren.dk/" />
+        <Seo title="Gratis Tagberegner - Beregn pris på dit nye tag" description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse." canonical="https://tagberegneren.dk" />
         <LandingPage home={true} />
         </>
     );

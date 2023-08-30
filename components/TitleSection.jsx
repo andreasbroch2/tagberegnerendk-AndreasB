@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { usePostHog } from 'posthog-js/react'
 import { useEffect, useState } from 'react'
 
 const AdresseSearch = dynamic(() => import('./AdresseSearch.jsx'), {
@@ -8,21 +8,23 @@ const AdresseSearch = dynamic(() => import('./AdresseSearch.jsx'), {
 
 
 export default function TitleSection(props) {
-    const [testState, setTestState] = useState(false)
-    const ctaVariant = useFeatureFlagVariantKey('title-exp');
-
+    const [flag, setFlag] = useState(false)
+    const posthog = usePostHog()
+  
     useEffect(() => {
-        if (ctaVariant === 'test') {
-            setTestState(true)
-        }
-    }, [ctaVariant])
+      const ph_flag = posthog.isFeatureEnabled('title-exp') 
+  
+      if (typeof ph_flag !== 'undefined') {
+        setFlag(ph_flag)
+      }
+    }, [posthog])
     return (
         <>
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>
                         <div className="mt-2 lg:mt-0 p-0">
-                            {testState ? (
+                            {flag ? (
                                 <>
                                     <h1
                                         className={`text-center text-5xl lg:text-7xl font-semibold lg:font-bold leading-snug lg:leading-snug`}>
@@ -48,9 +50,8 @@ export default function TitleSection(props) {
                                         <span className="tagrenoveringspan">nyt tag</span>
                                     </h1><h2
                                         className={`hidden lg:block font-medium text-lg lg:text-2xl mt-5 lg:mt-20 text-center `}>
-                                        Det tager kun{" "}
-                                        <span className="tagrenoveringspan">30 sekunder</span> at få en
-                                        nøjagtig pris på et nyt tag eller tagmaling!
+                                        Vores algoritme udregner tagaeral, pris og meget mere på kun{" "}
+                                        <span className="tagrenoveringspan">10 sekunder</span>
                                     </h2><p
                                         className="lg:hidden font-medium text-2xl lg:text-2xl mt-5 lg:mt-20 text-center ">
                                         Vores algoritme udregner tagaeral, pris og meget mere på kun{" "}

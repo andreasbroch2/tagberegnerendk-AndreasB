@@ -49,26 +49,15 @@ async function handler(req, res) {
         // Gem leaden i databasen
         console.log("before save:", newLead);
         try {
-            await newLead.save(function (err) {
-                if (err) {
-                    console.log("error saving", err);
-                }
-            });
+            newLead.markModified("vaerdi");
+            newLead.markModified("udhaeng");
+            newLead.markModified("tagrender");
+            newLead.markModified("hojdeTilTagrende");
+            console.log("after modified");
+            await newLead.save();
         } catch (error) {
             console.log("error saving", error);
         }
-        console.log("after save");
-        newLead.markModified("vaerdi");
-        newLead.markModified("udhaeng");
-        newLead.markModified("tagrender");
-        newLead.markModified("hojdeTilTagrende");
-        console.log("after modified");
-        await newLead.save(function (err) {
-            if (err) {
-                console.log("error saving", err);
-            }
-        });
-        console.log("Lead oprettet:");
         res.json("Lead oprettet:");
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);

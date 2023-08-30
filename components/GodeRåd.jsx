@@ -35,7 +35,7 @@ export default function GodeRåd() {
                         </div>
                         <div className="text-white">
                             <div className="iconBox">
-                                <Image src={userSpeak} alt="User Speak" placeholder="blur" />
+                                <Image src={userSpeak} alt="User Speak" />
                             </div>
                             <h4 className="font-semibold text-2xl mt-3">Bed om referencer</h4>
                             <p className="font-light text-zinc-300 mt-3">

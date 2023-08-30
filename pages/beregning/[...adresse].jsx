@@ -127,7 +127,8 @@ export default function Beregning({ params }) {
                         <button
                             type="submit"
                             id="submitButton"
-                            onClick={async () => {
+                            onClick={async (e) => {
+                                e.preventDefault();
                                 event("GetPrice", {
                                     category: "Lead",
                                     label: 'GetPrice',

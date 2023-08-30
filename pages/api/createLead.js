@@ -2,9 +2,8 @@ import Lead from "../../models/Lead";
 
 async function handler(req, res) {
     let { nyTagType, nyTagTypeTekst, boligTagType, boligTagTypeTekst, tagVinkel, tagfladeareal, skorsten, samletPris, tagMalingPris, hojdeTilTagrende, adresse, boligGrundPlan, leadPriceId, by, postnummer, udhaeng, tagrender, time } = req.body;
-
-     //Convert adresse to string
-     try {
+    //Convert adresse to string
+    try {
         postnummer = parseInt(postnummer);
         //convert højSamletPris to number
         let værdi;
@@ -13,9 +12,7 @@ async function handler(req, res) {
         } else if (nyTagTypeTekst !== "Tagmaling") {
             værdi = samletPris;
         }
-
         let newLead; // Declare newLead outside the else block
-
         let beskrivelse;
         if (nyTagTypeTekst == "Tagmaling") {
             beskrivelse = `Skal have tilbud på ${tagfladeareal} m2 Tagmaling`;
@@ -48,10 +45,15 @@ async function handler(req, res) {
             udhaeng: udhaeng,
             tagrender: tagrender,
         });
-
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen
-        const save = await newLead.save();
+        const save = await newLead.save(function (err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.json({ token: generateToken(user), user: user });
+        });
         res.json(save);
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);

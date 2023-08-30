@@ -2,5 +2,5 @@
 module.exports = {
     siteUrl: 'https://tagberegneren.dk',
     generateRobotsTxt: true, // (optional)
-    // ...other options
+    exclude: ['/pris']
   }

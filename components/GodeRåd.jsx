@@ -14,7 +14,7 @@ export default function GodeRåd() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
                         <div className="text-white">
                             <div className="iconBox">
-                                <Image src={pricetag} alt="Tilbud" placeholder="blur" />
+                                <Image src={pricetag} alt="Tilbud" />
                             </div>
                             <h4 className="font-semibold text-2xl mt-3">Indhent flere tilbud</h4>
                             <p className="font-light text-zinc-300 mt-3">
@@ -25,7 +25,7 @@ export default function GodeRåd() {
                         </div>
                         <div className="text-white">
                             <div className="iconBox">
-                                <Image src={document} alt="Dokument" placeholder="blur" />
+                                <Image src={document} alt="Dokument" />
                             </div>
                             <h4 className="font-semibold text-2xl mt-3">Verificer forsikring</h4>
                             <p className="font-light text-zinc-300 mt-3">

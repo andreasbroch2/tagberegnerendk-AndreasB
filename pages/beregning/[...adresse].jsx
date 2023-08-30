@@ -466,7 +466,6 @@ export default function Beregning({ params }) {
                                                 src={homeRoof}
                                                 alt="Tag på hus"
                                                 className="mx-auto"
-                                                placeholder="blur"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Nyt tag
@@ -490,7 +489,6 @@ export default function Beregning({ params }) {
                                                 src={paintBucket}
                                                 alt="Tagmaling"
                                                 className="mx-auto"
-                                                placeholder="blur"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Tagmaling
@@ -759,7 +757,6 @@ export default function Beregning({ params }) {
                                                             className="mx-auto"
                                                             src={houseOutline}
                                                             alt="Udhæng"
-                                                            placeholder="blur"
                                                         />
                                                         <p className="font-semibold text-center my-auto mx-auto">
                                                             Udhæng

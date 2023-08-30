@@ -6,6 +6,7 @@ import { createLead } from "../../lib/serveractions";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
+import Seo from "../../components/Seo";
 import homeRoof from "../../assets/home-roof.svg";
 import paintBucket from "../../assets/paint-bucket.svg";
 import gutter from "../../assets/gutter.png";
@@ -190,6 +191,7 @@ export default function Beregning({ params }) {
 
     return (
         <>
+            <Seo title="Beregn pris på nyt tag eller tagmaling" description="Beregn pris på nyt tag eller tagmaling" />
             <section>
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -464,6 +466,7 @@ export default function Beregning({ params }) {
                                                 src={homeRoof}
                                                 alt="Tag på hus"
                                                 className="mx-auto"
+                                                placeholder="blur"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Nyt tag
@@ -487,6 +490,7 @@ export default function Beregning({ params }) {
                                                 src={paintBucket}
                                                 alt="Tagmaling"
                                                 className="mx-auto"
+                                                placeholder="blur"
                                             />
                                             <p className="font-semibold text-center my-auto mx-auto">
                                                 Tagmaling
@@ -520,6 +524,7 @@ export default function Beregning({ params }) {
                                                 src={teglTag}
                                                 alt="Tegltag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Tegltag
@@ -543,6 +548,7 @@ export default function Beregning({ params }) {
                                                 src={staalTag}
                                                 alt="Ståltag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Ståltag
@@ -566,6 +572,7 @@ export default function Beregning({ params }) {
                                                 src={betonTegl}
                                                 alt="Beton tegl"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Betontegl
@@ -589,6 +596,7 @@ export default function Beregning({ params }) {
                                                 src={tagPap}
                                                 alt="Tagpap"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Tagpap
@@ -612,6 +620,7 @@ export default function Beregning({ params }) {
                                                 src={eternitTag}
                                                 alt="Eternit tag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Eternit
@@ -635,6 +644,7 @@ export default function Beregning({ params }) {
                                                 src={straaTag}
                                                 alt="Stråtag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Stråtag
@@ -658,6 +668,7 @@ export default function Beregning({ params }) {
                                                 src={levendeTag}
                                                 alt="Levende tag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Levende tag
@@ -681,6 +692,7 @@ export default function Beregning({ params }) {
                                                 src={naturSkiferTag}
                                                 alt="Naturskifer tag"
                                                 className="rounded-xl w-full h-full object-cover"
+                                                placeholder="blur"
                                             />
                                             <h4 className="center-in-div text-white">
                                                 Naturskifer
@@ -716,6 +728,7 @@ export default function Beregning({ params }) {
                                                             className="mx-auto"
                                                             alt="Tagrender"
                                                             src={gutter}
+                                                            placeholder="blur"
                                                         />
                                                         <p className="font-semibold text-center my-auto mx-auto">
                                                             Tagrender
@@ -746,6 +759,7 @@ export default function Beregning({ params }) {
                                                             className="mx-auto"
                                                             src={houseOutline}
                                                             alt="Udhæng"
+                                                            placeholder="blur"
                                                         />
                                                         <p className="font-semibold text-center my-auto mx-auto">
                                                             Udhæng

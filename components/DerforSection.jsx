@@ -15,7 +15,7 @@ export default function DerforSection() {
                     <div className="grid grid-cols 1 lg:grid-cols-2 gap-10 lg:gap-20">
                         <div className="text-darkblue">
                             <div className="iconBoxLight shadow-xl">
-                                <Image src={calculator} alt="Lommeregner" />
+                                <Image src={calculator} alt="Lommeregner" placeholder="blur" />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
                                 Automatisk beregning
@@ -28,7 +28,7 @@ export default function DerforSection() {
                         </div>
                         <div className="text-darkblue">
                             <div className="iconBoxLight shadow-xl">
-                                <Image src={free} alt="Gratis" />
+                                <Image src={free} alt="Gratis" placeholder="blur" />
                             </div>
                             <h4 className="font-semibold text-2xl text-darkblue mt-5">
                                 100% Gratis tag beregner

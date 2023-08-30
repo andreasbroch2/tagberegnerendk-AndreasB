@@ -47,7 +47,7 @@ export default function Beregning({ params }) {
 
     useEffect(() => {
         event("Beregning", {
-            category: "Beregning",
+            category: "Beregning", 
             label: 'Beregning',
         });
         if (router.isReady) {

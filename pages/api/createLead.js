@@ -1,8 +1,18 @@
 import Lead from "../../models/Lead";
+import { PostHog } from 'posthog-node';
 
 async function handler(req, res) {
+    const client = new PostHog(
+        'phc_AVtfq7Tpl76X5VWwBe9Ykj5aoRuYhUCWbymCOeA5VJz',
+        {
+          host: "https://eu.posthog.com",
+        }
+      );
     let { nyTagType, nyTagTypeTekst, boligTagType, boligTagTypeTekst, tagVinkel, tagfladeareal, skorsten, samletPris, tagMalingPris, hojdeTilTagrende, adresse, boligGrundPlan, leadPriceId, by, postnummer, udhaeng, tagrender, time } = req.body;
-    //Convert adresse to string
+    client.capture({
+        distinctId: leadPriceId,
+        event: 'Lead created',
+    });
     try {
         postnummer = parseInt(postnummer);
         //convert højSamletPris to number

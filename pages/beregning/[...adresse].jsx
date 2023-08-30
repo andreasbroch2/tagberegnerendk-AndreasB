@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
-import Link from "next/link";
+import { useRouter } from 'next/router';
+import { usePostHog } from 'posthog-js/react';
 import { calculator, updatePrice } from "../../lib/calculator";
 import { createLead } from "../../lib/serveractions";
 import { v4 as uuidv4 } from "uuid";
@@ -44,12 +44,17 @@ export default function Beregning({ params }) {
     const [boligFound, setBoligFound] = useState(true);
 
     const router = useRouter()
+    const posthog = usePostHog()
 
     useEffect(() => {
         event("Beregning", {
             category: "Beregning", 
             label: 'Beregning',
         });
+        posthog.capture('Beregning',
+        {
+            distinctId: leadPriceId,
+        })
         if (router.isReady) {
             const urlPath = router.query.adresse;
             if (urlPath) {
@@ -119,8 +124,6 @@ export default function Beregning({ params }) {
         <><div className="mt-20">
         </div><form id="leadform" name="leadform">
                 <div className="mt-10">
-
-                    <Link href={`/pris?id=${leadPriceId}`}>
                         <button
                             type="submit"
                             id="submitButton"
@@ -155,7 +158,6 @@ export default function Beregning({ params }) {
                             className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
                             Beregn pris
                         </button>
-                    </Link>
                 </div>
             </form></>
     );

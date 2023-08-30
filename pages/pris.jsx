@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { event } from "nextjs-google-analytics";
 import Image from "next/image";
+import { usePostHog } from 'posthog-js/react';
 import journalist from "../assets/journalist.jpg";
 import jydskTagTeknik from "../assets/jydsk-tagteknik.png";
 import trustpilot from "../assets/trustpilot-4.5.png";
@@ -12,6 +13,8 @@ export default function Pris() {
     const priceID = searchParams.get("id");
     const [priceData, setPriceData] = useState(null);
     const [pickedPrice, setPickedPrice] = useState("samletPris");
+
+    const posthog = usePostHog();
 
     useEffect(() => {
         fetchLeads();
@@ -65,6 +68,11 @@ export default function Pris() {
             category: "Tilbud",
             label: 'Tilbud',
         });
+
+        posthog.capture('Tilbud - Klik', {
+            distinctId: priceData.leadPriceId,
+        });
+
     }
     return (
         <section>

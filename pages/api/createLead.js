@@ -52,8 +52,8 @@ async function handler(req, res) {
                 console.log(err);
                 return;
             }
-            res.json({ token: generateToken(user), user: user });
         });
+        console.log("Lead oprettet:", save);
         res.json(save);
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);

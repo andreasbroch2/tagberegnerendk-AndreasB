@@ -52,6 +52,7 @@ async function handler(req, res) {
         newLead.markModified("udhaeng");
         newLead.markModified("tagrender");
         newLead.markModified("hojdeTilTagrende");
+        console.log("after modified");
         await newLead.save(function (err) {
             if (err) {
                 console.log("error saving", err);

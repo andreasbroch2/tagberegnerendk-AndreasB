@@ -48,6 +48,16 @@ async function handler(req, res) {
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen
         console.log("before save:", newLead);
+        try {
+            await newLead.save(function (err) {
+                if (err) {
+                    console.log("error saving", err);
+                }
+            });
+        } catch (error) {
+            console.log("error saving", error);
+        }
+        console.log("after save");
         newLead.markModified("vaerdi");
         newLead.markModified("udhaeng");
         newLead.markModified("tagrender");

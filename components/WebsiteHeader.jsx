@@ -11,14 +11,13 @@ export default function WebsiteHeader() {
     return (
         <header>
             <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
-                <p>Gratis og præcis prisberegning på nyt tag og tagmaling</p>
+                <p>Præcis prisberegning på nyt tag og tagmaling</p>
             </div>
             <div className="container px-3 lg:px-0">
                 <div className="mt-5 flex flex-wrap justify-between">
                     <Link href="/" className="flex my-auto">
                         <h4 className="text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
                     </Link>
-
                     <ul className="ml-10 hidden flex-wrap gap-5 items-center justify-center lg:flex font-light">
                         <li className="mr-4 hover:underline md:mr-6">
                             <Link href="/goderaad">Gode råd</Link>

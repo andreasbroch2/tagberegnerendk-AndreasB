@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
-import { usePostHog } from 'posthog-js/react';
 import { calculator, updatePrice } from "../../lib/calculator";
 import { createLead } from "../../lib/serveractions";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
 import Seo from "../../components/Seo";
+import { usePostHog, useFeatureFlagEnabled, useFeatureFlagVariantKey } from 'posthog-js/react'
 import homeRoof from "../../assets/home-roof.svg";
 import paintBucket from "../../assets/paint-bucket.svg";
 import gutter from "../../assets/gutter.png";
@@ -43,19 +43,26 @@ export default function Beregning({ params }) {
     const [tagrender, setTagrender] = useState(false);
     const [udhaeng, setUdhaeng] = useState(false);
     const [boligFound, setBoligFound] = useState(true);
+    const [ctaState, setCtaState] = useState('Udregn Pris')
 
-    const router = useRouter()
-    const posthog = usePostHog()
+    const router = useRouter();
+    const posthog = usePostHog();
+    const ctaVariant = useFeatureFlagVariantKey('test-flas');
+    useEffect(() => {
+        if (ctaVariant === 'test') {
+            setCtaState('Beregn Pris')
+        }
+    }, [ctaVariant])
 
     useEffect(() => {
         event("Beregning", {
-            category: "Beregning", 
+            category: "Beregning",
             label: 'Beregning',
         });
         posthog.capture('Beregning',
-        {
-            distinctId: leadPriceId,
-        })
+            {
+                distinctId: leadPriceId,
+            })
         if (router.isReady) {
             const urlPath = router.query.adresse;
             if (urlPath) {
@@ -125,41 +132,41 @@ export default function Beregning({ params }) {
         <><div className="mt-20">
         </div><form id="leadform" name="leadform">
                 <div className="mt-10">
-                        <button
-                            type="submit"
-                            id="submitButton"
-                            onClick={async (e) => {
-                                e.preventDefault();
-                                event("GetPrice", {
-                                    category: "Lead",
-                                    label: 'GetPrice',
-                                });
-                                // Change button text
-                                await changeButtonText();
-                                await createLead(
-                                    nyTagType,
-                                    nyTagTypeTekst,
-                                    boligTagType,
-                                    boligTagTypeTekst,
-                                    tagVinkel,
-                                    tagfladeareal,
-                                    skorsten,
-                                    samletPris,
-                                    tagMalingPris,
-                                    hojdeTilTagrende,
-                                    adresse,
-                                    boligGrundPlan,
-                                    leadPriceId,
-                                    by,
-                                    postnummer,
-                                    udhaeng,
-                                    tagrender,
-                                    new Date().toLocaleString()
-                                );
-                            }}
-                            className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
-                            Beregn pris
-                        </button>
+                    <button
+                        type="submit"
+                        id="submitButton"
+                        onClick={async (e) => {
+                            e.preventDefault();
+                            event("GetPrice", {
+                                category: "Lead",
+                                label: 'GetPrice',
+                            });
+                            // Change button text
+                            await changeButtonText();
+                            await createLead(
+                                nyTagType,
+                                nyTagTypeTekst,
+                                boligTagType,
+                                boligTagTypeTekst,
+                                tagVinkel,
+                                tagfladeareal,
+                                skorsten,
+                                samletPris,
+                                tagMalingPris,
+                                hojdeTilTagrende,
+                                adresse,
+                                boligGrundPlan,
+                                leadPriceId,
+                                by,
+                                postnummer,
+                                udhaeng,
+                                tagrender,
+                                new Date().toLocaleString()
+                            );
+                        }}
+                        className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
+                        {ctaState}
+                    </button>
                 </div>
             </form></>
     );

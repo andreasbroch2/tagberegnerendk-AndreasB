@@ -21,12 +21,12 @@ export default function TitleSection(props) {
                                     <span className="tagrenoveringspan">nyt tag</span> og{" "}
                                     <span className="tagrenoveringspan">tagmaling</span>
                                 </h1>
-                                <p
+                                <h2
                                     className={`hidden lg:block font-medium text-lg lg:text-2xl mt-5 lg:mt-20 text-center `}>
                                     Det tager kun{" "}
                                     <span className="tagrenoveringspan">30 sekunder</span> at få en
                                     nøjagtig pris på et nyt tag eller tagmaling!
-                                </p>
+                                </h2>
                             </>
 
                             <p

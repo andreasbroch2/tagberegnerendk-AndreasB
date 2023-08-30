@@ -18,6 +18,12 @@ export default function WebsiteFooter() {
                         <p className="font-semibold text-xl">Links</p>
                         <ul>
                             <li className="mt-4">
+                                <Link href="/">Forside</Link>
+                            </li>
+                            <li className="mt-4">
+                                <Link href="/hvad-koster-det-at-skifte-tag">Hvad koster det at skifte tag?</Link>
+                            </li>
+                            <li className="mt-4">
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
                             <li className="mt-4">

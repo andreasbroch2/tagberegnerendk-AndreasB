@@ -54,10 +54,11 @@ async function handler(req, res) {
             newLead.markModified("tagrender");
             newLead.markModified("hojdeTilTagrende");
             console.log("after modified");
-            await newLead.save();
+            console.log("save", await newLead.save())
         } catch (error) {
             console.log("error saving", error);
         }
+        console.log("after save");
         res.json("Lead oprettet:");
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);

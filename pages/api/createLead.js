@@ -54,7 +54,7 @@ async function handler(req, res) {
             }
         });
         console.log("Lead oprettet:");
-        res.json(save);
+        res.json("Lead oprettet:");
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);
     }

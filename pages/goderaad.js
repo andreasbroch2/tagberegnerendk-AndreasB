@@ -1,6 +1,6 @@
 import Råd from "../components/Råd";
-import { goderåd } from "../app/utils/goderåd";
-import { navne } from "../app/utils/navne";
+import { goderåd } from "../lib/goderåd";
+import { navne } from "../lib/navne";
 import Seo from "./../components/Seo";
 
 export default function Page() {

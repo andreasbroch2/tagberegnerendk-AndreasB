@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { faqData } from "../app/utils/faqData";
+import { faqData } from "../lib/faqData";
 
 export default function FaqContainer() {
     const [expandedId, setExpandedId] = useState(null);

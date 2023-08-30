@@ -1,6 +1,6 @@
 import LandingPage from "./../components/landingpage";
 import Seo from "./../components/Seo";
-import { getSinglePost } from "../app/utils/wordpress";
+import { getSinglePost } from "../lib/wordpress";
 
 export default function Home(props) {
     return (
@@ -17,7 +17,6 @@ export default function Home(props) {
 export const getStaticProps = async () => {
     const data = await getSinglePost('gratis-tagberegner-beregn-pris-pa-dit-nye-tag');
     return {
-        props: { data },
-        revalidate: 10,
+        props: { data }
     }
 }

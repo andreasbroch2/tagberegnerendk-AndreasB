@@ -1,14 +1,11 @@
-'use client';
-
-import { getPriceData } from "../utils/Serveractions/serverActions";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { event } from "nextjs-google-analytics";
 import Image from "next/image";
-import journalist from "../../assets/journalist.jpg";
-import jydskTagTeknik from "../../assets/jydsk-tagteknik.png";
-import trustpilot from "../../assets/trustpilot-4.5.png";
+import journalist from "../assets/journalist.jpg";
+import jydskTagTeknik from "../assets/jydsk-tagteknik.png";
+import trustpilot from "../assets/trustpilot-4.5.png";
 
 export default function Pris() {
     const searchParams = useSearchParams();
@@ -19,12 +16,17 @@ export default function Pris() {
     useEffect(() => {
         fetchLeads();
     }, [priceID]);
-
     const fetchLeads = async () => {
         try {
-            const leadsData = await getPriceData(priceID);
+            const response = await fetch("/api/getLead", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ leadPriceId: priceID }),
+            });
+            const leadsData = await response.json();
             setPriceData(leadsData);
-            console.log(leadsData);
         } catch (error) {
             console.error("Error fetching leads:", error);
         }

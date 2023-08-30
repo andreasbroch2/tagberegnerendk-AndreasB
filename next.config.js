@@ -5,9 +5,6 @@ module.exports = nextConfig;
 
 module.exports = {
     compiler: { styledComponents: true },
-    experimental: {
-        serverActions: true,
-    },
     async redirects() {
         return [
             {

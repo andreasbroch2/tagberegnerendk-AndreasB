@@ -1,5 +1,5 @@
 const { Inter } = require("next/font/google");
-const mongoose = require("../utils/db");
+const mongoose = require("../lib/db");
 
 let Lead;
 
@@ -24,7 +24,7 @@ try {
         hojSamletPris: String,
         samletPris: String,
         tagMalingPris: String,
-        hojdeTilTagrende: String,
+        hojdeTilTagrende: Number,
         adresse: String,
         by: String,
         postnummer: Number,

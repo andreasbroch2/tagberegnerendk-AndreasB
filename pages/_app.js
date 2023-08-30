@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import WebsiteFooter from "./../components/WebsiteFooter";
 import { Poppins } from "next/font/google";
 import { GoogleAnalytics } from "nextjs-google-analytics";
-import Providers from '../app/providers'
+import Providers from '../lib/providers'
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
     loading: () => <p>Loading...</p>,

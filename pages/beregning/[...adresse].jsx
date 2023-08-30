@@ -1,24 +1,23 @@
-'use client'
-
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 import Link from "next/link";
-import { calculator, updatePrice } from "../../utils/calculator";
-import { createLead } from "../../utils/Serveractions/serverActions.js";
+import { calculator, updatePrice } from "../../lib/calculator";
+import { createLead } from "../../lib/serveractions";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
-import homeRoof from "../../../assets/home-roof.svg";
-import paintBucket from "../../../assets/paint-bucket.svg";
-import gutter from "../../../assets/gutter.png";
-import houseOutline from "../../../assets/house-outline.svg";
-import teglTag from "../../../assets/tegltag.jpg";
-import tagPap from "../../../assets/tagpap.jpg";
-import eternitTag from "../../../assets/eternittag.jpg";
-import straaTag from "../../../assets/straatag.jpg";
-import staalTag from "../../../assets/staaltag.jpg";
-import naturSkiferTag from "../../../assets/naturskifer-tag.jpg";
-import levendeTag from "../../../assets/levende-tag.jpg";
-import betonTegl from "../../../assets/betontegl.jpeg";
+import homeRoof from "../../assets/home-roof.svg";
+import paintBucket from "../../assets/paint-bucket.svg";
+import gutter from "../../assets/gutter.png";
+import houseOutline from "../../assets/house-outline.svg";
+import teglTag from "../../assets/tegltag.jpg";
+import tagPap from "../../assets/tagpap.jpg";
+import eternitTag from "../../assets/eternittag.jpg";
+import straaTag from "../../assets/straatag.jpg";
+import staalTag from "../../assets/staaltag.jpg";
+import naturSkiferTag from "../../assets/naturskifer-tag.jpg";
+import levendeTag from "../../assets/levende-tag.jpg";
+import betonTegl from "../../assets/betontegl.jpeg";
 
 const leadPriceId = uuidv4();
 
@@ -28,72 +27,66 @@ export default function Beregning({ params }) {
     const [by, setBy] = useState("");
     const [postnummer, setPostnummer] = useState("");
     const [boligGrundPlan, setBoligGrundPlan] = useState(0);
-    const [boligDataÅben, setBoligDataÅben] = useState(false);
     const [boligTagTypeTekst, setBoligTagTypeTekst] = useState("");
     const [nyTagType, setNyTagType] = useState(0);
     const [nyTagTypeTekst, setNyTagTypeTekst] = useState("");
     const [boligTagType, setBoligTagType] = useState(0);
-    const [boligEtager, setBoligEtager] = useState(0);
     const [seBeregning, setSeBeregning] = useState(false);
     const [renoveringType, setRenoveringType] = useState("");
-    const [fornavn, setFornavn] = useState("");
-    const [efternavn, setEfternavn] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefon, setTelefon] = useState("");
     const [tagVinkel, setTagVinkel] = useState(0);
     const [tagfladeareal, setTagfladeareal] = useState(0);
-    const [højdeTilTagrende, setHøjdeTilTagrende] = useState(0);
+    const [hojdeTilTagrende, setHojdeTilTagrende] = useState(0);
     const [skorsten, setSkorsten] = useState(false);
     const [samletPris, setSamletPris] = useState(0);
-    const [lavSamletPris, setLavSamletPris] = useState(0);
-    const [højSamletPris, setHøjSamletPris] = useState(0);
     const [tagMalingPris, setTagMalingPris] = useState(0);
-    const [kælder, setKælder] = useState(false);
     const [tagrender, setTagrender] = useState(false);
-    const [udhæng, setUdhæng] = useState(false);
+    const [udhaeng, setUdhaeng] = useState(false);
     const [boligFound, setBoligFound] = useState(true);
+
+    const router = useRouter()
 
     useEffect(() => {
         event("Beregning", {
             category: "Beregning",
             label: 'Beregning',
         });
-        async function fetchData() {
-            const result = await calculator(params.adresse);
-            if (!result.boligGrundPlan) {
-                setBoligFound(false);
-                setLoading(false);
-                return;
+        if (router.isReady) {
+            const urlPath = router.query.adresse;
+            if (urlPath) {
+                async function fetchData() {
+                    // Get slug from url
+                    const result = await calculator(urlPath);
+                    if (!result.boligGrundPlan) {
+                        setBoligFound(false);
+                        setLoading(false);
+                        return;
+                    }
+                    setAdresse(result.adresse);
+                    setBy(result.by);
+                    setPostnummer(result.postnummer);
+                    setBoligGrundPlan(result.boligGrundPlan);
+                    setBoligTagType(result.boligTagType);
+                    setBoligTagTypeTekst(result.tagTypeTekst);
+                    setTagVinkel(result.tagVinkel);
+                    setTagfladeareal(result.tagFladeAreal);
+                    setHojdeTilTagrende(result.højdeTilTagrende);
+                    setSamletPris(result.middelSamletPris);
+                    setTagMalingPris(result.tagMalingPris);
+                    setLoading(result.loading);
+                }
+                fetchData();
             }
-            setAdresse(result.adresse);
-            setBy(result.by);
-            setPostnummer(result.postnummer);
-            setBoligGrundPlan(result.boligGrundPlan);
-            setBoligTagType(result.boligTagType);
-            setBoligEtager(result.etageAntal);
-            setBoligTagTypeTekst(result.tagTypeTekst);
-            setTagVinkel(result.tagVinkel);
-            setTagfladeareal(result.tagFladeAreal);
-            setHøjdeTilTagrende(result.højdeTilTagrende);
-            setSamletPris(result.middelSamletPris);
-            setLavSamletPris(result.lavSamletPris);
-            setHøjSamletPris(result.højSamletPris);
-            setTagMalingPris(result.tagMalingPris);
-            setKælder(result.kælder);
-            setLoading(result.loading);
         }
-        fetchData();
-    }, [params.adresse]);
+    }, [router.query.adresse]);
 
-    function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhæng) {
-        updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhæng).then(
+    function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng) {
+        updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng).then(
             (result) => {
                 setSamletPris(result.middelSamletPris);
-                setLavSamletPris(result.lavSamletPris);
-                setHøjSamletPris(result.højSamletPris);
                 setTagMalingPris(result.tagMalingPris);
                 setTagfladeareal(result.tagFladeAreal);
                 setNyTagTypeTekst(result.nyTagTypeTekst);
+                console.log(result.nyTagTypeTekst);
             }
         );
     }
@@ -126,6 +119,7 @@ export default function Beregning({ params }) {
         <><div className="mt-20">
         </div><form id="leadform" name="leadform">
                 <div className="mt-10">
+
                     <Link href={`/pris?id=${leadPriceId}`}>
                         <button
                             type="submit"
@@ -145,17 +139,15 @@ export default function Beregning({ params }) {
                                     tagVinkel,
                                     tagfladeareal,
                                     skorsten,
-                                    lavSamletPris,
-                                    højSamletPris,
                                     samletPris,
                                     tagMalingPris,
-                                    højdeTilTagrende,
+                                    hojdeTilTagrende,
                                     adresse,
                                     boligGrundPlan,
                                     leadPriceId,
                                     by,
                                     postnummer,
-                                    udhæng,
+                                    udhaeng,
                                     tagrender,
                                     new Date().toLocaleString()
                                 );
@@ -184,7 +176,7 @@ export default function Beregning({ params }) {
             </div>
             <div>
                 <p className="font-light text-sm">Højde til tagrende</p>
-                <p className="font-medium">{højdeTilTagrende} m</p>
+                <p className="font-medium">{hojdeTilTagrende} m</p>
             </div>
             <div>
                 <p className="font-light text-sm">Tagvinkel</p>
@@ -389,7 +381,7 @@ export default function Beregning({ params }) {
                                     <div className="mt-5">
                                         <div className="flex flex-col gap-10">
                                             <p className="font-semibold text-3xl">
-                                                {højdeTilTagrende}{" "}
+                                                {hojdeTilTagrende}{" "}
                                                 <span className="text-sm font-light">
                                                     meter til tagrende
                                                 </span>
@@ -398,9 +390,9 @@ export default function Beregning({ params }) {
                                                 min="0"
                                                 max="20"
                                                 onChange={(e) =>
-                                                    setHøjdeTilTagrende(e.target.value)
+                                                    setHojdeTilTagrende(e.target.value)
                                                 }
-                                                value={højdeTilTagrende}
+                                                value={hojdeTilTagrende}
                                                 type="range"
                                                 className=" my-auto w-full lg:w-6/12 h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                             />
@@ -708,7 +700,7 @@ export default function Beregning({ params }) {
                                                             tagfladeareal,
                                                             skorsten,
                                                             !tagrender,
-                                                            udhæng
+                                                            udhaeng
                                                         );
                                                         setTagrender(!tagrender);
                                                     }}
@@ -732,17 +724,17 @@ export default function Beregning({ params }) {
                                                 </div>
                                                 <div
                                                     onClick={() => {
-                                                        setUdhæng(!udhæng);
+                                                        setUdhaeng(!udhaeng);
                                                         handlePriceUpdate(
                                                             nyTagType,
                                                             tagVinkel,
                                                             tagfladeareal,
                                                             skorsten,
                                                             tagrender,
-                                                            !udhæng
+                                                            !udhaeng
                                                         );
                                                     }}
-                                                    className={`${udhæng == true
+                                                    className={`${udhaeng == true
                                                         ? "bg-green-200 border-green-400 border-2"
                                                         : "bg-white"
                                                         } rounded-xl shadow-xl py-10 px-5 flex flex-col justify-end hover:scale-105 transition-all w-full`}>

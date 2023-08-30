@@ -26,6 +26,7 @@ export default function Pris() {
                 body: JSON.stringify({ leadPriceId: priceID }),
             });
             const leadsData = await response.json();
+            console.log("Leads data:", leadsData);
             setPriceData(leadsData);
         } catch (error) {
             console.error("Error fetching leads:", error);

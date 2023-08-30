@@ -51,8 +51,8 @@ async function handler(req, res) {
 
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen
-        await newLead.save();
-        res.json(newLead);
+        const save = await newLead.save();
+        res.json(save);
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);
     }

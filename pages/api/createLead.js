@@ -50,8 +50,7 @@ async function handler(req, res) {
         console.log("before save:", newLead);
         const save = await newLead.save(function (err) {
             if (err) {
-                console.log(err);
-                return;
+                console.log("error saving", err);
             }
         });
         console.log("Lead oprettet:", save);

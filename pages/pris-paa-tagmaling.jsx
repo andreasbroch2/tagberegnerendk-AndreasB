@@ -1,14 +1,17 @@
-import Seo from "./../components/Seo";
+import Seo from "../components/Seo";
 import { getSinglePost } from "../lib/wordpress";
 import AdresseSearch from "../components/AdresseSearch";
+import DerforSection from "../components/DerforSection";
+import GodeRåd from "../components/GodeRåd";
 
 export default function PrisPaaTag(props) {
     return (
         <>
             <Seo
-                title="Hvad koster det at skifte tag? - Din guide til pris på nyt tag i 2023"
-                description="At få et nyt tag på dit hus kan være en stor investering, så det er vigtigt at forstå omkostningerne ved et nyt tag, inden du begynder projektet. Prisen for et nyt tag kan variere meget afhængigt af flere faktorer"
-                canonical="https://tagberegneren.dk/hvad-koster-det-at-skifte-tag" />
+                title="Få en pris på tagmaling - Vores algorithm udregner prisen på 10 sekunder"
+                description="Vil du have en vejledende pris på maling af dit tag. Indtast blot din adresse og vores beregner klarer resten for dig"
+                canonical="https://tagberegneren.dk/pris-paa-tagmaling"
+            />
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>
@@ -16,7 +19,7 @@ export default function PrisPaaTag(props) {
                             <h1
                                 className={`text-center text-5xl lg:text-7xl font-semibold lg:font-bold leading-snug lg:leading-snug`}>
                                 Beregn gratis pris på <br className="hidden lg:block" />
-                                <span className="tagrenoveringspan">nyt tag</span>
+                                <span className="tagrenoveringspan">tagmaling</span>
                             </h1><h2
                                 className={`hidden lg:block font-medium text-lg lg:text-2xl mt-5 lg:mt-20 text-center `}>
                                 Vores algoritme udregner tagaeral, pris og meget mere på kun{" "}
@@ -37,6 +40,8 @@ export default function PrisPaaTag(props) {
                     </div>
                 </div>
             </section>
+            <DerforSection />
+            <GodeRåd />
             <section className="blog-section">
                 <div className="container" dangerouslySetInnerHTML={{ __html: props.data.content }}></div>
             </section>
@@ -45,7 +50,7 @@ export default function PrisPaaTag(props) {
 }
 
 export const getStaticProps = async () => {
-    const data = await getSinglePost('hvad-koster-det-at-skifte-tag');
+    const data = await getSinglePost('pris-pa-tagmaling');
     return {
         props: { data }
     }

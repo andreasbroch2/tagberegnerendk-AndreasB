@@ -1,29 +1,30 @@
-import dynamic from 'next/dynamic'
+
+import Seo from "../components/Seo";
+import { getSinglePost } from "../lib/wordpress";
+import { useEffect, useState } from "react";
+import AdresseSearch from "../components/AdresseSearch";
+import DerforSection from "../components/DerforSection";
+import GodeRåd from "../components/GodeRåd";
 import { usePostHog } from 'posthog-js/react'
-import { useEffect, useState } from 'react'
 
-const AdresseSearch = dynamic(() => import('./AdresseSearch.jsx'), {
-    loading: () => <p>Henter...</p>,
-})
-
-
-export default function TitleSection(props) {
-    const [flag, setFlag] = useState(false)
+export default function Home(props) {
+    const [ctaState, setCtaState] = useState(false);
     const posthog = usePostHog()
     useEffect(() => {
       const ph_flag = posthog.isFeatureEnabled('title-exp') 
   
       if (typeof ph_flag !== 'undefined') {
-        setFlag(ph_flag)
+        setCtaState(ph_flag)
       }
     }, [])
     return (
         <>
+            <Seo title="Gratis Tagberegner - Beregn pris på dit nye tag" description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse." canonical="https://tagberegneren.dk" />
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>
                         <div className="mt-2 lg:mt-0 p-0">
-                            {flag ? (
+                            {ctaState ? (
                                 <>
                                     <h1
                                         className={`text-center text-5xl lg:text-7xl font-semibold lg:font-bold leading-snug lg:leading-snug`}>
@@ -69,6 +70,20 @@ export default function TitleSection(props) {
                     </div>
                 </div>
             </section>
+            <DerforSection />
+            <GodeRåd />
+            <section className="blog-section">
+                <div className="container" dangerouslySetInnerHTML={{ __html: props.data?.content }}></div>
+            </section>
         </>
     );
+}
+
+export async function getServerSideProps() {
+    const data = await getSinglePost('gratis-tagberegner-beregn-pris-pa-dit-nye-tag');
+    return {
+        props: {
+            data
+        },
+    }
 }

@@ -69,11 +69,9 @@ export default function Pris() {
             category: "Tilbud",
             label: 'Tilbud',
         });
-
         posthog.capture('Tilbud - Klik', {
             distinctId: priceData.leadPriceId,
         });
-
     }
     return (
         <>
@@ -127,57 +125,12 @@ export default function Pris() {
                                             </p>
                                         </div>
                                         <p className="font-light mt-5">Din beregnede pris:</p>
-                                        {pickedPrice === "lavSamletPris" ? (
-                                            <>
-                                                <h4 className="font-semibold text-2xl">
-                                                    {priceData.lavSamletPris}
-                                                </h4>
-                                                <p className="font-light text-sm mt-2">
-                                                    Dette er en lav pris. Det er denne pris du forventeligt
-                                                    vil få i et tilbud fra de færreste håndværkere. Har
-                                                    ingen skorsten, tagvinder ell. Kan prisen gå ned i den
-                                                    lave pris. Du bør være varsom med at godtage priser
-                                                    under denne pris, da det er vanskeligt at udføre et
-                                                    ordentligt stykke arbejde til denne pris.
-                                                </p>
-                                            </>
-                                        ) : null}
-                                        {pickedPrice === "samletPris" &&
-                                            priceData.nyTagTypeTekst !== "Tagmaling" ? (
-                                            <>
-                                                <h4 className="font-semibold text-2xl">
-                                                    {priceData.samletPris}
-                                                </h4>
-                                                <p className="font-light text-sm mt-2">
-                                                    Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed. Ønsker du en præcis pris på dit tagprojekt, så kig herunder.
-                                                </p>
-                                            </>
-                                        ) : null}
-                                        {pickedPrice === "hojSamletPris" ? (
-                                            <>
-                                                <h4 className="font-semibold text-2xl">
-                                                    {priceData.hojSamletPris}
-                                                </h4>
-                                                <p className="font-light text-sm mt-2">
-                                                    Dette er en høj pris. Du kan støde på denne pris, hvis
-                                                    dit tag er meget komplekst eller, hvis blot håndværkeren
-                                                    har en høj timepris. Du bør være varsom med at godtage
-                                                    priser over denne.
-                                                </p>
-                                            </>
-                                        ) : null}
-                                        {pickedPrice === "samletPris" &&
-                                            priceData.nyTagTypeTekst == "Tagmaling" ? (
-                                            <>
-                                                <h4 className="font-semibold text-2xl">
-                                                    {priceData.tagMalingPris}
-                                                </h4>
-                                                <p className="font-light text-sm mt-2">
-                                                    Dette er en mere eller mindre standard pris for
-                                                    tagmaling af et tag som dit, med den tagvinkel du har.
-                                                </p>
-                                            </>
-                                        ) : null}
+                                        <h4 className="font-semibold text-2xl">
+                                            {priceData.samletPris}
+                                        </h4>
+                                        <p className="font-light text-sm mt-2">
+                                            Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed. Ønsker du en præcis pris på dit tagprojekt, så kig herunder.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

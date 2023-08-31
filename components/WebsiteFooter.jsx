@@ -43,6 +43,9 @@ export default function WebsiteFooter() {
                             <li className="mt-4">
                                 <Link href="/tagtyper/hvad-koster-tegltag-guide">Tegltag</Link>
                             </li>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-tagpap-tag-guide">Tagpap</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

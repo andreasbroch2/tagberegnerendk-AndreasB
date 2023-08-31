@@ -7,6 +7,7 @@ const AdresseSearch = () => {
     // Tilstandsstyring med useState-hooks
     const [searchText, setSearchText] = useState("");
     const [autocompleteResults, setAutocompleteResults] = useState([]);
+    const [inputState, setInputState] = useState(false);
 
     const handleSearchTextChange = (e) => {
         const value = e.target.value;
@@ -55,8 +56,11 @@ const AdresseSearch = () => {
             setAutocompleteResults([]);
         }
     }, [searchText]);
+    // Show input and hide button when button is clicked
+    const setInputStateFunction = (state) => () => {
+        setInputState(state);
+    }
 
-    // Render AdresseSearch-komponenten
     return (
         <>
             <LoadingModal />
@@ -64,7 +68,7 @@ const AdresseSearch = () => {
                 <div className="content-center">
                     <div className="searchInput">
                         <div className="text-center">
-                            <div className="autoCompleteDiv relative">
+                            <div className={`autoCompleteDiv relative ${inputState ? "block" : "hidden"} transition-all`}>
                                 {/* Render en tekstinput til søgeteksten */}
                                 <input
                                     className="p-7 border border-3 border-zinc-400 shadow-2xl rounded-2xl w-full text-black"
@@ -95,6 +99,14 @@ const AdresseSearch = () => {
                                         </Link>
                                     ))}
                                 </div>
+                            </div>
+                            <div className={`searchButtonDiv ${inputState ? "hidden" : "block"} transition-all sticky top-0`}>
+                                <button
+                                    className="w-full font-medium bg-orange-500 text-white p-5 rounded-lg shadow-lg hover:bg-orange-600 active:bg-orange-700"
+                                    onClick={setInputStateFunction(true)}
+                                >
+                                    Start her
+                                </button>
                             </div>
                         </div>
                     </div>

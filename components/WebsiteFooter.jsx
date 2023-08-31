@@ -27,9 +27,6 @@ export default function WebsiteFooter() {
                                 <Link href="/pris-paa-tagmaling">Hvad koster tagmaling?</Link>
                             </li>
                             <li className="mt-4">
-                                <Link href="/tagtyper">Tagtyper</Link>
-                            </li>
-                            <li className="mt-4">
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
                             <li className="mt-4">
@@ -37,6 +34,14 @@ export default function WebsiteFooter() {
                             </li>
                             <li className="mt-4">
                                 <Link href="/hurtigesvar">Hurtige svar</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="text-white">
+                        <Link href="/tagtyper" className="font-semibold text-xl">Tagtyper</Link>
+                        <ul>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-tegltag-guide">Tegltag</Link>
                             </li>
                         </ul>
                     </div>

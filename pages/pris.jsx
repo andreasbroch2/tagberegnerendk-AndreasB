@@ -157,7 +157,7 @@ export default function Pris() {
                                     </div>
                                     <div className="flex justify-center mt-5">
                                         <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                            <a onClick={trackTilbudButton()} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                            <a onClick={trackTilbudButton} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
                                         </div>
                                     </div>
                                 </div>

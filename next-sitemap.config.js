@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://tagberegneren.dk',
+    siteUrl: 'https://www.tagberegneren.dk',
     generateRobotsTxt: true, // (optional)
     exclude: ['/pris']
   }

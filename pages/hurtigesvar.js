@@ -11,6 +11,7 @@ export default function FAQ() {
             />
             <section>
                 <div className="container">
+                    <h1>Hurtige svar</h1>
                     <FaqContainer />
                 </div>
             </section>

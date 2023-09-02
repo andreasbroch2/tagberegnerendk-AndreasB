@@ -9,7 +9,7 @@ export default function Page() {
             <Seo
                 title="Gode råd til dig der skal have lavet en tagrenovering"
                 description="Her kan du finde gode råd til dig der skal have lavet en tagrenovering i form af nyt tag eller tagmaling."
-                canonical="https://tagberegneren.dk/goderaad"
+                canonical="https://www.tagberegneren.dk/goderaad"
             />
             <div className="mb-20">
                 <section>

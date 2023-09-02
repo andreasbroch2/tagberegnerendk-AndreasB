@@ -49,9 +49,6 @@ export default function WebsiteHeader() {
                                 <Link href="/goderaad" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Gode råd</p>
                                 </Link>
-                                <Link href="/artikler" className="w-full">
-                                    <p className="px-5 py-4 w-full text-start">Artikler</p>
-                                </Link>
                                 <Link href="/hurtigesvar" className="w-full">
                                     <p className="px-5 py-4 w-full text-start">Hurtige svar</p>
                                 </Link>

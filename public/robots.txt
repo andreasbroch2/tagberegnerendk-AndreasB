@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://tagberegneren.dk
+Host: https://www.tagberegneren.dk
 
 # Sitemaps
-Sitemap: https://tagberegneren.dk/sitemap.xml
+Sitemap: https://www.tagberegneren.dk/sitemap.xml

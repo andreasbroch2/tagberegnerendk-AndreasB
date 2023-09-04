@@ -24,30 +24,37 @@ export default function ServerToc({ html }) {
       currentHeading.items.push(heading);
     }
   });
+  var count = 0;
   return (
 
-    <nav aria-label="Indholdsfortegnelse" className="text ib-toc-container toc-table py-4">
+    <nav aria-label="Indholdsfortegnelse" className="text ib-toc-container toc-table">
       <ul>
-        {headings.map((heading, index) => (
+        {headings.map((heading, index) => {
+          count ++;
+          return (
           // Remove the first 3 caracters from the id, if they that with a number followed by a full stop
           // This is to remove the numbering from the headings, which is added by the markdown parser
           <li key={index}>
-            <a href={`#${heading.title.replace(/^\d\./, "")}`}>
+            <a href={`#${count}`}>
               {heading.title}
             </a>
             {heading.items.length > 0 && (
               <ul>
-                {heading.items.map((child, index) => (
+                {heading.items.map((child, index) => {
+                  count ++;
+                  return (
                   <li key={index}>
-                    <a href={`#${child.title.replace(/^\d\. /, "")}`}>
+                    <a href={`#${count}`}>
                       {child.title}
                     </a>
                   </li>
-                ))}
+                )}
+                )}
               </ul>
             )}
           </li>
-        ))}
+        )}
+        )}
       </ul>
     </nav>
   );

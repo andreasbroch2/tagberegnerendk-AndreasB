@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { BreadcrumbJsonLd } from 'next-seo';
+import { BreadcrumbJsonLd, ArticleJsonLd } from 'next-seo';
 import ServerToc from './ServerToc';
 import Link from 'next/link';
 
@@ -16,8 +16,27 @@ export default function TagTyperLayout({ children, ...props }) {
                     {
                         position: 2,
                         name: props.props.title,
+                        item: props.canonical,
                     },
                 ]}
+            />
+            <ArticleJsonLd
+                useAppDir={false}
+                url={props.canonical}
+                title={props.props.title}
+                images={[
+                    props.props?.featuredImage.node.sourceUrl
+                ]}
+                datePublished={props.props.date}
+                dateModified={props.props.modified}
+                authorName={[
+                    {
+                        name: 'Tagberegneren',
+                        url: 'https://wwwtagberegneren.dk',
+                    },
+                ]}
+                description={props.props.seo.metaDesc}
+                isAccessibleForFree={true}
             />
             <article className='single-post my-4 md:my-8'>
                 <div className="entry-content md:px-4 flex">
@@ -41,24 +60,19 @@ export default function TagTyperLayout({ children, ...props }) {
                             <div className="relative">
                                 <Image
                                     className="object-cover"
-                                    src={props.props.featuredImage?.node.sourceUrl}
-                                    alt={props.props.featuredImage?.node.altText}
-                                    width={props.props.featuredImage?.node.mediaDetails.width}
-                                    height={props.props.featuredImage?.node.mediaDetails.height}
-                                    priority
-                                    sizes="
-                      (max-width: 768px) 100vw,
-                      50vw"
+                                    src={props.image}
+                                    alt={props.props.title}
+                                    placeholder='blur'
                                 />
                             </div>
                             <div id="article-text" dangerouslySetInnerHTML={{ __html: children }}>
                             </div>
                         </div>
                     </div>
-                    <div className="hidden md:basis-1/3 md:block">
+                    <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
                         <div className='ad-container flex place-content-center items-center flex-col relative'>
                             <h3 className='text-center mb-4'>Få 3 tilbud på din opgave</h3>
-                            <a href="https://www.partner-ads.com/dk/klikbanner.php?partnerid=44511&bannerid=25692&htmlurl=https://www.3byggetilbud.dk/tilbud/tagrenovering/" target="_blank" rel="nofollow noopener">
+                            <a href="/3byggetilbud" target="_blank" rel="nofollow noopener">
                                 <Image
                                     src="https://www.partner-ads.com/dk/visbanner.php?partnerid=44511&bannerid=26601"
                                     alt="Få 3 tilbud på din opgave"
@@ -68,11 +82,9 @@ export default function TagTyperLayout({ children, ...props }) {
                                 />
                             </a>
                         </div>
-                        <div className='sticky top-0 max-h-[95vh] overflow-y-auto'>
+                        <div className=''>
                             <div className="toc-container mt-6 w-fit mx-auto">
                                 <div className="info">
-                                    <p className="headlines">Indholdsfortegnelse</p>
-                                    <div className="ib-toc-separator" style={{ height: "2px" }}></div>
                                     <ServerToc html={children} />
                                 </div>
                             </div>

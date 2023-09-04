@@ -33,6 +33,7 @@ export async function getSinglePost(slug) {
           slug
           uri
           modified
+          date
           featuredImage { 
             node {
               altText

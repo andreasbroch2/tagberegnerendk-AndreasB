@@ -7,7 +7,7 @@ export default function FAQ() {
             <Seo
                 title="Hurtige svar på ofte stillede spørgsmål"
                 description="Her kan du finde svar på de mest almindelige spørgsmål omkring Tagberegneren.dk"
-                canonical="https://tagberegneren.dk/hurtigesvar"
+                canonical="https://www.tagberegneren.dk/hurtigesvar"
             />
             <section>
                 <div className="container">

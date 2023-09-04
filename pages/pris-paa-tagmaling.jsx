@@ -10,7 +10,7 @@ export default function PrisPaaTag(props) {
             <Seo
                 title="Få en pris på tagmaling - Vores algorithm udregner prisen på 10 sekunder"
                 description="Vil du have en vejledende pris på maling af dit tag. Indtast blot din adresse og vores beregner klarer resten for dig"
-                canonical="https://tagberegneren.dk/pris-paa-tagmaling"
+                canonical="https://www.tagberegneren.dk/pris-paa-tagmaling"
             />
             <section className="titleSection">
                 <div className="container">

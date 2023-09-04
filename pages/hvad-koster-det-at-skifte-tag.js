@@ -8,7 +8,7 @@ export default function PrisPaaTag(props) {
             <Seo
                 title="Hvad koster det at skifte tag? - Din guide til pris på nyt tag i 2023"
                 description="At få et nyt tag på dit hus kan være en stor investering, så det er vigtigt at forstå omkostningerne ved et nyt tag, inden du begynder projektet. Prisen for et nyt tag kan variere meget afhængigt af flere faktorer"
-                canonical="https://tagberegneren.dk/hvad-koster-det-at-skifte-tag" />
+                canonical="https://www.tagberegneren.dk/hvad-koster-det-at-skifte-tag" />
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>

@@ -6,7 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { event } from "nextjs-google-analytics";
 import Seo from "../../components/Seo";
-import { usePostHog, useFeatureFlagEnabled, useFeatureFlagVariantKey } from 'posthog-js/react'
+import { usePostHog, useFeatureFlagVariantKey } from 'posthog-js/react'
+import LoadingModal from "../../components/LoadingModal";
 import homeRoof from "../../assets/home-roof.svg";
 import paintBucket from "../../assets/paint-bucket.svg";
 import gutter from "../../assets/gutter.png";
@@ -44,6 +45,7 @@ export default function Beregning({ params }) {
     const [udhaeng, setUdhaeng] = useState(false);
     const [boligFound, setBoligFound] = useState(true);
     const [ctaState, setCtaState] = useState('Udregn Pris')
+    const [tagAargang, setTagAargang] = useState(0);
 
     const router = useRouter();
     const posthog = usePostHog();
@@ -85,6 +87,7 @@ export default function Beregning({ params }) {
                     setHojdeTilTagrende(result.højdeTilTagrende);
                     setSamletPris(result.middelSamletPris);
                     setTagMalingPris(result.tagMalingPris);
+                    setTagAargang(result.tagAargang);
                     setLoading(result.loading);
                 }
                 fetchData();
@@ -123,14 +126,13 @@ export default function Beregning({ params }) {
     async function changeButtonText() {
         document.getElementById("submitButton").innerHTML = "Beregner din pris...";
     }
-
-
-    if (loading) return <div className="text-center my-24 font-bold">Beregner boligdata...</div>;
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
+    if (loading) return <LoadingModal text="Beregner boligdata..." />
 
     const formHtml = (
-        <><div className="mt-20">
-        </div><form id="leadform" name="leadform">
+        <>
+            <div className="mt-20">
+            </div><form id="leadform" name="leadform">
                 <div className="mt-10">
                     <button
                         type="submit"
@@ -161,6 +163,7 @@ export default function Beregning({ params }) {
                                 postnummer,
                                 udhaeng,
                                 tagrender,
+                                tagAargang,
                                 new Date().toLocaleString()
                             );
                         }}

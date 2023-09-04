@@ -89,7 +89,9 @@ export default function Beregning({ params }) {
         }
         fetchData();
     }, [searchAdresse]);
-
+    useEffect(() => {
+        console.log("step: " + step);
+    }, [step]);
     function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng) {
         updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng).then(
             (result) => {
@@ -133,7 +135,25 @@ export default function Beregning({ params }) {
     function toggleShowSelectHojdeTilTagrende() {
         setShowSelectHojdeTilTagrende(!showSelectHojdeTilTagrende);
     }
-
+    function originalRoof(e){
+        // Change background color of button
+        e.target.style.backgroundColor = "#13BA0050";
+        var nextStep = document.getElementById("step2-q2");
+        var prevStep = document.getElementById("step2-q1");
+        nextStep.style.opacity = 100;
+        nextStep.style.height = "auto";
+        // Scroll to next step
+        nextStep.scrollIntoView({ behavior: "smooth" });
+        // White out previous step
+        prevStep.style.opacity = 0.3;
+    }
+    function changedRoof(){
+        var nextStep = document.getElementById("changed-roof");
+        nextStep.style.opacity = 100;
+        nextStep.style.height = "auto";
+        // Scroll to next step
+        nextStep.scrollIntoView({ behavior: "smooth" });
+    }
 
     if (loading) return <div className="text-center my-24 font-bold">Beregner boligdata...</div>;
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
@@ -551,6 +571,104 @@ export default function Beregning({ params }) {
             </div>
         </div>
     );
+    const questionsHtml = (
+        <>
+            <div className="mt-5 text-center" id="step2-q1">
+                <p className="mt-5 w-full font-bold">
+                    Er det det originale tag eller er det blevet skiftet?
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border-2 border-orange-500 p-3 text-sm font-semibold text-orange-500 rounded-lg" onClick={async (e) => {changedRoof(e)}}>
+                        Skiftet
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-lg" onClick={async (e) => {originalRoof(e)}}>
+                        Original
+                    </button>
+                </div>
+                <div className="opacity-0 h-0 transition-all" id="changed-roof">
+                    <input type="number" placeholder="Hvilket år har i skiftet tag?"/>
+                </div>
+            </div>
+            <div className="mt-5 text-center opacity-0 h-0 transition-all" id="step2-q2">
+                <p className="mt-5 w-full font-bold">
+                    Hvor mange tagflader har dit hus?
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        1
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        2
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        3
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        4
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        5
+                    </button>
+                    <button className="mt-6 border-2 border-mygreen p-3 text-sm font-semibold text-mygreen rounded-full">
+                        +5
+                    </button>
+                </div>
+            </div>
+            <div className="mt-5 text-center opacity-0 h-0 transition-all" id="step2-q3">
+                <p className="mt-5 w-full font-bold">
+                    Har dit hus skorsten, ovenlysvinduer eller tagkviste
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Nej
+                    </button>
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Ja
+                    </button>
+                </div>
+            </div>
+            <div className="mt-5 text-center opacity-0 h-0 transition-all" id="step2-q4">
+                <p className="mt-5 w-full font-bold">
+                    Ønsker du at få installeret nye ovenlysvinduer eller tagkviste?
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Nej
+                    </button>
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Ja
+                    </button>
+                </div>
+            </div>
+            <div className="mt-5 text-center opacity-0 h-0 transition-all" id="step2-q5">
+                <p className="mt-5 w-full font-bold">
+                    Vil du også have lavet nye tagrender?
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Nej
+                    </button>
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Ja
+                    </button>
+                </div>
+            </div>
+            <div className="mt-5 text-center opacity-0 h-0 transition-all" id="step2-q6">
+                <p className="mt-5 w-full font-bold">
+                    Vil du også have lavet nyt udhæng?
+                </p>
+                <div className="flex gap-4 place-content-center">
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Nej
+                    </button>
+                    <button className="mt-6 border border-mygreen p-3 text-sm font-semibold text-white rounded-lg">
+                        Ja
+                    </button>
+                </div>
+            </div>
+        </>
+    )
+
 
     return (
         <>
@@ -658,8 +776,8 @@ export default function Beregning({ params }) {
                                             <h3 className="font-bold text-lg lg:text-2xl">
                                                 Trin 1 - Din boligdata
                                             </h3>
-                                            <p className="font-light text-sm">                                            Vores algoritmer har lavet nogle beregninger ud fra data
-                                                vi har hentet om din bolig. Bekræft oplysningerne for at fortsætte.</p>
+                                            <p className="font-light text-sm">                                            
+                                            Vores algoritmer har lavet nogle beregninger ud fra data vi har hentet om din bolig. Bekræft oplysningerne for at fortsætte.</p>
                                         </div>
                                     </div>
                                     {boligDataHtml}
@@ -667,12 +785,21 @@ export default function Beregning({ params }) {
                                         <button
                                             onClick={() => {
                                                 setStep(2);
+                                                console.log('step: ' + step);
                                             }}
                                             className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
                                             Bekræft boligdata
                                         </button>
                                     </div>
                                 </>
+                            )}
+                            {step == 2 && (
+                                <div className="col-span-3 lg:col-span-2 gap-5">
+                                    <h2 className="font-bold text-xl lg:text-2xl">
+                                        Trin 2 - Spørgsmål
+                                    </h2>
+                                    {questionsHtml}
+                                </div>
                             )}
                             {step == 4 && (
                                 <div className="col-span-3 lg:col-span-2 gap-5">

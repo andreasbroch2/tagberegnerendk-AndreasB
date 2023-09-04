@@ -40,6 +40,7 @@ try {
         udhaeng: Boolean,
         tagrender: Boolean,
         gratisTagTjek: Boolean,
+        tagAargang: Number,
     });
 
     Lead = mongoose.model("Lead", leadSchema);

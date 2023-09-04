@@ -8,7 +8,7 @@ async function handler(req, res) {
           host: "https://eu.posthog.com",
         }
       );
-    let { nyTagType, nyTagTypeTekst, boligTagType, boligTagTypeTekst, tagVinkel, tagfladeareal, skorsten, samletPris, tagMalingPris, hojdeTilTagrende, adresse, boligGrundPlan, leadPriceId, by, postnummer, udhaeng, tagrender, time } = req.body;
+    let { nyTagType, nyTagTypeTekst, boligTagType, boligTagTypeTekst, tagVinkel, tagfladeareal, skorsten, samletPris, tagMalingPris, hojdeTilTagrende, adresse, boligGrundPlan, leadPriceId, by, postnummer, udhaeng, tagrender, time, tagAargang } = req.body;
     client.capture({
         distinctId: leadPriceId,
         event: 'Lead created',
@@ -54,6 +54,7 @@ async function handler(req, res) {
             opgave: nyTagTypeTekst,
             udhaeng: udhaeng,
             tagrender: tagrender,
+            tagAargang: tagAargang,
         });
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen

@@ -5,18 +5,9 @@ import { useEffect, useState } from "react";
 import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
-import { usePostHog } from 'posthog-js/react'
 
 export default function Home(props) {
     const [ctaState, setCtaState] = useState(false);
-    const posthog = usePostHog()
-    useEffect(() => {
-      const ph_flag = posthog.isFeatureEnabled('title-exp') 
-  
-      if (typeof ph_flag !== 'undefined') {
-        setCtaState(ph_flag)
-      }
-    }, [])
     return (
         <>
             <Seo title="Gratis Tagberegner - Beregn pris på dit nye tag" description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse." canonical="https://tagberegneren.dk" />

@@ -190,6 +190,17 @@ p {
   border-radius: 10px;
   font-weight: 500;
 }
+.succes-message-copy{
+  display: block;
+  background: #0C1A2A;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .menuDropdown li:hover {
   width: 100% !important;

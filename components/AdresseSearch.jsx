@@ -3,7 +3,7 @@ import Link from "next/link";
 import LoadingModal from "./LoadingModal";
 
 // Eksporter AdresseSearch-komponenten
-const AdresseSearch = () => {
+const AdresseSearch = (props) => {
     // Tilstandsstyring med useState-hooks
     const [searchText, setSearchText] = useState("");
     const [autocompleteResults, setAutocompleteResults] = useState([]);
@@ -63,7 +63,7 @@ const AdresseSearch = () => {
 
     return (
         <>
-            <LoadingModal />
+            <LoadingModal text="Henter Boligdata..." hidden={true}/>
             <div className="w-full lg:w-8/12 mx-auto">
                 <div className="content-center">
                     <div className="searchInput">

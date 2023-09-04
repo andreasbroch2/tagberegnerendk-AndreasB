@@ -1,37 +1,26 @@
 @tailwind base;
+@layer base{
+  h1 {
+    @apply text-3xl md:text-5xl leading-extra-tight;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-4xl leading-extra-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-2xl;
+  }
+  }
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --green: #14C200;
-}
-
-h1 {
-  font-size: 3.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  font-size: 2.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-h3 {
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-h4 {
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
 }
 
 #myModal {
@@ -57,11 +46,11 @@ h4 {
   margin-top: 20px;
 }
 
-.modal-container p{
+.modal-container p {
   font-size: 16px;
 }
 
-.modal-container button{
+.modal-container button {
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -92,12 +81,20 @@ section {
   margin-top: 5rem !important;
   margin-bottom: 5rem !important;
 }
-.blog-section{
-  h1, h2, h3, h4, h5, h6{
+
+.blog-section {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  p{
+
+  p {
     margin-bottom: 6px;
   }
 }
@@ -190,7 +187,53 @@ p {
   border-radius: 10px;
   font-weight: 500;
 }
-.succes-message-copy{
+
+div.toc-container {
+  @apply p-4;
+  margin-bottom: 20px;
+  background: #fbfcfd;
+  border-radius: 7px;
+  border: 1px solid #ddd;
+  p.headlines {
+    @apply mb-4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  ul {
+    @apply text-sm;
+    list-style-position: inside;
+    list-style-type: disc;
+  }
+  .ib-toc-separator {
+    background: #333;
+  }
+  p{
+    @apply mb-0;
+  }
+  nav {
+ 
+  ul {
+    @apply ml-0 my-0;
+    li{
+      @apply mb-0;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: normal;
+    ul{
+      @apply ml-6 mb-0;
+    }
+  }
+  }
+  a {
+  color: unset;
+    text-decoration: none;
+}
+}
+}
+
+.succes-message-copy {
   display: block;
   background: #0C1A2A;
   color: white;
@@ -324,7 +367,7 @@ p {
   scale: 1.1;
 }
 
-.center-in-div{
+.center-in-div {
   position: absolute;
   top: 50%;
   left: 50%;

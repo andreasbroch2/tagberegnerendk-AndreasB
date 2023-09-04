@@ -102,7 +102,6 @@ export default function Beregning({ params }) {
                 setTagMalingPris(result.tagMalingPris);
                 setTagfladeareal(result.tagFladeAreal);
                 setNyTagTypeTekst(result.nyTagTypeTekst);
-                console.log(result.nyTagTypeTekst);
             }
         );
     }

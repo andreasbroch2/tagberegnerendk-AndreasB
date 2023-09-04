@@ -89,9 +89,6 @@ export default function Beregning({ params }) {
         }
         fetchData();
     }, [searchAdresse]);
-    useEffect(() => {
-        console.log("step: " + step);
-    }, [step]);
     function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng) {
         updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng).then(
             (result) => {
@@ -99,7 +96,6 @@ export default function Beregning({ params }) {
                 setTagMalingPris(result.tagMalingPris);
                 setTagfladeareal(result.tagFladeAreal);
                 setNyTagTypeTekst(result.nyTagTypeTekst);
-                console.log(result.nyTagTypeTekst);
             }
         );
     }
@@ -791,7 +787,6 @@ export default function Beregning({ params }) {
                                         <button
                                             onClick={() => {
                                                 setStep(2);
-                                                console.log('step: ' + step);
                                             }}
                                             className="bg-mygreen p-5 font-semibold text-lg text-white rounded-lg w-full">
                                             Bekræft boligdata

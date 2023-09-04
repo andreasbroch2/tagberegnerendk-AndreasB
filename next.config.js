@@ -5,6 +5,12 @@ module.exports = nextConfig;
 
 module.exports = {
     compiler: { styledComponents: true },
+    images: {
+        domains: [
+          'tagberegneren.ditsmartehjem.dk', 
+          'www.partner-ads.com',
+          ],
+      },
     async redirects() {
         return [
             {

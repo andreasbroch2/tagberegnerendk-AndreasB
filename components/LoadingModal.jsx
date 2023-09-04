@@ -1,7 +1,6 @@
 // Loading Modal Component
 
 export default function LoadingModal(props) {
-    console.log("props: ", props);
     return (
         <div id="loadingModal" className={`${props.hidden && 'hidden'} fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50 flex justify-center items-center`}>
             <div className="bg-white rounded-lg p-10">

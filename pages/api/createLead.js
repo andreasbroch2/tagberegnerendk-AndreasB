@@ -58,18 +58,14 @@ async function handler(req, res) {
         });
         //Check if adresse already exists in database and if it does, then dont save the lead
         // Gem leaden i databasen
-        console.log("before save:", newLead);
         try {
             newLead.markModified("vaerdi");
             newLead.markModified("udhaeng");
             newLead.markModified("tagrender");
             newLead.markModified("hojdeTilTagrende");
-            console.log("after modified");
-            console.log("save", await newLead.save())
         } catch (error) {
             console.log("error saving", error);
         }
-        console.log("after save");
         res.json("Lead oprettet:");
     } catch (error) {
         res.json("Fejl ved oprettelse af lead:", error);

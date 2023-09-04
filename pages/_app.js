@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import dynamic from 'next/dynamic'
 import WebsiteFooter from "./../components/WebsiteFooter";
 import { Poppins } from "next/font/google";

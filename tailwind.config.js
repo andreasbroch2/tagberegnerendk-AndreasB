@@ -7,6 +7,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            lineHeight: {
+                'extra-tight': '1.15',
+            },
             colors: {
                 mygreen: "#13BA00",
                 darkblue: "#0D1F3C",

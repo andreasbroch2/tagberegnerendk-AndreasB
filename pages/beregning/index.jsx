@@ -159,7 +159,13 @@ export default function Beregning({ params }) {
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
 
     const formHtml = (
-        <><div className="mt-20">
+        <>
+        <Seo
+            title="Din beregning - TagBeregneren.dk"
+            description="Beregn pris på nyt tag eller tagmaling. Gennemfør formularen for at få din pris."
+            canonical="https://www.tagberegneren.dk/beregning"
+        />
+        <div className="mt-20">
         </div><form id="leadform" name="leadform">
                 <div className="mt-10">
                     <button

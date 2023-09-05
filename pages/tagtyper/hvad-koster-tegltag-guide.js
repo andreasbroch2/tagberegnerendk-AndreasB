@@ -35,11 +35,11 @@ export default function Page(props) {
                 type="article"
                 props={props.data}
             />
-            <section className="blog-section">
+            <div className="blog-section">
                 <TagTyperLayout props={props.data} image={teglTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-tegltag-guide" mainEntity={mainEntity}>
                     {props.data.content}
                 </TagTyperLayout>
-            </section>
+            </div>
         </>
     )
 }

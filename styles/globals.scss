@@ -1,5 +1,8 @@
 @tailwind base;
 @layer base{
+  html{
+    scroll-behavior: smooth;
+  }
   h1 {
     @apply text-3xl md:text-5xl leading-extra-tight;
   }
@@ -187,7 +190,11 @@ p {
   border-radius: 10px;
   font-weight: 500;
 }
-
+.blog-section {
+  ul{
+    @apply list-disc list-inside mb-4 font-semibold ml-2;
+  }
+}
 div.toc-container {
   @apply p-4;
   margin-bottom: 20px;
@@ -204,6 +211,7 @@ div.toc-container {
   }
   ul {
     @apply text-sm;
+    font-weight: 400;
     list-style-position: inside;
     list-style-type: disc;
   }

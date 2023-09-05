@@ -1,5 +1,7 @@
 import Seo from "./../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
+import { ArticleLayout } from "../../components/ArticleLayout";
+import tagTyper from "../../assets/tagtyper.png"
 
 export default function Page(props) {
     return (
@@ -10,7 +12,9 @@ export default function Page(props) {
                 canonical="https://www.tagberegneren.dk/tagtyper"
             />
             <section className="blog-section">
-                <div className="container" dangerouslySetInnerHTML={{ __html: props.data?.content }}></div>
+                <ArticleLayout props={props.data} image={tagTyper} canonical="https://www.tagberegneren.dk/tagtyper">
+                    {props.data.content}
+                </ArticleLayout>
             </section>
         </>
     )

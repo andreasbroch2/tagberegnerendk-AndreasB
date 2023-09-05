@@ -63,6 +63,7 @@ async function handler(req, res) {
             newLead.markModified("udhaeng");
             newLead.markModified("tagrender");
             newLead.markModified("hojdeTilTagrende");
+            newLead.save();
         } catch (error) {
             console.log("error saving", error);
         }

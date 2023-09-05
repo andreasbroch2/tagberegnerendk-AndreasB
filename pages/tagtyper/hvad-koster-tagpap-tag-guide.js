@@ -1,4 +1,4 @@
-import Seo from "./../../components/Seo";
+import Seo from "../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
 import TagTyperLayout from "../../components/ArticleLayout";
 import tagPapTag from "../../assets/tagpap-tag.png"

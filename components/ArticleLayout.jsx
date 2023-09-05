@@ -3,6 +3,7 @@ import { BreadcrumbJsonLd, ArticleJsonLd } from 'next-seo';
 import ServerToc from './ServerToc';
 import Link from 'next/link';
 import byggetilbudAd from '../public/images/3byggetilbud_336x280.jpg';
+import FAQComponent from './FAQComponent';
 
 export default function TagTyperLayout({ children, ...props }) {
     return (
@@ -68,6 +69,10 @@ export default function TagTyperLayout({ children, ...props }) {
                             </div>
                             <div id="article-text" dangerouslySetInnerHTML={{ __html: children }}>
                             </div>
+                            {props.mainEntity && (
+                                <FAQComponent mainEntity={props.mainEntity} />
+                            )
+                            }
                         </div>
                     </div>
                     <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
@@ -155,7 +160,7 @@ export function ArticleLayout({ children, ...props }) {
                         <div className='ad-container flex place-content-center items-center flex-col relative'>
                             <h3 className='text-center mb-4'>Få 3 tilbud på din opgave</h3>
                             <a href="/3byggetilbud" target="_blank" rel="nofollow noopener">
-                            <Image
+                                <Image
                                     src={byggetilbudAd}
                                     alt="Få 3 tilbud på din opgave"
                                     placeholder='blur'

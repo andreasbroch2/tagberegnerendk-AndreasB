@@ -195,6 +195,14 @@ p {
     @apply list-disc list-inside mb-4 font-semibold ml-2;
   }
 }
+div.faq-container{
+  .question{
+    @apply font-semibold mb-2;
+  }
+  .answer{
+    @apply mb-4;
+  }
+}
 div.toc-container {
   @apply p-4;
   margin-bottom: 20px;

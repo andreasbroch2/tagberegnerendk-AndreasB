@@ -140,7 +140,10 @@ export default function Pris() {
                                         {priceData.samletPris}
                                     </h4>
                                     <p className="font-light text-sm mt-2">
-                                        Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed. Vi anbefaler at indhente tilbud på dit projekt for at få en præcis pris. Vi har gjort det nemt for dig herunder.
+                                        Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed.
+                                    </p>
+                                    <p className="text-base font-semibold mt-5">
+                                    Vi anbefaler at indhente tilbud på dit projekt for at få en præcis pris, eller at få udført et professionelt tagtjek. Begge dele kan du gøre nemt og gratis herunder.
                                     </p>
                                 </div>
                             </div>
@@ -180,10 +183,10 @@ export default function Pris() {
                                     </div>
                                     <div className="bg-white rounded-xl shadow-lg border text-base p-4 md:p-10 mt-5 md:mt-10 md:basis-1/2">
                                         <h3 className="font-semibold mb-4">Du er kvalificeret til et gratis tagtjek</h3>
-                                        <p>På baggrund af dit tag og det område du bor, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
-                                        <h4 className="my-4">Få styr på skaderne i tide og undgå dyre regninger</h4>
-                                        <p className="mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
-                                        <p className="my-4 font-bold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Tryk på knappen herunder for at bestille dit tagtjek.</p>
+                                        <p className="font-light">På baggrund af dit tag og det område du bor, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
+                                        <p className="font-semibold my-4">Få styr på skaderne i tide og undgå dyre regninger</p>
+                                        <p className="font-light mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
+                                        <p className="my-4 font-semibold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Tryk på knappen herunder for at bestille dit tagtjek.</p>
                                         <div className="flex justify-center mt-5">
                                             <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
                                                 <a onClick={trackTagTjekButton} href="/gratistagtjek/" target="_blank">Bestil dit gratis tagtjek</a>
@@ -191,7 +194,7 @@ export default function Pris() {
                                         </div>
                                         <div className="mt-4">
                                             <h4 className="mb-4">Om Jydsk Tagteknik</h4>
-                                            <p>Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
+                                            <p className="font-light">Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
                                             <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
                                                 <Image src={jydskTagTeknik} alt="Jydsk Tagteknik - Logo" placeholder="blur" />
                                                 <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" placeholder="blur" />

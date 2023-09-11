@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { BreadcrumbJsonLd, ArticleJsonLd } from 'next-seo';
 import ServerToc from './ServerToc';
 import Link from 'next/link';
-import byggetilbudAd from '../public/images/3byggetilbud_336x280.jpg';
+import byggetilbudAd from '../assets/3byggetilbud_336x280.jpg';
 import FAQComponent from './FAQComponent';
 
 export default function TagTyperLayout({ children, ...props }) {

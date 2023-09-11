@@ -71,6 +71,15 @@ export default function Pris() {
             distinctId: priceData.leadPriceId,
         });
     }
+    function trackTagTjekButton() {
+        event("Tagtjek - Klik", {
+            category: "Tagtjek",
+            label: 'Tagtjek',
+        });
+        posthog.capture('Tagtjek - Klik', {
+            distinctId: priceData.leadPriceId,
+        });
+    }
     function copyText() {
         navigator.clipboard.writeText(`Jeg skal have udskiftet mit tag. Taget er fra ${priceData.tagAargang}. Tagarealet er på ${priceData.tagfladeareal} m2 og har en tagvinkel på ca. ${priceData.tagVinkel} grader. Der er ${priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er ${priceData.boligTagTypeTekst} og skal skiftes til ${priceData.nyTagTypeTekst}. ${priceData.udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} ${priceData.tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}`);
         var succesElement = document.getElementById("succes-copy");
@@ -136,35 +145,57 @@ export default function Pris() {
                                 </div>
                             </div>
                             {priceData.nyTagTypeTekst !== "Tagmaling" ? (
-                                <div id="tilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:p-10 mt-5 md:mt-10">
-                                    <h3 className="mb-5">Få tilbud på dit tagprojekt</h3>
-                                    <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
-                                    <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
-                                    <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
-                                    <ol className="list-decimal list-inside text-lg mb-5 ml-4">
-                                        <li>Det er gratis og uforpligtende</li>
-                                        <li>Spar tid og penge</li>
-                                        <li>Personlig vejledning</li>
-                                        <li>Entreprisegaranti</li>
-                                    </ol>
-                                    <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
-                                    <div className="bg-gray-100 rounded-lg p-5 mt-5 text-center">
-                                        <p className="font-semibold">Opgavebeskrivelse:</p>
-                                        <p className="font-light">Jeg skal have udskiftet mit tag. Taget er fra {priceData.tagAargang}. Tagarealet er på {priceData.tagfladeareal} m2 og har en tagvinkel på ca. {priceData.tagVinkel} grader. Der er {priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er {priceData.boligTagTypeTekst} og skal skiftes til {priceData.nyTagTypeTekst}. {priceData.udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {priceData.tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
-                                        {/* Button to copy above text */}
-                                        <div className="flex justify-center mt-5 relative">
-                                            <div className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                                <button onClick={copyText}>Kopier opgavebeskrivelse</button>
+                                <div className="md:flex md:gap-4">
+                                    <div id="byggetilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:p-10 mt-5 md:mt-10 md:basis-1/2">
+                                        <h3 className="font-semibold mb-5">Få tilbud på dit tagprojekt</h3>
+                                        <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
+                                        <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
+                                        <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
+                                        <ol className="list-decimal list-inside text-lg mb-5 ml-4">
+                                            <li>Det er gratis og uforpligtende</li>
+                                            <li>Spar tid og penge</li>
+                                            <li>Personlig vejledning</li>
+                                            <li>Entreprisegaranti</li>
+                                        </ol>
+                                        <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
+                                        <div className="bg-gray-100 rounded-lg p-5 mt-5 text-center">
+                                            <p className="font-semibold">Opgavebeskrivelse:</p>
+                                            <p className="font-light">Jeg skal have udskiftet mit tag. Taget er fra {priceData.tagAargang}. Tagarealet er på {priceData.tagfladeareal} m2 og har en tagvinkel på ca. {priceData.tagVinkel} grader. Der er {priceData.hojdeTilTagrende} m til tagrende. Det gamle tag er {priceData.boligTagTypeTekst} og skal skiftes til {priceData.nyTagTypeTekst}. {priceData.udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {priceData.tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
+                                            {/* Button to copy above text */}
+                                            <div className="flex justify-center mt-5 relative">
+                                                <div className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                                    <button onClick={copyText}>Kopier opgavebeskrivelse</button>
+                                                </div>
+                                                {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
+                                                <div className="hidden transition-all" id="succes-copy">
+                                                    <p>Kopieret!</p>
+                                                </div>
                                             </div>
-                                            {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
-                                            <div className="hidden transition-all" id="succes-copy">
-                                                <p>Kopieret!</p>
+                                        </div>
+                                        <div className="flex justify-center mt-5">
+                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                                <a onClick={trackTilbudButton} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex justify-center mt-5">
-                                        <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                            <a onClick={trackTilbudButton} href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                    <div className="bg-white rounded-xl shadow-lg border text-base p-4 md:p-10 mt-5 md:mt-10 md:basis-1/2">
+                                        <h3 className="font-semibold mb-4">Du er kvalificeret til et gratis tagtjek</h3>
+                                        <p>På baggrund af dit tag og det område du bor, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
+                                        <h4 className="my-4">Få styr på skaderne i tide og undgå dyre regninger</h4>
+                                        <p className="mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
+                                        <p className="my-4 font-bold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Tryk på knappen herunder for at bestille dit tagtjek.</p>
+                                        <div className="flex justify-center mt-5">
+                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                                <a onClick={trackTagTjekButton} href="/gratistagtjek/" target="_blank">Bestil dit gratis tagtjek</a>
+                                            </div>
+                                        </div>
+                                        <div className="mt-4">
+                                            <h4 className="mb-4">Om Jydsk Tagteknik</h4>
+                                            <p>Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
+                                            <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
+                                                <Image src={jydskTagTeknik} alt="Jydsk Tagteknik - Logo" placeholder="blur" />
+                                                <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" placeholder="blur" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

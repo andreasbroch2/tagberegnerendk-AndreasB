@@ -61,7 +61,7 @@ export default function Beregning() {
     const [showTagTjek, setShowTagTjek] = useState(false);
     const [showByggetilbud, setShowByggetilbud] = useState(false);
     const [tagTjek, setTagTjek] = useState(false);
-    const [byggetilbud, setByggetilbud] = useState(false);
+    const [byggetilbud, setByggetilbud] = useState(true);
     const [showFinish, setShowFinish] = useState(false);
 
     const posthog = usePostHog();
@@ -1160,69 +1160,6 @@ export default function Beregning() {
                                         </MotionDiv>
                                     )}
 
-                                    {byggetilbud && (
-                                        <MotionDiv>
-                                            <div id="byggetilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:mt-10 mt-5">
-                                                <h3 className="font-semibold mb-5">Få tilbud på dit tagprojekt</h3>
-                                                <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
-                                                <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
-                                                {!showByggetilbud && (
-                                                    <div className="buttons">
-                                                        <div className="flex justify-center mt-5 gap-4">
-                                                            <button onClick={
-                                                                () => {
-                                                                    setByggetilbud(false);
-                                                                    setShowFinish(true);
-                                                                }
-                                                            } className="declineButton">Afvis</button>
-                                                            <button onClick={
-                                                                () => {
-                                                                    setShowByggetilbud(true);
-                                                                }
-                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                {showByggetilbud && (
-                                                    <MotionDiv>
-                                                        <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
-                                                        <ol className="list-decimal list-inside text-lg mb-5 ml-4">
-                                                            <li>Det er gratis og uforpligtende</li>
-                                                            <li>Spar tid og penge</li>
-                                                            <li>Personlig vejledning</li>
-                                                            <li>Entreprisegaranti</li>
-                                                        </ol>
-                                                        <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
-                                                        <div className="bg-gray-100 rounded-lg p-5 mt-5">
-                                                            <p className="font-semibold">Opgavebeskrivelse:</p>
-                                                            <p className="font-light">Jeg skal have udskiftet mit tag. {tagAargang && `Taget er fra ${tagAargang}. `}Tagarealet er på {tagfladeareal} m2 og har en tagvinkel på ca. {tagVinkel} grader. Der er {hojdeTilTagrende} m til tagrende. Det gamle tag er {boligTagTypeTekst} og skal skiftes til {nyTagTypeTekst}. {udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
-                                                            {/* Button to copy above text */}
-                                                            <div className="flex justify-center mt-5 relative">
-                                                                <div onClick={copyText} className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm cursor-pointer">
-                                                                    Kopier opgavebeskrivelse
-                                                                </div>
-                                                                {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
-                                                                <div className="hidden transition-all" id="succes-copy">
-                                                                    <p>Kopieret!</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex justify-center mt-5">
-                                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                                                <a onClick={
-                                                                    () => {
-                                                                        trackTilbudButton();
-                                                                        setByggetilbud(false);
-                                                                        setShowFinish(true);
-                                                                    }
-                                                                } href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
-                                                            </div>
-                                                        </div>
-                                                    </MotionDiv>
-                                                )}
-                                            </div>
-                                        </MotionDiv>
-                                    )}
                                     <div className="bg-white shadow-xl rounded-xl p-5 mt-5 md:mt-10">
                                         <div className="flex justify-between ">
                                             <div className="my-auto">
@@ -1315,7 +1252,69 @@ export default function Beregning() {
                                             </div>
                                         </div>
                                     </div>
-
+                                    {byggetilbud && (
+                                        <MotionDiv>
+                                            <div id="byggetilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:mt-10 mt-5">
+                                                <h3 className="font-semibold mb-5">Få tilbud på dit tagprojekt</h3>
+                                                <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
+                                                <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
+                                                {!showByggetilbud && (
+                                                    <div className="buttons">
+                                                        <div className="flex justify-center mt-5 gap-4">
+                                                            <button onClick={
+                                                                () => {
+                                                                    setByggetilbud(false);
+                                                                    setShowFinish(true);
+                                                                }
+                                                            } className="declineButton">Afvis</button>
+                                                            <button onClick={
+                                                                () => {
+                                                                    setShowByggetilbud(true);
+                                                                }
+                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {showByggetilbud && (
+                                                    <MotionDiv>
+                                                        <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
+                                                        <ol className="list-decimal list-inside text-lg mb-5 ml-4">
+                                                            <li>Det er gratis og uforpligtende</li>
+                                                            <li>Spar tid og penge</li>
+                                                            <li>Personlig vejledning</li>
+                                                            <li>Entreprisegaranti</li>
+                                                        </ol>
+                                                        <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
+                                                        <div className="bg-gray-100 rounded-lg p-5 mt-5">
+                                                            <p className="font-semibold">Opgavebeskrivelse:</p>
+                                                            <p className="font-light">Jeg skal have udskiftet mit tag. {tagAargang && `Taget er fra ${tagAargang}. `}Tagarealet er på {tagfladeareal} m2 og har en tagvinkel på ca. {tagVinkel} grader. Der er {hojdeTilTagrende} m til tagrende. Det gamle tag er {boligTagTypeTekst} og skal skiftes til {nyTagTypeTekst}. {udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
+                                                            {/* Button to copy above text */}
+                                                            <div className="flex justify-center mt-5 relative">
+                                                                <div onClick={copyText} className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm cursor-pointer">
+                                                                    Kopier opgavebeskrivelse
+                                                                </div>
+                                                                {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
+                                                                <div className="hidden transition-all" id="succes-copy">
+                                                                    <p>Kopieret!</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-center mt-5">
+                                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                                                <a onClick={
+                                                                    () => {
+                                                                        trackTilbudButton();
+                                                                        setByggetilbud(false);
+                                                                        setShowFinish(true);
+                                                                    }
+                                                                } href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                                            </div>
+                                                        </div>
+                                                    </MotionDiv>
+                                                )}
+                                            </div>
+                                        </MotionDiv>
+                                    )}
 
                                 </MotionDiv>
                             )}

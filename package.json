@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@builder.io/react": "^3.0.13",
+    "@next/bundle-analyzer": "^13.4.19",
     "@react-google-maps/api": "^2.19.2",
     "autoprefixer": "10.4.15",
     "cheerio": "^1.0.0-rc.12",

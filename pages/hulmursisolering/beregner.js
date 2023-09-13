@@ -1,4 +1,4 @@
-import { useLoadScript, GoogleMap, MarkerF, CircleF, DrawingManager, useGoogleMap } from '@react-google-maps/api';
+import { useLoadScript, GoogleMap, DrawingManager } from '@react-google-maps/api';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { useState, useMemo, useEffect } from 'react';
 import styles from '../../styles/Home.module.css';

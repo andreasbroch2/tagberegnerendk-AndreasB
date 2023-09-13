@@ -7,13 +7,12 @@ import Providers from '../lib/providers'
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
     loading: () => <p>Loading...</p>,
+    ssr: false
 })
-
-
 
 const poppins = Poppins({
     subsets: ["latin"],
-    weight: ["600", "100", "200", "300", "400", "500", "700"],
+    weight: ["600", "300", "400", "500", "700"],
     variable: "--font-poppins",
 });
 

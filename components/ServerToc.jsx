@@ -3,7 +3,6 @@
 
 const cheerio = require('cheerio');
 
-
 export default function ServerToc({ html }) {
   const $ = cheerio.load(html);
 

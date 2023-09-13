@@ -1,9 +1,13 @@
-
+import dynamic from "next/dynamic";
 import Seo from "../components/Seo";
 import { getSinglePost } from "../lib/wordpress";
-import AdresseSearch from "../components/AdresseSearch";
+// import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
+
+const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
+    ssr: false,
+});
 
 export default function Home(props) {
     return (
@@ -35,7 +39,7 @@ export default function Home(props) {
                     </div>
                     <div className="mt-10 searchAdresseDiv">
                         <div className="flex justify-start lg:justify-end mt-5 md:mt-0">
-                            <AdresseSearch
+                            <DynamixAdresseSearch
                                 home={props.home}
                             />
                         </div>

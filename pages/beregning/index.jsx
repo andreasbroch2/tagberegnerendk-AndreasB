@@ -17,7 +17,7 @@ import enTagflade from "../../assets/en-tagflade.jpg";
 import toTagflader from "../../assets/2tagflader.jpg";
 import fireTagflader from "../../assets/4tagflader.jpg";
 import femTagflader from "../../assets/5tagflader.jpg";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { addThousandsSeparator, beregnTagareal, calculateNewRoof, calculateRoofPrice, BBRData } from "../../lib/functions";
 import { prisNedtagning } from "../../lib/prices";
 import jydskTagTeknik from "../../assets/jydsk-tagteknik.png";
@@ -878,7 +878,31 @@ export default function Beregning() {
                                         </div>
                                     </div>
                                     {boligDataHtml}
-                                    <div className="mt-10 sticky bottom-0">
+                                    <div className="mt-10">
+                                        {!boligGrundPlan && (
+                                            <p className="text-sm text-red-500">
+                                                Du mangler at angive din boligs grundplan
+                                            </p>
+                                        )
+                                        }
+                                        {!tagVinkel && (
+                                            <p className="text-sm text-red-500">
+                                                Du mangler at angive din boligs taghældning
+                                            </p>
+                                        )
+                                        }
+                                        {!hojdeTilTagrende && (
+                                            <p className="text-sm text-red-500">
+                                                Du mangler at angive din boligs højde til tagrende
+                                            </p>
+                                        )
+                                        }
+                                        {!boligTagType && (
+                                            <p className="text-sm text-red-500">
+                                                Du mangler at angive din boligs tagtype
+                                            </p>
+                                        )
+                                        }
                                         <button
                                             onClick={() => {
                                                 setStep(2);

@@ -795,6 +795,8 @@ export default function Beregning() {
                             <div
                                 onClick={() => {
                                     setStep(2);
+                                    let tagAreal = beregnTagareal(tagVinkel, boligGrundPlan);
+                                    setTagfladeareal(tagAreal);
                                 }}
                                 className={`flex gap-2 cursor-pointer ${step >= 2
                                     ? "text-mygreen"

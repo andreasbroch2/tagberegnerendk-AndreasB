@@ -1107,7 +1107,123 @@ export default function Beregning() {
                             )}
                             {step == 4 && (
                                 <MotionDiv>
-                                    <div className="bg-white shadow-xl rounded-xl p-5">
+                                    {tagTjek && (
+                                        <MotionDiv>
+                                            <div className="bg-white rounded-xl shadow-lg border text-base p-4 mt-5 md:mt-10">
+                                                <h3 className="font-semibold mb-4">Du er kvalificeret til et gratis tagtjek</h3>
+                                                <p className="font-light">På baggrund af dine oplysninger, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
+                                                {!showTagTjek && (
+                                                    <div className="buttons">
+                                                        <div className="flex justify-center mt-5 gap-4">
+                                                            <button onClick={
+                                                                () => {
+                                                                    setTagTjek(false);
+                                                                    setByggetilbud(true);
+                                                                }
+                                                            } className="declineButton">Afvis</button>
+                                                            <button onClick={
+                                                                () => {
+                                                                    setShowTagTjek(true);
+                                                                }
+                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {showTagTjek && (
+                                                    <MotionDiv>
+                                                        <p className="font-semibold my-4">Få styr på skaderne i tide og undgå dyre regninger</p>
+                                                        <p className="font-light mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
+                                                        <p className="my-4 font-semibold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Tryk på knappen herunder for at bestille dit tagtjek.</p>
+                                                        <div className="flex justify-center mt-5">
+                                                            <div className="acceptButton">
+                                                                <a onClick={
+                                                                    () => {
+                                                                        trackTagTjekButton();
+                                                                        setTagTjek(false);
+                                                                        setByggetilbud(true);
+                                                                        // Scroll to element with id byggetilbud
+                                                                    }
+                                                                } href="/gratistagtjek/" target="_blank">Bestil dit gratis tagtjek</a>
+                                                            </div>
+                                                        </div>
+                                                        <div className="mt-4">
+                                                            <h4 className="mb-4">Om Jydsk Tagteknik</h4>
+                                                            <p className="font-light">Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
+                                                            <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
+                                                                <Image src={jydskTagTeknik} alt="Jydsk Tagteknik - Logo" placeholder="blur" />
+                                                                <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" placeholder="blur" />
+                                                            </div>
+                                                        </div>
+                                                    </MotionDiv>
+                                                )}
+                                            </div>
+                                        </MotionDiv>
+                                    )}
+
+                                    {byggetilbud && (
+                                        <MotionDiv>
+                                            <div id="byggetilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:mt-10 mt-5">
+                                                <h3 className="font-semibold mb-5">Få tilbud på dit tagprojekt</h3>
+                                                <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
+                                                <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
+                                                {!showByggetilbud && (
+                                                    <div className="buttons">
+                                                        <div className="flex justify-center mt-5 gap-4">
+                                                            <button onClick={
+                                                                () => {
+                                                                    setByggetilbud(false);
+                                                                    setShowFinish(true);
+                                                                }
+                                                            } className="declineButton">Afvis</button>
+                                                            <button onClick={
+                                                                () => {
+                                                                    setShowByggetilbud(true);
+                                                                }
+                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {showByggetilbud && (
+                                                    <MotionDiv>
+                                                        <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
+                                                        <ol className="list-decimal list-inside text-lg mb-5 ml-4">
+                                                            <li>Det er gratis og uforpligtende</li>
+                                                            <li>Spar tid og penge</li>
+                                                            <li>Personlig vejledning</li>
+                                                            <li>Entreprisegaranti</li>
+                                                        </ol>
+                                                        <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
+                                                        <div className="bg-gray-100 rounded-lg p-5 mt-5">
+                                                            <p className="font-semibold">Opgavebeskrivelse:</p>
+                                                            <p className="font-light">Jeg skal have udskiftet mit tag. {tagAargang && `Taget er fra ${tagAargang}. `}Tagarealet er på {tagfladeareal} m2 og har en tagvinkel på ca. {tagVinkel} grader. Der er {hojdeTilTagrende} m til tagrende. Det gamle tag er {boligTagTypeTekst} og skal skiftes til {nyTagTypeTekst}. {udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
+                                                            {/* Button to copy above text */}
+                                                            <div className="flex justify-center mt-5 relative">
+                                                                <div onClick={copyText} className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm cursor-pointer">
+                                                                    Kopier opgavebeskrivelse
+                                                                </div>
+                                                                {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
+                                                                <div className="hidden transition-all" id="succes-copy">
+                                                                    <p>Kopieret!</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-center mt-5">
+                                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
+                                                                <a onClick={
+                                                                    () => {
+                                                                        trackTilbudButton();
+                                                                        setByggetilbud(false);
+                                                                        setShowFinish(true);
+                                                                    }
+                                                                } href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                                            </div>
+                                                        </div>
+                                                    </MotionDiv>
+                                                )}
+                                            </div>
+                                        </MotionDiv>
+                                    )}
+                                    <div className="bg-white shadow-xl rounded-xl p-5 mt-5 md:mt-10">
                                         <div className="flex justify-between ">
                                             <div className="my-auto">
                                                 <h3>
@@ -1199,121 +1315,7 @@ export default function Beregning() {
                                             </div>
                                         </div>
                                     </div>
-                                    {tagTjek && (
-                                        <MotionDiv>
-                                            <div className="bg-white rounded-xl shadow-lg border text-base p-4 mt-5 md:mt-10">
-                                                <h3 className="font-semibold mb-4">Du er kvalificeret til et gratis tagtjek</h3>
-                                                <p className="font-light">På baggrund af dine oplysninger, kan vi i samarbejde med <strong>Jydsk Tagteknik</strong> tilbyde dig et gratis tagtjek til en værdi af <strong>2.995,-</strong></p>
-                                                {!showTagTjek && (
-                                                    <div className="buttons">
-                                                        <div className="flex justify-center mt-5 gap-4">
-                                                            <button onClick={
-                                                                () => {
-                                                                    setTagTjek(false);
-                                                                    setByggetilbud(true);
-                                                                }
-                                                            } className="declineButton">Afvis</button>
-                                                            <button onClick={
-                                                                () => {
-                                                                    setShowTagTjek(true);
-                                                                }
-                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                {showTagTjek && (
-                                                    <MotionDiv>
-                                                        <p className="font-semibold my-4">Få styr på skaderne i tide og undgå dyre regninger</p>
-                                                        <p className="font-light mb-4">Dit tag vil blive gennemgået og vurderet om det er i orden eller om der er brug for en mindre reparation, en renovering eller en udskiftning.</p>
-                                                        <p className="my-4 font-semibold">Tagtjekket og efterfølgende tilbud er 100% uforpligtende. Tryk på knappen herunder for at bestille dit tagtjek.</p>
-                                                        <div className="flex justify-center mt-5">
-                                                            <div className="acceptButton">
-                                                                <a onClick={
-                                                                    () => {
-                                                                        trackTagTjekButton();
-                                                                        setTagTjek(false);
-                                                                        setByggetilbud(true);
-                                                                        // Scroll to element with id byggetilbud
-                                                                    }
-                                                                } href="/gratistagtjek/" target="_blank">Bestil dit gratis tagtjek</a>
-                                                            </div>
-                                                        </div>
-                                                        <div className="mt-4">
-                                                            <h4 className="mb-4">Om Jydsk Tagteknik</h4>
-                                                            <p className="font-light">Jydsk Tagteknik er en af danmarks førende tagfirmaer og har flere gange vundet prisen som årets tagfirma. De er dækket af Håndværkerens Tryghedsgaranti og dækker hele danmark</p>
-                                                            <div className="flex flex-col md:flex-row justify-center place-items-center mt-4 p-4">
-                                                                <Image src={jydskTagTeknik} alt="Jydsk Tagteknik - Logo" placeholder="blur" />
-                                                                <Image src={trustpilot} alt="Trustpilot - 4.5 Stjerner" placeholder="blur" />
-                                                            </div>
-                                                        </div>
-                                                    </MotionDiv>
-                                                )}
-                                            </div>
-                                        </MotionDiv>
-                                    )}
-                                    {byggetilbud && (
-                                        <MotionDiv>
-                                            <div id="byggetilbud" className="bg-white rounded-xl shadow-lg border text-base p-4 md:mt-10 mt-5">
-                                                <h3 className="font-semibold mb-5">Få tilbud på dit tagprojekt</h3>
-                                                <p className="font-light mb-2">I samarbejde med <strong>3byggetilbud</strong> kan vi tilbyde dig at få 3 tilbud på dit tagprojekt.</p>
-                                                <p className="font-semibold">Det er helt gratis og uforpligtende for dig at modtage tilbud. Du vælger selv, om du vil acceptere et af tilbuddene.</p>
-                                                {!showByggetilbud && (
-                                                    <div className="buttons">
-                                                        <div className="flex justify-center mt-5 gap-4">
-                                                            <button onClick={
-                                                                () => {
-                                                                    setByggetilbud(false);
-                                                                    setShowFinish(true);
-                                                                }
-                                                            } className="declineButton">Afvis</button>
-                                                            <button onClick={
-                                                                () => {
-                                                                    setShowByggetilbud(true);
-                                                                }
-                                                            } className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Læs mere</button>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                {showByggetilbud && (
-                                                    <MotionDiv>
-                                                        <p className="font-semibold mt-5 mb-2">Fordele ved 3byggetilbud:</p>
-                                                        <ol className="list-decimal list-inside text-lg mb-5 ml-4">
-                                                            <li>Det er gratis og uforpligtende</li>
-                                                            <li>Spar tid og penge</li>
-                                                            <li>Personlig vejledning</li>
-                                                            <li>Entreprisegaranti</li>
-                                                        </ol>
-                                                        <p className="font-semibold">For at gøre det nemt for dig har vi klargjort en opgavebeskrivelse på baggrund af dine informationer:</p>
-                                                        <div className="bg-gray-100 rounded-lg p-5 mt-5">
-                                                            <p className="font-semibold">Opgavebeskrivelse:</p>
-                                                            <p className="font-light">Jeg skal have udskiftet mit tag. {tagAargang && `Taget er fra ${tagAargang}. `}Tagarealet er på {tagfladeareal} m2 og har en tagvinkel på ca. {tagVinkel} grader. Der er {hojdeTilTagrende} m til tagrende. Det gamle tag er {boligTagTypeTekst} og skal skiftes til {nyTagTypeTekst}. {udhaeng && ("Tilbuddet skal også inkludere nyt udhæng. ")} {tagrender && ("Tilbuddet skal også inkludere nye tagrender. ")}</p>
-                                                            {/* Button to copy above text */}
-                                                            <div className="flex justify-center mt-5 relative">
-                                                                <div onClick={copyText} className="bg-gray-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm cursor-pointer">
-                                                                    Kopier opgavebeskrivelse
-                                                                </div>
-                                                                {/* Insert succes message after copying text. It should show a text just above the button for 2 seconds */}
-                                                                <div className="hidden transition-all" id="succes-copy">
-                                                                    <p>Kopieret!</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex justify-center mt-5">
-                                                            <div className="bg-mygreen hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm">
-                                                                <a onClick={
-                                                                    () => {
-                                                                        trackTilbudButton();
-                                                                        setByggetilbud(false);
-                                                                        setShowFinish(true);
-                                                                    }
-                                                                } href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
-                                                            </div>
-                                                        </div>
-                                                    </MotionDiv>
-                                                )}
-                                            </div>
-                                        </MotionDiv>
-                                    )}
+
 
                                 </MotionDiv>
                             )}

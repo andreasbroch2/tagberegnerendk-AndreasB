@@ -12,6 +12,8 @@ module.exports = {
             },
             colors: {
                 mygreen: "#13BA00",
+                primary: "#13BA00",
+                secondary: "#F97316",
                 darkblue: "#0D1F3C",
             },
             backgroundImage: {

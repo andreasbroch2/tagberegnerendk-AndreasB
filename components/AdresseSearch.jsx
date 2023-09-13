@@ -63,7 +63,7 @@ const AdresseSearch = (props) => {
 
     return (
         <>
-            <LoadingModal text="Henter Boligdata..." hidden={true}/>
+            <LoadingModal text="Henter Boligdata..." hidden={true} />
             <div className="w-full lg:w-8/12 mx-auto">
                 <div className="content-center">
                     <div className="searchInput">
@@ -90,7 +90,7 @@ const AdresseSearch = (props) => {
                                         </div>
                                     )}
                                     {autocompleteResults.map((result) => (
-                                        <Link onClick={adressEvent} key={result.tekst} href={`/beregning/${result.tekst}`}>
+                                    <Link onClick={adressEvent} key={result.tekst} href={`/beregning?adresse=${result.tekst}`}>
                                             {autocompleteResults.length > 0 && (
                                                 <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
                                                     {result.tekst}
@@ -99,6 +99,9 @@ const AdresseSearch = (props) => {
                                         </Link>
                                     ))}
                                 </div>
+                                <Link href={`/beregning`}>
+                                    <p className="text-sm mt-2">Ønsker du ikke at indtaste din adresse kan fortsætte med manuel indtastning her.</p>
+                                </Link>
                             </div>
                             <div className={`searchButtonDiv ${inputState ? "hidden" : "block"} transition-all sticky top-0`}>
                                 <button

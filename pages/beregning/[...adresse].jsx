@@ -542,7 +542,7 @@ export default function Beregning({ params }) {
                                                 setNyTagType(2);
                                                 handlePriceUpdate(
                                                     2,
-                                                    tagVinkel,
+                                                    tagVinkel, 
                                                     tagfladeareal,
                                                     skorsten
                                                 );

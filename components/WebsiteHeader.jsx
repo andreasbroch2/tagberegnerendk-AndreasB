@@ -20,22 +20,15 @@ export default function WebsiteHeader() {
                     </Link>
                     <ul className="ml-10 hidden flex-wrap gap-5 items-center justify-center lg:flex font-light">
                         <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/goderaad">Gode råd</Link>
+                            <Link href="/hvad-koster-det-at-skifte-tag">Nyt Tag</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/hurtigesvar">Hurtige svar</Link>
+                            <Link href="/tagmaling">Tagmaling</Link>
                         </li>
                         <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/omos">Om os</Link>
+                            <Link href="/hulmursisolering/beregner">Hulmursisolering</Link>
                         </li>
                     </ul>
-
-                    <Link href="/">
-                        <button className="beregnKnap hidden lg:block font-medium">
-                            Beregn pris
-                        </button>
-                    </Link>
-
                     <button onClick={handleNavToggle} className="lg:hidden mobileMenu">
                         <div className="space-y-2">
                             <div className="w-8 h-0.5 bg-gray-500"></div>

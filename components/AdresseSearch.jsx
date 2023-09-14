@@ -31,7 +31,7 @@ const AdresseSearch = (props) => {
                 if (data.length === 0) {
                     console.error("Error: No data found");
                 }
-                return data.slice(0, 2); // Limit the results to two items
+                return data.slice(0, 5); // Limit the results to two items
             } catch (error) {
                 console.error("Error:", error);
                 return [];
@@ -64,55 +64,49 @@ const AdresseSearch = (props) => {
     return (
         <>
             <LoadingModal text="Henter Boligdata..." hidden={true} />
-            <div className="w-full lg:w-8/12 mx-auto">
-                <div className="content-center">
-                    <div className="searchInput">
-                        <div className="text-center">
-                            <div className={`autoCompleteDiv relative ${inputState ? "block" : "hidden"} transition-all`}>
-                                {/* Render en tekstinput til søgeteksten */}
-                                <input
-                                    className="p-7 border border-3 border-zinc-400 shadow-2xl rounded-2xl w-full text-black"
-                                    type="text"
-                                    value={searchText}
-                                    autoComplete="street-address"
-                                    placeholder="Indtast adresse"
-                                    onChange={(e) => {
-                                        handleSearchTextChange(e);
-                                        setSearchText(e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={`bg-white p-5 gap-1 text-black shadow-lg ${searchText === "" ? "hidden" : "block"
-                                        } forslagsListe`}>
-                                    {autocompleteResults.length === 0 && (
-                                        <div className="bg-white p-5 w-full text-start rounded-lg">
-                                            Indtast gyldig adresse
-                                        </div>
-                                    )}
-                                    {autocompleteResults.map((result) => (
-                                    <Link onClick={adressEvent} key={result.tekst} href={`/beregning?adresse=${result.tekst}`}>
-                                            {autocompleteResults.length > 0 && (
-                                                <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
-                                                    {result.tekst}
-                                                </div>
-                                            )}
-                                        </Link>
-                                    ))}
-                                </div>
-                                <Link href={`/beregning`}>
-                                    <p className="text-sm mt-2">Ønsker du ikke at indtaste din adresse kan fortsætte med manuel indtastning her.</p>
-                                </Link>
+            <div className="addressInputDiv">
+                <div className={`addressInputWrapper ${inputState ? "block" : "hidden"} transition-all`}>
+                    {/* Render en tekstinput til søgeteksten */}
+                    <input
+                        className="addressInput"
+                        type="text"
+                        value={searchText}
+                        autoComplete="street-address"
+                        placeholder="Indtast adresse"
+                        onChange={(e) => {
+                            handleSearchTextChange(e);
+                            setSearchText(e.target.value);
+                        }}
+                    />
+                    <div
+                        className={`${searchText === "" ? "hidden" : "block"
+                            } forslagsListe`}>
+                        {autocompleteResults.length === 0 && (
+                            <div className="bg-white p-5 w-full text-start rounded-lg">
+                                Indtast gyldig adresse
                             </div>
-                            <div className={`searchButtonDiv ${inputState ? "hidden" : "block"} transition-all sticky top-0`}>
-                                <button
-                                    className="w-full font-medium bg-orange-500 text-white p-5 rounded-lg shadow-lg hover:bg-orange-600 active:bg-orange-700"
-                                    onClick={setInputStateFunction(true)}
-                                >
-                                    Start her
-                                </button>
-                            </div>
-                        </div>
+                        )}
+                        {autocompleteResults.map((result) => (
+                            <Link onClick={adressEvent} key={result.tekst} href={`/beregning?adresse=${result.tekst}`}>
+                                {autocompleteResults.length > 0 && (
+                                    <div className="bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg">
+                                        {result.tekst}
+                                    </div>
+                                )}
+                            </Link>
+                        ))}
                     </div>
+                    <Link className="text-center" href={`/beregning`}>
+                        <p className="text-sm mt-2">Ønsker du ikke at indtaste din adresse kan fortsætte med manuel indtastning her.</p>
+                    </Link>
+                </div>
+                <div className={`searchButtonDiv ${inputState ? "hidden" : "block"} transition-all sticky top-0`}>
+                    <button
+                        className="w-full font-medium bg-orange-500 text-white p-5 rounded-lg shadow-lg hover:bg-orange-600 active:bg-orange-700"
+                        onClick={setInputStateFunction(true)}
+                    >
+                        Start her
+                    </button>
                 </div>
             </div>
         </>

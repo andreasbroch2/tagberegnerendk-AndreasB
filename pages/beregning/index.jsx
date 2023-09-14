@@ -61,7 +61,7 @@ export default function Beregning() {
     const [showTagTjek, setShowTagTjek] = useState(false);
     const [showByggetilbud, setShowByggetilbud] = useState(false);
     const [tagTjek, setTagTjek] = useState(false);
-    const [byggetilbud, setByggetilbud] = useState(true);
+    const [byggetilbud, setByggetilbud] = useState(false);
     const [showFinish, setShowFinish] = useState(false);
 
     const posthog = usePostHog();
@@ -1086,6 +1086,7 @@ export default function Beregning() {
                                                         <button
                                                             onClick={() => {
                                                                 setStep(4);
+                                                                setByggetilbud(true);
                                                                 // Scroll to top
                                                                 window.scrollTo(0, 0);
                                                                 // After 3 seconds set tagTjek to true

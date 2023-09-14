@@ -68,9 +68,10 @@
   }
 }
 
-button{
+button {
   box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.5);
 }
+
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -81,7 +82,8 @@ button:disabled {
 .declineButton {
   @apply bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg font-medium;
   box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.5);
-  &.alt{
+
+  &.alt {
     @apply bg-white border border-red-500 text-red-500 py-2 px-4 rounded-lg hover:bg-slate-200 hover:scale-105 transition-all;
   }
 }
@@ -89,7 +91,8 @@ button:disabled {
 .acceptButton {
   @apply bg-mygreen hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium;
   box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.5);
-  &.alt{
+
+  &.alt {
     @apply bg-white border border-mygreen text-mygreen py-2 px-4 rounded-lg hover:bg-slate-200 hover:scale-105 transition-all;
   }
 }
@@ -299,6 +302,33 @@ div.toc-container {
   }
 }
 
+.addressInputDiv {
+  @apply w-full lg:w-8/12 mx-auto;
+}
+
+.addressInputWrapper {
+  @apply relative;
+}
+
+.addressInput {
+  @apply p-7 border border-2 border-zinc-400 rounded-2xl w-full text-black bg-white gap-1 shadow-2xl;
+}
+
+.forslagsListe {
+  @apply bg-white p-5 gap-1 text-black shadow-lg block;
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+  top: 85px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 10px !important;
+}
+
 .succes-message-copy {
   display: block;
   background: #0C1A2A;
@@ -322,9 +352,12 @@ div.toc-container {
 }
 
 button.mobileMenu {
-  position: relative;
-  display: inline-block;
-  box-shadow: none;
+  @media screen and (max-width: 768px) {
+
+    position: relative;
+    display: inline-block;
+    box-shadow: none;
+  }
 }
 
 
@@ -336,32 +369,12 @@ button.mobileMenu {
 
 }
 
-.forslagsListe {
-  position: absolute;
-  margin: auto;
-  z-index: 1;
-  top: 85px;
-  left: 0;
-  right: 0;
-  overflow: auto;
-  max-height: 250px;
-  border-radius: 10px;
-  margin-top: 5px;
-  padding: 10px !important;
-}
+
 
 .forslagsListe li {
-  padding: 15px 20px;
-  width: 100%;
-  text-align: start;
-  border-radius: 10px;
-  font-weight: 400;
+  @apply bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg
 }
 
-.forslagsListe li:hover {
-  background: #F3F9FF;
-  color: black;
-}
 
 
 .boligOplysninger {

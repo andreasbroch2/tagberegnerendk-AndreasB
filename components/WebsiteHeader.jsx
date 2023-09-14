@@ -19,14 +19,8 @@ export default function WebsiteHeader() {
                         <h4 className="text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
                     </Link>
                     <ul className="ml-10 hidden flex-wrap gap-5 items-center justify-center lg:flex font-light">
-                        <li className="mr-4 hover:underline md:mr-6">
+                        <li className="mr-4 text-xl font-semibold hover:underline md:mr-6">
                             <Link href="/hvad-koster-det-at-skifte-tag">Nyt Tag</Link>
-                        </li>
-                        <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/tagmaling">Tagmaling</Link>
-                        </li>
-                        <li className="mr-4 hover:underline md:mr-6">
-                            <Link href="/hulmursisolering/beregner">Hulmursisolering</Link>
                         </li>
                     </ul>
                     <button onClick={handleNavToggle} className="lg:hidden mobileMenu">

@@ -315,7 +315,7 @@ div.toc-container {
 }
 
 .forslagsListe {
-  @apply bg-white p-5 gap-1 text-black shadow-lg block;
+  @apply bg-white p-5 gap-1 text-black shadow-lg;
   position: absolute;
   margin: auto;
   z-index: 1;
@@ -360,7 +360,6 @@ button.mobileMenu {
   }
 }
 
-
 .calculator {
   width: 100%;
   background: linear-gradient(153.37deg, #0C1A2A 6.94%, rgba(12, 26, 42, 0.87) 88.51%);
@@ -369,13 +368,9 @@ button.mobileMenu {
 
 }
 
-
-
 .forslagsListe li {
   @apply bg-white p-5 w-full text-start hover:bg-mygreen hover:text-white active:bg-mygreen active:text-white rounded-lg
 }
-
-
 
 .boligOplysninger {
   background: #0C1A2A;

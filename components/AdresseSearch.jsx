@@ -27,10 +27,6 @@ const AdresseSearch = (props) => {
                     `https://api.dataforsyningen.dk/autocomplete?type=adresse&q=${searchText}`
                 );
                 const data = await response.json();
-                //If data is empty console log error
-                if (data.length === 0) {
-                    console.error("Error: No data found");
-                }
                 return data.slice(0, 5); // Limit the results to two items
             } catch (error) {
                 console.error("Error:", error);

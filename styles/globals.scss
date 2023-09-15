@@ -6,7 +6,7 @@
   }
 
   h1 {
-    @apply text-3xl md:text-5xl leading-extra-tight;
+    @apply text-4xl md:text-5xl leading-extra-tight font-medium text-center;
   }
 
   h2 {
@@ -119,6 +119,10 @@ h1 {
 
 .edit-text {
   @apply text-orange-500 float-right font-light text-sm cursor-pointer;
+}
+
+.blog-section a{
+  @apply text-secondary font-medium;
 }
 
 section {
@@ -303,7 +307,7 @@ div.toc-container {
 }
 
 .addressInputDiv {
-  @apply w-full lg:w-8/12 mx-auto;
+  @apply w-full lg:w-8/12 mx-auto my-4;
 }
 
 .addressInputWrapper {

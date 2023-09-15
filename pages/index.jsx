@@ -1,5 +1,7 @@
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import Seo from "../components/Seo";
+import ServerToc from "../components/ServerToc";
 import { getSinglePost } from "../lib/wordpress";
 // import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
@@ -12,10 +14,13 @@ const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch")
 export default function Home(props) {
     return (
         <>
-            <Seo 
-            title="Gratis Tagberegner - Beregn pris på dit nye tag" 
-            description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse." 
-            canonical="https://www.tagberegneren.dk" />
+            <Head>
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: props.data.seo.schema?.raw }} />
+            </Head>
+            <Seo
+                title="Gratis Tagberegner - Beregn pris på dit nye tag"
+                description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse."
+                canonical="https://www.tagberegneren.dk" />
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>
@@ -48,8 +53,22 @@ export default function Home(props) {
             </section>
             <DerforSection />
             <GodeRåd />
-            <section className="blog-section">
-                <div className="container" dangerouslySetInnerHTML={{ __html: props.data?.content }}></div>
+            <section className="entry-content blog-section md:px-4 flex">
+                <div className="md:basis-2/3">
+                    <div className="max-w-3xl mx-auto">
+                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.data?.content }}>
+                        </div>
+                    </div>
+                </div>
+                <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
+                    <div className=''>
+                        <div className="toc-container mt-6 w-fit mx-auto">
+                            <div className="info">
+                                <ServerToc html={props.data?.content} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
     );

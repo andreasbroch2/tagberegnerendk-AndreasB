@@ -2,11 +2,25 @@ import Seo from "../components/Seo";
 import { getSinglePost } from "../lib/wordpress";
 import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
-import GodeRåd from "../components/GodeRåd";
+import ServerToc from "../components/ServerToc";
 
 export default function PrisPaaTag(props) {
     return (
         <>
+            <BreadcrumbJsonLd
+                itemListElements={[
+                    {
+                        position: 1,
+                        name: 'Forside - Tagberegneren.dk',
+                        item: 'https://www.tagberegneren.dk',
+                    },
+                    {
+                        position: 2,
+                        name: 'Hvad koster tagmaling?',
+                        item: 'https://www.tagberegneren.dk/pris-paa-tagmaling',
+                    },
+                ]}
+            />
             <Seo
                 title="Få en pris på tagmaling - Vores algorithm udregner prisen på 10 sekunder"
                 description="Vil du have en vejledende pris på maling af dit tag. Indtast blot din adresse og vores beregner klarer resten for dig"
@@ -41,9 +55,22 @@ export default function PrisPaaTag(props) {
                 </div>
             </section>
             <DerforSection />
-            <GodeRåd />
-            <section className="blog-section">
-                <div className="container" dangerouslySetInnerHTML={{ __html: props.data.content }}></div>
+            <section className="entry-content blog-section md:px-4 flex">
+                <div className="md:basis-2/3">
+                    <div className="max-w-3xl mx-auto">
+                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.data?.content }}>
+                        </div>
+                    </div>
+                </div>
+                <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
+                    <div className=''>
+                        <div className="toc-container mt-6 w-fit mx-auto">
+                            <div className="info">
+                                <ServerToc html={props.data?.content} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
     );

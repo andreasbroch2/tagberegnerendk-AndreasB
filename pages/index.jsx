@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import { BreadcrumbJsonLd } from "next-seo";
 import Seo from "../components/Seo";
 import ServerToc from "../components/ServerToc";
 import { getSinglePost } from "../lib/wordpress";
@@ -27,6 +28,15 @@ export default function Home(props) {
             <Head>
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: props.data.seo.schema?.raw }} />
             </Head>
+            <BreadcrumbJsonLd
+                itemListElements={[
+                    {
+                        position: 1,
+                        name: 'Forside - Tagberegneren.dk',
+                        item: 'https://www.tagberegneren.dk',
+                    },
+                ]}
+            />
             <Seo
                 title="Gratis Tagberegner - Beregn pris på dit nye tag"
                 description="Udregn gratis og hurtigt en pris på dit nye tag. Indtast blot din adresse."

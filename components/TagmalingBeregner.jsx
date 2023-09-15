@@ -1,13 +1,4 @@
-import dynamic from 'next/dynamic'
-import { usePostHog } from 'posthog-js/react'
-import { useEffect, useState } from 'react'
-
-const AdresseSearch = dynamic(() => import('./AdresseSearch.jsx'), {
-    loading: () => <p>Henter...</p>,
-})
-
-
-export default function TitleSection(props) {
+export default function TagmalingBeregner(){
     return (
         <>
             <section className="titleSection">
@@ -31,9 +22,6 @@ export default function TitleSection(props) {
                     </div>
                     <div className="mt-10 searchAdresseDiv">
                         <div className="flex justify-start lg:justify-end mt-5 md:mt-0">
-                            <AdresseSearch
-                                home={props.home}
-                            />
                         </div>
                     </div>
                 </div>

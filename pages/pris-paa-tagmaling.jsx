@@ -3,10 +3,15 @@ import { getSinglePost } from "../lib/wordpress";
 import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
 import ServerToc from "../components/ServerToc";
+import Head from "next/head";
+import { BreadcrumbJsonLd } from "next-seo";
 
 export default function PrisPaaTag(props) {
     return (
         <>
+            <Head>
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: props.data.seo.schema?.raw }} />
+            </Head>
             <BreadcrumbJsonLd
                 itemListElements={[
                     {

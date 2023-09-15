@@ -352,6 +352,7 @@ div.toc-container {
 }
 .navSearch {
   @apply lg:hidden;
+  height: 50px;
   flex-grow: 0;
   margin-left: 1em;
   min-width: 240px;

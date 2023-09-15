@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import Posts from '../components/posts';
+import Posts from '../components/Posts';
 import useSearch from '../lib/use-search';
 
 export default function Search() {

@@ -2,6 +2,7 @@ import Post from './post';
 import PropTypes from 'prop-types';
 
 const Posts = ( {posts} ) => {
+    console.log("posts", posts);
 	return (
 		<div className="all-blog-posts-container grid grid-cols-1 md:grid-cols-3 gap-3 my-8">
 			{

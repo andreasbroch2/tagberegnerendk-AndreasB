@@ -350,20 +350,112 @@ div.toc-container {
   background: #F3F9FF;
   color: black;
 }
+.navSearch {
+  @apply lg:hidden;
+  flex-grow: 0;
+  margin-left: 1em;
+  min-width: 240px;
+  &.mobile{
+    @apply hidden lg:block;
+  }
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
 
+    @media (min-width: 480px) {
+      justify-content: flex-end;
+      margin-right: -1rem;
+    }
+  }
+
+  input {
+    font-size: 1.0rem;
+    padding: 6px;
+    border-radius: 5px;
+    }
+
+  button {
+    font-size: 1.2em;
+    background: none;
+    padding: 1.045em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    float: right;
+    &[disabled] {
+      svg {
+        transition: fill 0.5s;
+      }
+    }
+
+    svg {
+      transform: translateY(2px);
+    }
+  }
+}
+
+.navSearchResults {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100vw;
+  background-color: white;
+  padding: 1.5em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  border-top: solid 5px;
+  margin-right: -1rem;
+  z-index: 999;
+
+  @media (min-width: 480px) {
+    width: 30em;
+    margin-right: 0;
+  }
+
+  [data-search-is-active="true"] & {
+    display: block;
+  }
+
+  p {
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: -0.5em 0;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 0.5em;
+    margin: 0 -0.5em;
+    &:focus {
+      outline: 2px solid;
+    }
+  }
+}
 .menuDropdown Link {
   width: 100% !important;
 }
 
 button.mobileMenu {
   @media screen and (max-width: 768px) {
-
     position: relative;
     display: inline-block;
     box-shadow: none;
   }
 }
-
+button.noShadow {
+  box-shadow: none;
+}
 .calculator {
   width: 100%;
   background: linear-gradient(153.37deg, #0C1A2A 6.94%, rgba(12, 26, 42, 0.87) 88.51%);

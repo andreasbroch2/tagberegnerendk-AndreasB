@@ -4,9 +4,46 @@ import WebsiteFooter from "./../components/WebsiteFooter";
 import { Poppins } from "next/font/google";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import Providers from '../lib/providers'
+import { SearchProvider } from '../lib/use-search';
+import Link from 'next/link';
+import Image from 'next/image';
+import searchIcon from '../assets/search.svg';
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
-    loading: () => <p>Loading...</p>,
+    loading: () =>
+        <header>
+            <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
+                <p>Præcis prisberegning på nyt tag og tagmaling</p>
+            </div>
+            <div className="container px-3 lg:px-0">
+                <div className="mt-5 flex flex-wrap justify-between">
+                    <Link href="/" className="flex my-auto">
+                        <h4 className="text-xl md:text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
+                    </Link>
+                    <ul className="ml-10 hidden flex-wrap gap-5 items-center justify-center lg:flex font-light">
+                        <li className="mr-4 text-xl font-semibold hover:underline md:mr-6">
+                            <Link href="/hvad-koster-det-at-skifte-tag">Nyt Tag</Link>
+                        </li>
+                    </ul>
+                    <button className="lg:hidden mobileMenu">
+                        <div className="space-y-2">
+                            <div className="w-8 h-0.5 bg-gray-500"></div>
+                            <div className="w-8 h-0.5 bg-gray-600"></div>
+                            <div className="w-8 h-0.5 bg-gray-600"></div>
+                        </div>
+                    </button>
+                    <div className={`mobile navSearch`}>
+                        <button className='noShadow'>
+                            <span className="sr-only">Toggle Search</span>
+                            <Image
+                                src={searchIcon}
+                                alt="Search Icon"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>,
     ssr: false
 })
 
@@ -19,14 +56,16 @@ const poppins = Poppins({
 function MyApp({ Component, pageProps, }) {
     return (
         <Providers>
-            <div className={`${poppins.className}`}>
-                <GoogleAnalytics trackPageViews />
-                <WebsiteHeader />
-                <main>
-                    <Component {...pageProps} />
-                </main>
-                <WebsiteFooter />
-            </div>
+            <SearchProvider>
+                <div className={`${poppins.className}`}>
+                    <GoogleAnalytics trackPageViews />
+                    <WebsiteHeader />
+                    <main>
+                        <Component {...pageProps} />
+                    </main>
+                    <WebsiteFooter />
+                </div>
+            </SearchProvider>
         </Providers>
     );
 }

@@ -70,15 +70,11 @@ export default function Beregning() {
     const searchAdresse = searchParams.get("adresse");
 
     useEffect(() => {
-        if (!searchAdresse) return setLoading(false), setShowSelectTagType(true), setSecondStep(2);
         event("Beregning", {
             category: "Beregning",
             label: 'Beregning',
         });
-        posthog.capture('Beregning',
-            {
-                distinctId: leadPriceId,
-            })
+        if (!searchAdresse) return setLoading(false), setShowSelectTagType(true), setSecondStep(2);
         async function fetchData() {
             const result = await BBRData(searchAdresse);
             if (!result.boligGrundPlan) {
@@ -104,6 +100,12 @@ export default function Beregning() {
         fetchData();
     }, [searchAdresse]);
 
+    useEffect(() => {
+        posthog.capture('Beregning',
+            {
+                distinctId: leadPriceId,
+            })
+    }, [posthog]);
     function toggleShowSelectTagType() {
         setShowSelectTagType(!showSelectTagType);
     }

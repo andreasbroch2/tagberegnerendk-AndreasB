@@ -82,3 +82,34 @@ export async function getSinglePost(slug) {
     })
   return data?.page
 }
+
+export async function getAllPosts() {
+  const data = await fetchAPI(`
+  {
+    posts(first: 10000) { 
+      edges {
+        node {
+          title
+          excerpt
+          slug
+          date
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+          categories {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `);
+  return data?.posts;
+}

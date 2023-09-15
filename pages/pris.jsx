@@ -17,23 +17,24 @@ export default function Pris() {
     const posthog = usePostHog();
 
     useEffect(() => {
+        const fetchLeads = async () => {
+            try {
+                const response = await fetch("/api/getLead", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ leadPriceId: priceID }),
+                });
+                const leadsData = await response.json();
+                setPriceData(leadsData);
+            } catch (error) {
+                console.error("Error fetching leads:", error);
+            }
+        };
         fetchLeads();
     }, [priceID]);
-    const fetchLeads = async () => {
-        try {
-            const response = await fetch("/api/getLead", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ leadPriceId: priceID }),
-            });
-            const leadsData = await response.json();
-            setPriceData(leadsData);
-        } catch (error) {
-            console.error("Error fetching leads:", error);
-        }
-    };
+
 
     const convertToPlainValue = (obj) => {
         if (typeof obj !== "object" || obj === null) {
@@ -143,7 +144,7 @@ export default function Pris() {
                                         Dette er en vejledende pris på baggrund af markedsdata og dine oplysninger. Din faktiske pris kan svinge efter valgt håndværker og dit tags beskaffenhed.
                                     </p>
                                     <p className="text-base font-semibold mt-5">
-                                    Vi anbefaler at indhente tilbud på dit projekt for at få en præcis pris, eller at få udført et professionelt tagtjek. Begge dele kan du gøre nemt og gratis herunder.
+                                        Vi anbefaler at indhente tilbud på dit projekt for at få en præcis pris, eller at få udført et professionelt tagtjek. Begge dele kan du gøre nemt og gratis herunder.
                                     </p>
                                 </div>
                             </div>

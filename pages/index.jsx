@@ -8,6 +8,16 @@ import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
+    loading: () =>
+        <div className="addressInputDiv">
+            <div className={`searchButtonDiv block transition-all sticky top-0`}>
+                <button
+                    className="w-full font-medium bg-orange-500 text-white p-5 rounded-lg shadow-lg hover:bg-orange-600 active:bg-orange-700"
+                >
+                    Start her
+                </button>
+            </div>
+        </div>,
     ssr: false,
 });
 

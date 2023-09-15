@@ -55,7 +55,7 @@ const AdresseSearch = (props) => {
     // Show input and hide button when button is clicked
     const setInputStateFunction = (state) => () => {
         setInputState(state);
-    }
+    };
 
     return (
         <>

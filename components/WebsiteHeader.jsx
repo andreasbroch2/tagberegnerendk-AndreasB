@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import Search from "./Search";
 
 export default function WebsiteHeader() {
     const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
@@ -16,7 +17,7 @@ export default function WebsiteHeader() {
             <div className="container px-3 lg:px-0">
                 <div className="mt-5 flex flex-wrap justify-between">
                     <Link href="/" className="flex my-auto">
-                        <h4 className="text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
+                        <h4 className="text-xl md:text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
                     </Link>
                     <ul className="ml-10 hidden flex-wrap gap-5 items-center justify-center lg:flex font-light">
                         <li className="mr-4 text-xl font-semibold hover:underline md:mr-6">
@@ -45,6 +46,7 @@ export default function WebsiteHeader() {
                             </div>
                         </div>
                     </button>
+                    <Search classes={'mobile'} />
                 </div>
             </div>
         </header>

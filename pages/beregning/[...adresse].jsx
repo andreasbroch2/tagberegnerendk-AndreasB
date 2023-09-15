@@ -93,7 +93,7 @@ export default function Beregning({ params }) {
                 fetchData();
             }
         }
-    }, [router.query.adresse]);
+    }, [router.query.adresse, posthog, router.isReady]);
 
     function handlePriceUpdate(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng) {
         updatePrice(nyTagType, tagVinkel, tagFladeAreal, skorsten, tagrender, udhaeng).then(

@@ -219,7 +219,7 @@ export default function Beregning() {
                 </div>
             )}
             <div>
-                <p className="font-light text-sm">Tagtype</p>
+                <p className="font-light text-sm">Nuværende tagtype</p>
                 <p className="font-medium">{boligTagTypeTekst ? (
                     boligTagTypeTekst
                 ) : (

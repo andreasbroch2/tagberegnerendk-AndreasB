@@ -345,6 +345,10 @@ div.toc-container {
   transform: translate(-50%, -50%);
 }
 
+#breadcrumbs a{
+  color: black;
+}
+
 .menuDropdown li:hover {
   width: 100% !important;
   background: #F3F9FF;

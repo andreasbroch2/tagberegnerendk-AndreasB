@@ -49,7 +49,7 @@ export default function TagTyperLayout({ children, ...props }) {
                                 <span className="separator">  /  </span>
                                 <span>{props.props.title}</span>
                             </div>
-                            <h1>{`${props.props.title}`}</h1>
+                            <h1 className='text-left'>{`${props.props.title}`}</h1>
                             {/* Add author and modified date */}
                             <div className="post-meta flex my-4 items-center gap-2 text-sm">
                                 <div className="post-meta__date">

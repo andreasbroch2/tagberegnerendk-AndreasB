@@ -49,6 +49,18 @@ export default function WebsiteFooter() {
                             <li className="mt-4">
                                 <Link href="/tagtyper/hvad-koster-eternit-tag-guide">Eternit</Link>
                             </li>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-solcelletag-guide">Solcelletag</Link>
+                            </li>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-skifer-tag-guide">Skifertag</Link>
+                            </li>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-staaltag-guide">Ståltag</Link>
+                            </li>
+                            <li className="mt-4">
+                                <Link href="/tagtyper/hvad-koster-straatag-guide">Stråtag</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

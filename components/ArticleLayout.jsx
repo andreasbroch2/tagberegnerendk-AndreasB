@@ -66,6 +66,7 @@ export default function TagTyperLayout({ children, ...props }) {
                                     src={props.image}
                                     alt={props.props.title}
                                     placeholder='blur'
+                                    loading='eager'
                                 />
                             </div>
                             {/* <div id="article-text" dangerouslySetInnerHTML={{ __html: children }}> */}

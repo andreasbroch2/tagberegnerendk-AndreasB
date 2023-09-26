@@ -5,6 +5,7 @@ import DerforSection from "../components/DerforSection";
 import ServerToc from "../components/ServerToc";
 import Head from "next/head";
 import { BreadcrumbJsonLd } from "next-seo";
+import CleanLinks from "../components/CleanLinks";
 
 export default function PrisPaaTag(props) {
     return (
@@ -63,7 +64,7 @@ export default function PrisPaaTag(props) {
             <section className="entry-content blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
                     <div className="max-w-3xl mx-auto">
-                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.data?.content }}>
+                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.cleanElement }}>
                         </div>
                     </div>
                 </div>
@@ -71,7 +72,7 @@ export default function PrisPaaTag(props) {
                     <div className=''>
                         <div className="toc-container mt-6 w-fit mx-auto">
                             <div className="info">
-                                <ServerToc html={props.data?.content} />
+                                <ServerToc html={props.cleanElement} />
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,8 @@ export default function PrisPaaTag(props) {
 
 export const getStaticProps = async () => {
     const data = await getSinglePost('pris-pa-tagmaling');
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data }
+        props: { data, cleanElement }
     }
 }

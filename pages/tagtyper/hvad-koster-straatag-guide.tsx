@@ -2,11 +2,13 @@ import Seo from '../../components/Seo';
 import { getSinglePost } from "../../lib/wordpress";
 import TagTyperLayout from "../../components/ArticleLayout";
 import straaTag from "../../assets/straatag.jpg"
+import CleanLinks from "../../components/CleanLinks";
 
 export async function getStaticProps() {
     const data = await getSinglePost("hvad-koster-straatag-guide");
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data },
+        props: { data, cleanElement },
     };
 }
 
@@ -21,8 +23,8 @@ export default function Page(props) {
                 type="article"
                 props={props.data}
             />
-            <TagTyperLayout props={props.data} image={straaTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-straatag-guide">
-                {props.data.content}
+            <TagTyperLayout props={props.data} image={straaTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-straatag-guide" cleanElement={props.cleanElement}>
+                {props.cleanElement}
             </TagTyperLayout>
         </>
     );

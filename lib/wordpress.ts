@@ -26,7 +26,7 @@ export async function fetchAPI(query = '', { variables }: Record<string, any> = 
 export async function getSinglePost(slug) {
   const data = await fetchAPI(`
       query GET_POST{
-        page: postBy(uri: "${slug}") {
+        page: postBy(slug: "${slug}") {
           id
           title
           content

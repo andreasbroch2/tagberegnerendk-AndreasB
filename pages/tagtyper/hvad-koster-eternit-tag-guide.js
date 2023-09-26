@@ -2,6 +2,7 @@ import Seo from "../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
 import TagTyperLayout from "../../components/ArticleLayout";
 import eternitTag from "../../assets/eternittag.jpg"
+import CleanLinks from "../../components/CleanLinks";
 
 export default function Page(props) {
     const mainEntity = [
@@ -36,8 +37,8 @@ export default function Page(props) {
             props={props.data}
             />
             <div className="blog-section">
-                <TagTyperLayout props={props.data} image={eternitTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-eternit-tag-guide" mainEntity={mainEntity}>
-                    {props.data.content}
+                <TagTyperLayout props={props.data} image={eternitTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-eternit-tag-guide" mainEntity={mainEntity} cleanElement={props.cleanElement}>
+                    {props.cleanElement}
                 </TagTyperLayout>
             </div>
         </>
@@ -46,7 +47,8 @@ export default function Page(props) {
 
 export async function getStaticProps() {
     const data = await getSinglePost('eternit-tag');
+    var cleanElement = CleanLinks(data.content);
     return {
-        props: { data },
+        props: { data, cleanElement},
     };
 }

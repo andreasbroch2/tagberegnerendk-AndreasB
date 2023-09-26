@@ -7,6 +7,7 @@ import { getSinglePost } from "../lib/wordpress";
 // import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
+import CleanLinks from "../components/CleanLinks";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
     loading: () =>
@@ -76,7 +77,7 @@ export default function Home(props) {
             <section className="entry-content blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
                     <div className="max-w-3xl mx-auto">
-                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.data?.content }}>
+                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.cleanElement }}>
                         </div>
                     </div>
                 </div>
@@ -96,9 +97,11 @@ export default function Home(props) {
 
 export async function getStaticProps() {
     const data = await getSinglePost('gratis-tagberegner-beregn-pris-pa-dit-nye-tag');
+    const cleanElement = CleanLinks(data.content);
     return {
         props: {
-            data
+            data,
+            cleanElement,
         },
     }
 }

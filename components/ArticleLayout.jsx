@@ -4,6 +4,7 @@ import ServerToc from './ServerToc';
 import Link from 'next/link';
 import byggetilbudAd from '../assets/3byggetilbud_336x280.jpg';
 import FAQComponent from './FAQComponent';
+import postConverter  from '../lib/postConverter';
 
 export default function TagTyperLayout({ children, ...props }) {
     return (
@@ -61,13 +62,15 @@ export default function TagTyperLayout({ children, ...props }) {
                             </div>
                             <div className="relative">
                                 <Image
-                                    className="object-cover"
+                                    className="object-cover article-hero-image"
                                     src={props.image}
                                     alt={props.props.title}
                                     placeholder='blur'
                                 />
                             </div>
-                            <div id="article-text" dangerouslySetInnerHTML={{ __html: children }}>
+                            {/* <div id="article-text" dangerouslySetInnerHTML={{ __html: children }}> */}
+                            <div id="article-text">
+                                {postConverter(props.cleanElement)}
                             </div>
                             {props.mainEntity && (
                                 <FAQComponent mainEntity={props.mainEntity} />
@@ -146,7 +149,7 @@ export function ArticleLayout({ children, ...props }) {
                             </div>
                             <div className="relative">
                                 <Image
-                                    className="object-cover"
+                                    className="object-cover article-hero-image"
                                     src={props.image}
                                     alt={props.props.title}
                                     placeholder='blur'

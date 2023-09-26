@@ -4,15 +4,17 @@ export default function Seo(props) {
     return (
         <>
             <NextSeo
-                title={props.title}
-                description={props.description}
+            // If props.props.data.title is undefined, use props.title
+                title={props.props?.seo.title || props.title}
+                description={props.props?.seo.metaDesc || props.description}
                 canonical={props.canonical}
                 openGraph={{
                     type: props.type,
                     locale: 'da_DK',
                     url: props.canonical,
-                    title: props.title,
-                    description: props.description,
+                    // If props.props.data.title is undefined, use props.title
+                    title: props.props?.seo.title || props.title,
+                    description: props.props?.seo.metaDesc || props.description,
                     images: [
                         {
                             url: props.props?.featuredImage.node.sourceUrl,

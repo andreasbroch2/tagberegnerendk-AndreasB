@@ -5,6 +5,7 @@ import Seo from "./../components/Seo";
 import { getSinglePost } from "../lib/wordpress";
 import DerforSection from "../components/DerforSection";
 import ServerToc from "../components/ServerToc";
+import CleanLinks from "../components/CleanLinks";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
     loading: () =>
@@ -74,7 +75,7 @@ export default function PrisPaaTag(props) {
             <section className="entry-content blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
                     <div className="max-w-3xl mx-auto">
-                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.data?.content }}>
+                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.cleanElement }}>
                         </div>
                     </div>
                 </div>
@@ -94,7 +95,8 @@ export default function PrisPaaTag(props) {
 
 export const getStaticProps = async () => {
     const data = await getSinglePost('hvad-koster-det-at-skifte-tag');
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data }
+        props: { data, cleanElement }
     }
 }

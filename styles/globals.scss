@@ -404,6 +404,24 @@ div.toc-container {
   }
 }
 
+.footer-link{
+  @apply text-base mb-1 hover:text-primary;
+}
+
+.article-hero-image{
+  @apply w-full h-96 object-cover object-center rounded-lg;
+}
+
+.yarpp-thumbnails-horizontal{
+  @apply grid grid-cols-2 md:grid-cols-4 gap-2 text-center;
+  a{
+    @apply flex flex-col hover:text-primary items-center text-sm;
+  }
+  img{
+    @apply w-full h-32 object-cover object-center rounded-lg;
+  }
+}
+
 .navSearchResults {
   display: none;
   position: absolute;

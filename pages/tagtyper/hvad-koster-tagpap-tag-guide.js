@@ -2,6 +2,7 @@ import Seo from "../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
 import TagTyperLayout from "../../components/ArticleLayout";
 import tagPapTag from "../../assets/tagpap-tag.png"
+import CleanLinks from "../../components/CleanLinks";
 
 export default function Page(props) {
     const mainEntity = [
@@ -36,8 +37,8 @@ export default function Page(props) {
             props={props.data}
             />
             <div className="blog-section">
-                <TagTyperLayout props={props.data} image={tagPapTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-tagpap-tag-guide" mainEntity={mainEntity}>
-                    {props.data.content}
+                <TagTyperLayout props={props.data} image={tagPapTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-tagpap-tag-guide" mainEntity={mainEntity} cleanElement={props.cleanElement}>
+                    {props.cleanElement}
                 </TagTyperLayout>
             </div>
         </>
@@ -46,7 +47,8 @@ export default function Page(props) {
 
 export async function getStaticProps() {
     const data = await getSinglePost('tagpap');
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data },
+        props: { data, cleanElement},
     };
 }

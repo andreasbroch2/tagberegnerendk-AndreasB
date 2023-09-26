@@ -2,6 +2,7 @@ import Seo from "./../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
 import TagTyperLayout from "../../components/ArticleLayout";
 import solcelleTag from "../../assets/solcelletag.png"
+import CleanLinks from "../../components/CleanLinks";
 
 export default function Page(props) {
     return (
@@ -14,8 +15,8 @@ export default function Page(props) {
                 props={props.data}
             />
             <div className="blog-section">
-                <TagTyperLayout props={props.data} image={solcelleTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-solcelletag-guide">
-                    {props.data.content}
+                <TagTyperLayout props={props.data} image={solcelleTag} canonical="https://www.tagberegneren.dk/tagtyper/hvad-koster-solcelletag-guide" cleanElement={props.cleanElement}>
+                    {props.cleanElement}
                 </TagTyperLayout>
             </div>
         </>
@@ -24,7 +25,8 @@ export default function Page(props) {
 
 export async function getStaticProps() {
     const data = await getSinglePost('hvad-koster-solcelletag-guide');
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data },
+        props: { data, cleanElement },
     };
 }

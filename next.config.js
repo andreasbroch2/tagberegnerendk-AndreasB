@@ -25,6 +25,11 @@ const nextConfig = {
                 permanent: true,
             },
             {
+                source: '/tagtyper/tagpap',
+                destination: '/tagtyper/hvad-koster-tagpap-tag-guide',
+                permanent: true,
+            },
+            {
                 source: '/pris-pa-tagmaling',
                 destination: '/pris-paa-tagmaling',
                 permanent: true,
@@ -35,7 +40,17 @@ const nextConfig = {
                 permanent: true,
             },
             {
+                source: '/tagtyper/tegltag',
+                destination: '/tagtyper/hvad-koster-tegltag-guide',
+                permanent: true,
+            },
+            {
                 source: '/eternit-tag',
+                destination: '/tagtyper/hvad-koster-eternit-tag-guide',
+                permanent: true,
+            },
+            {
+                source: '/tagtyper/eternit-tag',
                 destination: '/tagtyper/hvad-koster-eternit-tag-guide',
                 permanent: true,
             },

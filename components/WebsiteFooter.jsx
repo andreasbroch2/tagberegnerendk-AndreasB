@@ -16,50 +16,53 @@ export default function WebsiteFooter() {
                     </div>
                     <div className="text-white">
                         <p className="font-semibold text-xl">Links</p>
-                        <ul>
-                            <li className="mt-4">
+                        <ul className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/">Forside</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/hvad-koster-det-at-skifte-tag">Hvad koster det at skifte tag?</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/pris-paa-tagmaling">Hvad koster tagmaling?</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/omos">Om os</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/hurtigesvar">Hurtige svar</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="text-white">
                         <Link href="/tagtyper" className="font-semibold text-xl">Tagtyper</Link>
-                        <ul>
-                            <li className="mt-4">
+                        <ul className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-tegltag-guide">Tegltag</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-tagpap-tag-guide">Tagpap</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-eternit-tag-guide">Eternit</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-solcelletag-guide">Solcelletag</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-skifer-tag-guide">Skifertag</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-staaltag-guide">Ståltag</Link>
                             </li>
-                            <li className="mt-4">
+                            <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-straatag-guide">Stråtag</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/tagtyper/hvad-koster-zinktag-guide">Zinktag</Link>
                             </li>
                         </ul>
                     </div>

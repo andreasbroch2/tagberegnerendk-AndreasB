@@ -2,6 +2,7 @@ import Seo from "./../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
 import { ArticleLayout } from "../../components/ArticleLayout";
 import tagTyper from "../../assets/tagtyper.png"
+import CleanLinks from "../../components/CleanLinks";
 
 export default function Page(props) {
     return (
@@ -12,8 +13,8 @@ export default function Page(props) {
                 canonical="https://www.tagberegneren.dk/tagtyper"
             />
             <div className="blog-section">
-                <ArticleLayout props={props.data} image={tagTyper} canonical="https://www.tagberegneren.dk/tagtyper">
-                    {props.data.content}
+                <ArticleLayout props={props.data} image={tagTyper} canonical="https://www.tagberegneren.dk/tagtyper" cleanElement={props.cleanElement}>
+                    {props.cleanElement}
                 </ArticleLayout>
             </div>
         </>
@@ -22,7 +23,8 @@ export default function Page(props) {
 
 export async function getStaticProps() {
     const data = await getSinglePost('tagtyper');
+    var cleanElement = CleanLinks(data.content);
     return {
-        props: { data },
+        props: { data, cleanElement},
     };
 }

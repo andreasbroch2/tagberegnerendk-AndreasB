@@ -6,6 +6,7 @@ import { getSinglePost } from "../lib/wordpress";
 import DerforSection from "../components/DerforSection";
 import ServerToc from "../components/ServerToc";
 import CleanLinks from "../components/CleanLinks";
+import postConverter from "../lib/postConverter";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
     loading: () =>
@@ -75,7 +76,8 @@ export default function PrisPaaTag(props) {
             <section className="entry-content blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
                     <div className="max-w-3xl mx-auto">
-                        <div id="article-text" dangerouslySetInnerHTML={{ __html: props.cleanElement }}>
+                        <div id="article-text">
+                            {postConverter(props.cleanElement)}
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ export default function WebsiteHeader() {
                             <Link href="/hvad-koster-det-at-skifte-tag">Nyt Tag</Link>
                         </li>
                     </ul>
-                    <button onClick={handleNavToggle} className="lg:hidden mobileMenu">
+                    <button onClick={handleNavToggle} className="lg:hidden mobileMenu" name="open-menu">
                         <div className="space-y-2">
                             <div className="w-8 h-0.5 bg-gray-500"></div>
                             <div className="w-8 h-0.5 bg-gray-600"></div>

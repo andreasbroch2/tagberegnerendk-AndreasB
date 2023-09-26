@@ -11,8 +11,8 @@ module.exports = {
                 'extra-tight': '1.15',
             },
             colors: {
-                mygreen: "#13BA00",
-                primary: "#13BA00",
+                mygreen: "#0f9500",
+                primary: "#0f9500",
                 secondary: "#F97316",
                 darkblue: "#0D1F3C",
             },

@@ -27,6 +27,21 @@ export default function WebsiteFooter() {
                                 <Link href="/pris-paa-tagmaling">Hvad koster tagmaling?</Link>
                             </li>
                             <li className="footer-link">
+                                <Link href="/hvad-koster-loftisolering-guide">Hvad koster loftisolering?</Link>
+                            </li>                            
+                            <li className="footer-link">
+                                <Link href="/hvad-koster-tagisolering-guide">Hvad koster tagisolering?</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/hvad-koster-tagrensning-guide">Hvad koster tagrensning?</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/hvad-koster-solceller-guide">Hvad koster solceller?</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/hvad-koster-algerens-guide">Hvad koster algerens?</Link>
+                            </li>
+                            <li className="footer-link">
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
                             <li className="footer-link">
@@ -63,6 +78,12 @@ export default function WebsiteFooter() {
                             </li>
                             <li className="footer-link">
                                 <Link href="/tagtyper/hvad-koster-zinktag-guide">Zinktag</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/tagtyper/hvad-koster-betontegl-tag-guide">Betontegl</Link>
+                            </li>
+                            <li className="footer-link">
+                                <Link href="/tagtyper/hvad-koster-decratag-guide">Decratag</Link>
                             </li>
                         </ul>
                     </div>

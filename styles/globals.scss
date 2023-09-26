@@ -290,9 +290,7 @@ div.toc-container {
 
       li {
         @apply mb-0;
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
-        line-height: normal;
-
+        font-size: 1rem;
         ul {
           @apply ml-6 mb-0;
         }
@@ -403,7 +401,9 @@ div.toc-container {
     }
   }
 }
-
+#article-text{
+  @apply mt-4;
+}
 .footer-link{
   @apply text-base mb-1 hover:text-primary;
 }
@@ -413,7 +413,7 @@ div.toc-container {
 }
 
 .yarpp-thumbnails-horizontal{
-  @apply grid grid-cols-2 md:grid-cols-4 gap-2 text-center;
+  @apply grid grid-cols-2 md:grid-cols-4 gap-2 text-center mt-4;
   a{
     @apply flex flex-col hover:text-primary items-center text-sm;
   }

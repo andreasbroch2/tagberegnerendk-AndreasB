@@ -2,5 +2,6 @@
 module.exports = {
     siteUrl: 'https://www.tagberegneren.dk',
     generateRobotsTxt: true, // (optional)
-    exclude: ['/pris', '/beregning']
+    exclude: ['/pris', '/beregning'],
+    priority: 1
   }

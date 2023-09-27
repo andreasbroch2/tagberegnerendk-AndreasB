@@ -58,7 +58,10 @@ function MyApp({ Component, pageProps, }) {
         <Providers>
             <SearchProvider>
                 <div className={`${poppins.className}`}>
-                    <GoogleAnalytics trackPageViews />
+                    <GoogleAnalytics 
+                    trackPageViews
+                    strategy="lazyOnload"
+                     />
                     <WebsiteHeader />
                     <main>
                         <Component {...pageProps} />

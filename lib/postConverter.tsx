@@ -5,6 +5,7 @@ const parse = require('html-react-parser');
 
 export default function postConverter(element: String) {
   var cleanJsx = parse(element);
+  let count = 1;
   function reactNodeToImg(node) {
     return React.Children.map(node, (node) => {
       if (!node.type) {
@@ -25,7 +26,8 @@ export default function postConverter(element: String) {
       }
       // If node.type is a heading tag, return a heading with an id of the same as the text
       else if (node.type === 'h2' || node.type === 'h3' || node.type === 'h4' || node.type === 'h5' || node.type === 'h6') {
-        var headingElement = React.createElement(node.type, { id: node.props.children }, node.props.children);
+        var headingElement = React.createElement(node.type, { id: count }, node.props.children);
+        count++;
         return headingElement;
       }
       else if (node.props && node.props.children != null) {
@@ -47,7 +49,8 @@ export default function postConverter(element: String) {
     }
     // If node.type is a heading tag, return a heading with an id of the same as the text
     else if (elementchild.type === 'h2' || elementchild.type === 'h3' || elementchild.type === 'h4' || elementchild.type === 'h5' || elementchild.type === 'h6') {
-      var headingElement = React.createElement(elementchild.type, { id: elementchild.props.children }, elementchild.props.children);
+      var headingElement = React.createElement(elementchild.type, { id: count }, elementchild.props.children);
+      count++;
       return headingElement;
     }
     else if (elementchild.props && elementchild.props.children) {

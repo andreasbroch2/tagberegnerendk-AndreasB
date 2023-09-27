@@ -99,7 +99,7 @@ export default function Home(props) {
                     <div className=''>
                         <div className="toc-container mt-6 w-fit mx-auto">
                             <div className="info">
-                                <ServerToc html={props.data?.content} />
+                                <ServerToc html={props.cleanElement} />
                             </div>
                         </div>
                     </div>

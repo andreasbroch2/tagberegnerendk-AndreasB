@@ -10,7 +10,7 @@
   }
 
   h2 {
-    @apply text-2xl md:text-4xl leading-extra-tight;
+    @apply text-3xl font-medium md:text-4xl leading-extra-tight;
   }
 
   h3 {
@@ -420,6 +420,28 @@ div.toc-container {
   img{
     @apply w-full h-32 object-cover object-center rounded-lg;
   }
+}
+
+.video-post{
+  @apply mt-4;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  position:relative;
+  background-color:darkgray;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.video-post iframe{
+  height: 100%;
+  width:100%;
+}
+
+.play{
+  height:50px;
+  width:50px;
+  z-index: 1;
 }
 
 .navSearchResults {

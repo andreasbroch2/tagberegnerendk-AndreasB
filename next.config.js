@@ -5,6 +5,7 @@ const nextConfig = {
         domains: [
             'tagberegneren.ditsmartehjem.dk',
             'www.partner-ads.com',
+            "img.youtube.com",
         ],
     },
     async redirects() {

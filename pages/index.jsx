@@ -24,6 +24,10 @@ const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch")
     ssr: false,
 });
 
+const VideoComponent = dynamic(() => import("../components/VideoComponent"), {
+    ssr: false,
+});
+
 export default function Home(props) {
     return (
         <>
@@ -75,6 +79,14 @@ export default function Home(props) {
             </section>
             <DerforSection />
             <GodeRåd />
+            <section className="container">
+                <h2>Se en video om hvordan Tagberegneren.dk virker</h2>
+                <VideoComponent
+                    title="Sådan virker Tagberegneren.dk"
+                    description="Tagberegneren.dk giver dig en nøjagtig pris på dit nye tag eller din nye tagmaling. Det tager kun 30 sekunder at få en pris. Det hele regnes ud automatisk, så snart du har indtastet din adresse."
+                    date="2023-09-27"
+                    youtubeId="hGAF2ATNS2s" />
+            </section>
             <section className="entry-content blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
                     <div className="max-w-3xl mx-auto">

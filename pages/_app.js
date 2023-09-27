@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import WebsiteFooter from "./../components/WebsiteFooter";
 import { Poppins } from "next/font/google";
 import { GoogleAnalytics } from "nextjs-google-analytics";
-import Providers from '../lib/providers'
 import { SearchProvider } from '../lib/use-search';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -55,7 +54,6 @@ const poppins = Poppins({
 
 function MyApp({ Component, pageProps, }) {
     return (
-        <Providers>
             <SearchProvider>
                 <div className={`${poppins.className}`}>
                     <GoogleAnalytics 
@@ -69,7 +67,6 @@ function MyApp({ Component, pageProps, }) {
                     <WebsiteFooter />
                 </div>
             </SearchProvider>
-        </Providers>
     );
 }
 

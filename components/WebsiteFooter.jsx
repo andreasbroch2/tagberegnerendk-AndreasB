@@ -6,7 +6,7 @@ export default function WebsiteFooter() {
             <div className="container p-3 lg:p-0">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-20 py-16">
                     <div className="text-white">
-                        <h4 className="font-semibold text-2xl">Tagberegneren.dk</h4>
+                        <p className="font-semibold text-2xl">Tagberegneren.dk</p>
                         <p className="font-light mt-4">
                             Tagberegneren.dk er en gratis beregner, der hjælper dig med at beregne
                             prisen på dit nye tag. Vi har samlet priser fra håndværkere i hele

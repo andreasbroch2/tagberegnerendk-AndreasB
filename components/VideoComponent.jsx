@@ -3,6 +3,7 @@
 import { VideoJsonLd } from "next-seo"
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import playButton from "../assets/play-button.png";
 
 export default function VideoComponent(props) {
     const [imageClicked, setImageClicked] = useState(false);
@@ -32,7 +33,7 @@ export default function VideoComponent(props) {
                             alt="yt thumbnail"
                             priority
                         />
-                        <img className='play' id="play-button" src="https://addplaybuttontoimage.way4info.net/Images/Icons/7.png" alt="play button" />
+                        <Image className='play' id="play-button" src={playButton} alt="play button" />
                     </>
                 ) : (
                     <iframe

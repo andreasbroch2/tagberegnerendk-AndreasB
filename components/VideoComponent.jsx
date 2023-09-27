@@ -32,7 +32,7 @@ export default function VideoComponent(props) {
                             alt="yt thumbnail"
                             priority
                         />
-                        <img className='play' id="play-button" src="http://addplaybuttontoimage.way4info.net/Images/Icons/7.png" alt="play button" />
+                        <img className='play' id="play-button" src="https://addplaybuttontoimage.way4info.net/Images/Icons/7.png" alt="play button" />
                     </>
                 ) : (
                     <iframe

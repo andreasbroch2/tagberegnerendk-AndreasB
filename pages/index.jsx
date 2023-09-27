@@ -4,7 +4,6 @@ import { BreadcrumbJsonLd } from "next-seo";
 import Seo from "../components/Seo";
 import ServerToc from "../components/ServerToc";
 import { getSinglePost } from "../lib/wordpress";
-// import AdresseSearch from "../components/AdresseSearch";
 import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
 import CleanLinks from "../components/CleanLinks";

@@ -48,7 +48,7 @@ const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'),
 
 const poppins = Poppins({
     subsets: ["latin"],
-    weight: ["600", "300", "400", "500", "700"],
+    weight: ["600", "300", "400", "500"],
     variable: "--font-poppins",
 });
 

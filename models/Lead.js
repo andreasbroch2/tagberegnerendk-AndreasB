@@ -1,4 +1,3 @@
-const { Inter } = require("next/font/google");
 const mongoose = require("../lib/db");
 
 let Lead;

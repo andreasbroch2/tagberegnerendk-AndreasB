@@ -4,7 +4,8 @@ import ServerToc from './ServerToc';
 import Link from 'next/link';
 import byggetilbudAd from '../assets/3byggetilbud_336x280.jpg';
 import FAQComponent from './FAQComponent';
-import postConverter  from '../lib/postConverter';
+import postConverter from '../lib/postConverter';
+import { ByggeTilbud2 } from './ByggeTilbud'
 
 export default function TagTyperLayout({ children, ...props }) {
     return (
@@ -99,6 +100,7 @@ export default function TagTyperLayout({ children, ...props }) {
                         </div>
                     </div>
                 </div>
+                <ByggeTilbud2 />
             </article>
         </>
     );
@@ -135,10 +137,15 @@ export function ArticleLayout({ children, ...props }) {
                 isAccessibleForFree={true}
             />
             <article className='single-post my-4 md:my-8'>
-                <div className="entry-content md:px-4 flex">
+                <div className="container blog-section md:px-4 flex">
                     <div className="md:basis-2/3">
-                        <div className="max-w-3xl mx-auto">
-                            <h1>{`${props.props.title}`}</h1>
+                        <div className="max-w-3xl">
+                            <div id="breadcrumbs" className='mb-4 text-xs'>
+                                <span><Link href={'/'}>Forside</Link></span>
+                                <span className="separator">  /  </span>
+                                <span>{props.props.title}</span>
+                            </div>
+                            <h1 className='text-left'>{`${props.props.title}`}</h1>
                             {/* Add author and modified date */}
                             <div className="post-meta flex my-4 items-center gap-2 text-sm">
                                 <div className="post-meta__date">
@@ -181,6 +188,7 @@ export function ArticleLayout({ children, ...props }) {
                         </div>
                     </div>
                 </div>
+                <ByggeTilbud2 />
             </article>
         </>
     );

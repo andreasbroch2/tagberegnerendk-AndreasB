@@ -1,6 +1,6 @@
 import Seo from '../components/Seo';
 import { getSinglePost } from "../lib/wordpress";
-import TagTyperLayout from "../components/ArticleLayout";
+import {ArticleLayout} from "../components/ArticleLayout";
 import algeRens from "../assets/algerens.jpg"
 import CleanLinks from "../components/CleanLinks";
 
@@ -21,9 +21,9 @@ export default function Page(props) {
                 type="article"
                 props={props.data}
             />
-            <TagTyperLayout props={props.data} image={algeRens} canonical="https://www.tagberegneren.dk/hvad-koster-algerens-guide" cleanElement={props.cleanElement}>
+            <ArticleLayout props={props.data} image={algeRens} canonical="https://www.tagberegneren.dk/hvad-koster-algerens-guide" cleanElement={props.cleanElement}>
                 {props.cleanElement}
-            </TagTyperLayout>
+            </ArticleLayout>
         </>
     );
 }

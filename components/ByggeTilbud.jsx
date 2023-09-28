@@ -33,7 +33,7 @@ export default function ByggeTilbud() {
                     <p className="italic">Brug først vores beregner til at udregne dit tagareal og lave en opgavebeskrivelse klar til anmode om tilbud</p>
                 </div>
             </div>
-            <div className="text-center mb-8"><Link href="/3byggetilbud" className="acceptButton">Anmod om tilbud på din tagrenovering</Link></div>
+            <div className="text-center mb-8"><Link href="/3byggetilbud" className="acceptButton" target="_blank">Anmod om tilbud på din tagrenovering</Link></div>
         </div >
     );
 }
@@ -64,7 +64,7 @@ export function ByggeTilbud2() {
                         <p className="italic">Brug først vores beregner til at udregne dit tagareal og lave en opgavebeskrivelse klar til at udfylde deres formular.</p>
                     </div>
                 </div>
-                <div className="text-center"><Link href="/3byggetilbud" className="acceptButton">Anmod om tilbud på din tagrenovering</Link></div>
+                <div className="text-center"><Link href="/3byggetilbud" className="acceptButton" target="_blank">Anmod om tilbud på din tagrenovering</Link></div>
             </div>
         </section>
     );

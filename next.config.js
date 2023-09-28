@@ -36,6 +36,11 @@ const nextConfig = {
                 permanent: true,
             },
             {
+                source: '/hvad-koster-hulmursisolering-guide',
+                destination: '/hulmursisolering',
+                permanent: true,
+            },
+            {
                 source: '/tegltag',
                 destination: '/tagtyper/hvad-koster-tegltag-guide',
                 permanent: true,

@@ -12,7 +12,7 @@ export default function WebsiteHeader() {
     return (
         <header>
             <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
-                <p>Præcis prisberegning på nyt tag og tagmaling</p>
+                Præcis prisberegning på nyt tag og tagmaling
             </div>
             <div className="container px-3 lg:px-0">
                 <div className="mt-5 flex flex-wrap justify-between">

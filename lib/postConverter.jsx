@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-const parse = require('html-react-parser');
+import parse from "html-react-parser";
 
-export default function postConverter(element: String) {
+export default function postConverter(element) {
   var cleanJsx = parse(element);
   let count = 1;
   function reactNodeToImg(node) {

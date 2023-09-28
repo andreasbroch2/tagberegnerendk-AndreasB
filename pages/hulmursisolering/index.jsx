@@ -1,6 +1,9 @@
 import dynamic from "next/dynamic";
 import Seo from "../../components/Seo";
 import { getSinglePost } from "../../lib/wordpress";
+import CleanLinks from "../../components/CleanLinks";
+import postConverter from "../../lib/postConverter";
+import ServerToc from "../../components/ServerToc";
 
 const HulmurSearch = dynamic(() => import("../../components/HulmurSearch"), {
     ssr: false,
@@ -12,9 +15,10 @@ export default function Hulmursisolering(props) {
     return (
         <>
             <Seo
-                title="Hvad koster hulmursisolering? - Få en gratis pris på hulmursisolering her"
-                description="Få en gratis pris på hulmursisolering her. Beregn prisen på hulmursisolering på kun 10 sekunder. Få en præcis pris og forventet besparelse ved hulmursisolering på kun 10 sekunder."
-                canonical="https://www.tagberegneren.dk/hulmursisolering" />
+                type="article"
+                props={props.data}
+                canonical="https://www.tagberegneren.dk/hulmursisolering"
+            />
             <section className="titleSection">
                 <div className="container">
                     <div className={` grid grid-cols-1 sm:mt-20`}>
@@ -37,16 +41,32 @@ export default function Hulmursisolering(props) {
                     </div>
                 </div>
             </section>
-            <section className="blog-section">
-                <div className="container" dangerouslySetInnerHTML={{ __html: props.data?.content }}></div>
+            <section className="entry-content blog-section md:px-4 flex">
+                <div className="md:basis-2/3">
+                    <div className="max-w-3xl mx-auto">
+                        <div id="article-text">
+                            {postConverter(props.cleanElement)}
+                        </div>
+                    </div>
+                </div>
+                <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
+                    <div className=''>
+                        <div className="toc-container mt-6 w-fit mx-auto">
+                            <div className="info">
+                                <ServerToc html={props.cleanElement} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
     );
 }
 
 export const getStaticProps = async () => {
-    const data = await getSinglePost('hulmursisolering');
+    const data = await getSinglePost('hvad-koster-hulmursisolering-guide');
+    const cleanElement = CleanLinks(data.content);
     return {
-        props: { data }
+        props: { data, cleanElement }
     }
 }

@@ -11,10 +11,11 @@ module.exports = {
                 'extra-tight': '1.15',
             },
             colors: {
-                mygreen: "#0f9500",
-                primary: "#0f9500",
+                mygreen: "#4AB252",
+                primary: "#4AB252",
                 secondary: "#F97316",
                 darkblue: "#0D1F3C",
+                bluebt: "#002E5F"
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

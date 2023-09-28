@@ -71,7 +71,9 @@
 button {
   box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.5);
 }
-
+p{
+  @apply mb-2;
+}
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -141,10 +143,6 @@ section {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
-  p {
-    margin-bottom: 6px;
-  }
 }
 
 Footer {
@@ -157,8 +155,6 @@ Footer {
 
 .container {
   margin: auto;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
   max-width: 1300px !important;
 }
 
@@ -252,6 +248,9 @@ div.faq-container {
   }
 }
 
+.box{
+  @apply p-6 md:p-10 rounded-3xl bg-white shadow-xl mt-10;
+}
 div.toc-container {
   @apply p-4;
   margin-bottom: 20px;
@@ -278,21 +277,15 @@ div.toc-container {
   .ib-toc-separator {
     background: #333;
   }
-
-  p {
-    @apply mb-0;
-  }
-
   nav {
-
     ul {
-      @apply ml-0 my-0;
+      @apply mt-3 ml-0 mb-0;
 
       li {
         @apply mb-0;
         font-size: 1rem;
         ul {
-          @apply ml-6 mb-0;
+          @apply ml-6 mb-0 mt-0;
         }
       }
     }

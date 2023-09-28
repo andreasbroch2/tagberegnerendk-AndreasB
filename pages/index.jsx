@@ -8,6 +8,7 @@ import DerforSection from "../components/DerforSection";
 import GodeRåd from "../components/GodeRåd";
 import CleanLinks from "../components/CleanLinks";
 import postConverter from "../lib/postConverter";
+import { ByggeTilbud2 } from "../components/ByggeTilbud";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
     loading: () =>
@@ -76,7 +77,7 @@ export default function Home(props) {
                     </div>
                 </div>
             </section>
-            <DerforSection />
+            <DerforSection dark={false} />
             <GodeRåd />
             <section className="container">
                 <h2>Se en video om hvordan Tagberegneren.dk virker</h2>
@@ -86,9 +87,9 @@ export default function Home(props) {
                     date="2023-09-27"
                     youtubeId="hGAF2ATNS2s" />
             </section>
-            <section className="entry-content blog-section md:px-4 flex">
+            <section className="container blog-section md:px-4 flex">
                 <div className="md:basis-2/3">
-                    <div className="max-w-3xl mx-auto">
+                    <div className="max-w-3xl">
                         <div id="article-text">
                             {postConverter(props.cleanElement)}
                         </div>
@@ -104,6 +105,7 @@ export default function Home(props) {
                     </div>
                 </div>
             </section>
+            <ByggeTilbud2 />
         </>
     );
 }

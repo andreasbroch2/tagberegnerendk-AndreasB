@@ -7,6 +7,7 @@ import DerforSection from "../components/DerforSection";
 import ServerToc from "../components/ServerToc";
 import CleanLinks from "../components/CleanLinks";
 import postConverter from "../lib/postConverter";
+import ByggeTilbud, {ByggeTilbud2} from "../components/ByggeTilbud";
 
 const DynamixAdresseSearch = dynamic(() => import("../components/AdresseSearch"), {
     loading: () =>
@@ -72,10 +73,11 @@ export default function PrisPaaTag(props) {
                     </div>
                 </div>
             </section>
-            <DerforSection />
-            <section className="entry-content blog-section md:px-4 flex">
+            <DerforSection dark={true} />
+            <ByggeTilbud2 />
+            <section className="container blog-section flex">
                 <div className="md:basis-2/3">
-                    <div className="max-w-3xl mx-auto">
+                    <div className="max-w-3xl">
                         <div id="article-text">
                             {postConverter(props.cleanElement)}
                         </div>
@@ -85,7 +87,7 @@ export default function PrisPaaTag(props) {
                     <div className=''>
                         <div className="toc-container mt-6 w-fit mx-auto">
                             <div className="info">
-                                <ServerToc html={props.data?.content} />
+                                <ServerToc html={props.cleanElement} />
                             </div>
                         </div>
                     </div>

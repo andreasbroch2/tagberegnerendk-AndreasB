@@ -7,10 +7,10 @@ export default function GodeRåd() {
     return (
         <section>
             <div className="container">
-                <h2>
-                    3 gode råd til dig som skal renovere tag
-                </h2>
-                <div className="p-10 rounded-3xl bg-darkblue shadow-xl mt-10">
+                <div className="p-8 rounded-3xl bg-darkblue shadow-xl mt-10 text-white">
+                    <h2 className="text-center mb-8">
+                        3 gode råd til dig som skal renovere tag
+                    </h2>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
                         <div className="text-white flex flex-col items-center text-center">
                             <div className="iconBox">

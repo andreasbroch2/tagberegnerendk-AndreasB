@@ -27,6 +27,8 @@ export default function ServerToc({ html }) {
   return (
 
     <nav aria-label="Indholdsfortegnelse" className="text ib-toc-container toc-table">
+      <p>Indholdsfortegnelse</p>
+      <hr />
       <ul>
         {headings.map((heading, index) => {
           count ++;

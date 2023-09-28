@@ -42,6 +42,9 @@ export default function WebsiteFooter() {
                                 <Link href="/hvad-koster-algerens-guide">Hvad koster algerens?</Link>
                             </li>
                             <li className="footer-link">
+                                <Link href="/hvad-koster-hulmursisolering-guide">Hvad koster hulmursisolering?</Link>
+                            </li>
+                            <li className="footer-link">
                                 <Link href="/goderaad">Gode råd</Link>
                             </li>
                             <li className="footer-link">

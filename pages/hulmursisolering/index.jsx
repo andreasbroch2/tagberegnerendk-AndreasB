@@ -4,6 +4,7 @@ import { getSinglePost } from "../../lib/wordpress";
 import CleanLinks from "../../components/CleanLinks";
 import postConverter from "../../lib/postConverter";
 import ServerToc from "../../components/ServerToc";
+import HulmurCalc from "../../components/HulmurCalc";
 
 const HulmurSearch = dynamic(() => import("../../components/HulmurSearch"), {
     ssr: false,
@@ -34,6 +35,7 @@ export default function Hulmursisolering(props) {
                             </h2>
                         </div>
                     </div>
+                    <HulmurCalc />
                     <div className="mt-10 searchAdresseDiv">
                         <div className="mt-5 md:mt-0">
                             <HulmurSearch />

@@ -1318,7 +1318,6 @@ export default function Beregning() {
                                             </div>
                                         </MotionDiv>
                                     )}
-
                                 </MotionDiv>
                             )}
                         </div>

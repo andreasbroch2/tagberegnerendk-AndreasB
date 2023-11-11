@@ -206,6 +206,8 @@ export default function Beregning() {
         posthog.capture('Tagtjek - Klik', {
         });
     }
+    // Create variable that contains gclid from localstorage or empty string if on client side
+    const gclid = typeof window !== 'undefined' ? localStorage.getItem('gclid') : '';
 
     if (loading) return <div className="text-center my-24 font-bold">Indlæser beregner...</div>;
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
@@ -1310,7 +1312,7 @@ export default function Beregning() {
                                                                         setByggetilbud(false);
                                                                         setShowFinish(true);
                                                                     }
-                                                                } href="/3byggetilbud/" target="_blank">Få 3 gratis tilbud</a>
+                                                                } href={`/3byggetilbud?uid=${gclid}`} target="_blank">Få 3 gratis tilbud</a>
                                                             </div>
                                                         </div>
                                                     </MotionDiv>

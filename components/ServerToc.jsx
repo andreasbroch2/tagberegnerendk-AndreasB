@@ -13,7 +13,6 @@ export default function ServerToc({ html }) {
     const level = element.tagName === 'h2' ? 2 : 3;
     const id = $(element).attr('id');
     const title = $(element).text();
-
     const heading = { level, id, title, items: [] };
 
     if (level === 2) {

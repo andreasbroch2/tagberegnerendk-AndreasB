@@ -7,6 +7,7 @@ import { SearchProvider } from '../lib/use-search';
 import Link from 'next/link';
 import Image from 'next/image';
 import searchIcon from '../assets/search.svg';
+import Script from "next/script.js";
 
 const WebsiteHeader = dynamic(() => import('./../components/WebsiteHeader.jsx'), {
     loading: () =>

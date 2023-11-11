@@ -29,6 +29,15 @@ const VideoComponent = dynamic(() => import("../components/VideoComponent"), {
 });
 
 export default function Home(props) {
+    // If gclid url parameter exists, save value to localstorage
+    if (typeof window !== "undefined") {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gclid = urlParams.get("gclid");
+        if (gclid) {
+            localStorage.setItem("gclid", gclid);
+            console.log("glcid: ", gclid);
+        }
+    }
     return (
         <>
             <Head>

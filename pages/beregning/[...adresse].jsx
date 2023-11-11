@@ -50,6 +50,7 @@ export default function Beregning({ params }) {
     const router = useRouter();
     const posthog = usePostHog();
     const ctaVariant = useFeatureFlagVariantKey('test-flas');
+    
     useEffect(() => {
         if (ctaVariant === 'test') {
             setCtaState('Beregn Pris')

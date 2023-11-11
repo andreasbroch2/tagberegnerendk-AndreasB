@@ -8,6 +8,8 @@ import postConverter from '../lib/postConverter';
 import { ByggeTilbud2 } from './ByggeTilbud'
 
 export default function TagTyperLayout({ children, ...props }) {
+    
+    const gclid = typeof window !== 'undefined' ? localStorage.getItem('gclid') : '';
     return (
         <>
             <BreadcrumbJsonLd
@@ -83,7 +85,7 @@ export default function TagTyperLayout({ children, ...props }) {
                     <div className="hidden md:basis-1/3 md:block sticky top-0 max-h-[95vh] overflow-y-auto">
                         <div className='ad-container flex place-content-center items-center flex-col relative'>
                             <h3 className='text-center mb-4'>Få 3 tilbud på din opgave</h3>
-                            <a href="/3byggetilbud" target="_blank" rel="nofollow noopener">
+                            <a href={`/3byggetilbud?uid=${gclid}`} target="_blank" rel="nofollow noopener">
                                 <Image
                                     src={byggetilbudAd}
                                     alt="Få 3 tilbud på din opgave"

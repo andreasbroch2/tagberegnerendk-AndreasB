@@ -12,7 +12,6 @@ export async function getStaticProps() {
     };
 }
 
-
 export default function Page(props) {
     return (
         <>

@@ -211,6 +211,7 @@ export default function Beregning() {
     // Create variable that contains utm source and medium from localstorage or empty string if on client side
     const utmSource = typeof window !== 'undefined' ? localStorage.getItem('utm_source') : '';
     const utmMedium = typeof window !== 'undefined' ? localStorage.getItem('utm_medium') : '';
+    const userID = typeof window !== 'undefined' ? localStorage.getItem('userid') : '';
 
     if (loading) return <div className="text-center my-24 font-bold">Indlæser beregner...</div>;
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
@@ -1315,7 +1316,7 @@ export default function Beregning() {
                                                                         setByggetilbud(false);
                                                                         setShowFinish(true);
                                                                     }
-                                                                } href={`/3byggetilbud?uid=${gclid}&uid2=${utmSource}-${utmMedium}-beregner`} target="_blank">Få 3 gratis tilbud</a>
+                                                                } href={`/3byggetilbud?uid=${gclid}&uid2=${utmSource}-${utmMedium}-${userID}-beregner`} target="_blank">Få 3 gratis tilbud</a>
                                                             </div>
                                                         </div>
                                                     </MotionDiv>

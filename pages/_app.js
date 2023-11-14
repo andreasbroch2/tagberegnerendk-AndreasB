@@ -2,7 +2,7 @@ import "../styles/globals.scss";
 import dynamic from 'next/dynamic'
 import WebsiteFooter from "./../components/WebsiteFooter";
 import { Poppins } from "next/font/google";
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import { GoogleAnalytics, pageView } from "nextjs-google-analytics";
 import { SearchProvider } from '../lib/use-search';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -55,6 +55,10 @@ const poppins = Poppins({
 
 function MyApp({ Component, pageProps, }) {
     if (typeof window !== "undefined") {
+        // Generate userid and store in localstorage
+        if (!localStorage.getItem("userid")) {
+            localStorage.setItem("userid", Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
+        }
         const urlParams = new URLSearchParams(window.location.search);
         const gclid = urlParams.get("gclid");
         if (gclid) {
@@ -69,12 +73,19 @@ function MyApp({ Component, pageProps, }) {
         if (utmMedium) {
             localStorage.setItem("utm_medium", utmMedium);
         }
+        pageView({
+            title: document.title,
+            location: window.location.href,
+            path: window.location.pathname,
+            sendPageView: true,
+            userId: localStorage.getItem("userid")
+        })
     }
+
     return (
             <SearchProvider>
                 <div className={`${poppins.className}`}>
                     <GoogleAnalytics 
-                    trackPageViews
                     strategy="lazyOnload"
                      />
                     <WebsiteHeader />

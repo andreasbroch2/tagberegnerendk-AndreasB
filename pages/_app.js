@@ -54,6 +54,22 @@ const poppins = Poppins({
 });
 
 function MyApp({ Component, pageProps, }) {
+    if (typeof window !== "undefined") {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gclid = urlParams.get("gclid");
+        if (gclid) {
+            localStorage.setItem("gclid", gclid);
+        }
+        // Also save utm source and medium
+        const utmSource = urlParams.get("utm_source");
+        const utmMedium = urlParams.get("utm_medium");
+        if (utmSource) {
+            localStorage.setItem("utm_source", utmSource);
+        }
+        if (utmMedium) {
+            localStorage.setItem("utm_medium", utmMedium);
+        }
+    }
     return (
             <SearchProvider>
                 <div className={`${poppins.className}`}>

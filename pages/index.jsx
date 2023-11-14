@@ -35,7 +35,15 @@ export default function Home(props) {
         const gclid = urlParams.get("gclid");
         if (gclid) {
             localStorage.setItem("gclid", gclid);
-            console.log("glcid: ", gclid);
+        }
+        // Also save utm source and medium
+        const utmSource = urlParams.get("utm_source");
+        const utmMedium = urlParams.get("utm_medium");
+        if (utmSource) {
+            localStorage.setItem("utm_source", utmSource);
+        }
+        if (utmMedium) {
+            localStorage.setItem("utm_medium", utmMedium);
         }
     }
     return (

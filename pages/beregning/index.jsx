@@ -23,6 +23,7 @@ import { prisNedtagning } from "../../lib/prices";
 import jydskTagTeknik from "../../assets/jydsk-tagteknik.png";
 import trustpilot from "../../assets/trustpilot-4.5.png";
 import router from "next/router";
+import UrlString from '../../lib/UrlString';
 
 const leadPriceId = uuidv4();
 
@@ -68,7 +69,10 @@ export default function Beregning() {
 
     const searchParams = useSearchParams();
     const searchAdresse = searchParams.get("adresse");
-
+    const [ urlState, setUrlState ] = useState("");
+    useEffect(() => {
+        setUrlState(UrlString());
+    })
     useEffect(() => {
         event("Beregning", {
             category: "Beregning",
@@ -206,12 +210,6 @@ export default function Beregning() {
         posthog.capture('Tagtjek - Klik', {
         });
     }
-    // Create variable that contains gclid from localstorage or empty string if on client side
-    const gclid = typeof window !== 'undefined' ? localStorage.getItem('gclid') : '';
-    // Create variable that contains utm source and medium from localstorage or empty string if on client side
-    const utmSource = typeof window !== 'undefined' ? localStorage.getItem('utm_source') : '';
-    const utmMedium = typeof window !== 'undefined' ? localStorage.getItem('utm_medium') : '';
-    const userID = typeof window !== 'undefined' ? localStorage.getItem('userid') : '';
 
     if (loading) return <div className="text-center my-24 font-bold">Indlæser beregner...</div>;
     if (!boligFound) return <div className="text-center my-24 font-bold">Vi kan desværre ikke udregne pris på din bolig. Prøv en anden adresse.</div>
@@ -1152,7 +1150,7 @@ export default function Beregning() {
                                                                         setByggetilbud(true);
                                                                         // Scroll to element with id byggetilbud
                                                                     }
-                                                                } href="/gratistagtjek/" target="_blank">Bestil dit gratis tagtjek</a>
+                                                                } href={`/gratistagtjek${urlState};beregner`} target="_blank">Bestil dit gratis tagtjek</a>
                                                             </div>
                                                         </div>
                                                         <div className="mt-4">
@@ -1316,7 +1314,7 @@ export default function Beregning() {
                                                                         setByggetilbud(false);
                                                                         setShowFinish(true);
                                                                     }
-                                                                } href={`/3byggetilbud?uid=${gclid}&uid2=${utmSource}-${utmMedium}-${userID}-beregner`} target="_blank">Få 3 gratis tilbud</a>
+                                                                } href={`/3byggetilbud?${urlState};beregner`} target="_blank">Få 3 gratis tilbud</a>
                                                             </div>
                                                         </div>
                                                     </MotionDiv>

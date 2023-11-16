@@ -60,9 +60,13 @@ function MyApp({ Component, pageProps, }) {
             localStorage.setItem("userid", Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
         }
         const urlParams = new URLSearchParams(window.location.search);
-        const gclid = urlParams.get("gclid");
-        if (gclid) {
-            localStorage.setItem("gclid", gclid);
+        if (!localStorage.getItem("gclid")) {
+            const gclid = urlParams.get("gclid");
+            if (gclid) {
+                localStorage.setItem("gclid", gclid);
+                localStorage.setItem("utm_source", "google");
+                localStorage.setItem("utm_medium", "cpc");
+            }
         }
         // Also save utm source and medium
         const utmSource = urlParams.get("utm_source");
@@ -72,6 +76,13 @@ function MyApp({ Component, pageProps, }) {
         }
         if (utmMedium) {
             localStorage.setItem("utm_medium", utmMedium);
+        }
+        if (!localStorage.getItem("referer")) {
+            //Get referer and save to localstorage
+            const referer = document.referrer;
+            if (referer) {
+                localStorage.setItem("referer", referer);
+            }
         }
         pageView({
             title: document.title,
@@ -83,18 +94,18 @@ function MyApp({ Component, pageProps, }) {
     }
 
     return (
-            <SearchProvider>
-                <div className={`${poppins.className}`}>
-                    <GoogleAnalytics 
+        <SearchProvider>
+            <div className={`${poppins.className}`}>
+                <GoogleAnalytics
                     strategy="lazyOnload"
-                     />
-                    <WebsiteHeader />
-                    <main>
-                        <Component {...pageProps} />
-                    </main>
-                    <WebsiteFooter />
-                </div>
-            </SearchProvider>
+                />
+                <WebsiteHeader />
+                <main>
+                    <Component {...pageProps} />
+                </main>
+                <WebsiteFooter />
+            </div>
+        </SearchProvider>
     );
 }
 

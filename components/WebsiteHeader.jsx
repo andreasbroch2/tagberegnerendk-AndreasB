@@ -14,8 +14,8 @@ export default function WebsiteHeader() {
             <div className="bg-mygreen text-white text-center w-full  text-sm lg:text-lg font-medium py-2 px-2">
                 Præcis prisberegning på nyt tag og tagmaling
             </div>
-            <div className="container px-3 lg:px-0">
-                <div className="mt-5 flex flex-wrap justify-between">
+            <div className="container flex px-3 lg:px-0">
+                <div className="mt-5 w-full flex flex-wrap justify-between">
                     <Link href="/" className="flex my-auto">
                         <h4 className="text-xl md:text-3xl font-semibold flex gap-2">TagBeregneren.dk</h4>
                     </Link>

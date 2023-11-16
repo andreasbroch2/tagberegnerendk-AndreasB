@@ -5,6 +5,8 @@ import Link from "next/link";
 import byggetilbudLogo from "../assets/3byggetilbud-logo.svg"
 import checkmark from "../assets/checkmark.svg"
 import BTTrustpilot from "./BTTrustpilot";
+import UrlString from "../lib/UrlString";
+import { useEffect, useState } from "react";
 
 export default function ByggeTilbud() {
     return (
@@ -39,6 +41,10 @@ export default function ByggeTilbud() {
 }
 
 export function ByggeTilbud2() {
+    const [ urlState, setUrlState ] = useState("");
+    useEffect(() => {
+        setUrlState(UrlString());
+    })
     return (
         <section className="container">
             <div className="box">
@@ -64,7 +70,7 @@ export function ByggeTilbud2() {
                         <p className="italic">Brug først vores beregner til at udregne dit tagareal og lave en opgavebeskrivelse klar til at udfylde deres formular.</p>
                     </div>
                 </div>
-                <div className="text-center"><Link href="/3byggetilbud" className="acceptButton" target="_blank">Anmod om tilbud på din tagrenovering</Link></div>
+                <div className="text-center"><Link href={`/3byggetilbud${urlState};byggetilbud2`} className="acceptButton" target="_blank">Anmod om tilbud på din tagrenovering</Link></div>
             </div>
         </section>
     );

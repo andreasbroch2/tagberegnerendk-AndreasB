@@ -1,6 +1,9 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /3byggetilbud
+Disallow: /gratistagtjek
+
 
 # Host
 Host: https://www.tagberegneren.dk

@@ -17,8 +17,8 @@ const nextConfig = {
                 permanent: true,
             },
             {
-                source: '/gratistagtjek',
-                destination: 'https://www.partner-ads.com/dk/klikbanner.php?partnerid=44511&bannerid=102210&htmlurl=https://book.jydsktagteknik.dk/tagtjek/',
+                source: '/gratistagtjek:path*',
+                destination: 'https://www.partner-ads.com/dk/klikbanner.php?partnerid=44511&bannerid=102210&:path*&htmlurl=https://book.jydsktagteknik.dk/tagtjek/',
                 permanent: true,
             },
             {

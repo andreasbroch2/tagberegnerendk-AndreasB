@@ -1314,7 +1314,7 @@ export default function Beregning() {
                                                                         setByggetilbud(false);
                                                                         setShowFinish(true);
                                                                     }
-                                                                } href={`/3byggetilbud?${urlState};beregner`} target="_blank">Få 3 gratis tilbud</a>
+                                                                } href={`/3byggetilbud${urlState};beregner`} target="_blank">Få 3 gratis tilbud</a>
                                                             </div>
                                                         </div>
                                                     </MotionDiv>

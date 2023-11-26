@@ -345,8 +345,8 @@ export default function Beregning() {
             {/* A hidden selector for boliggrundplan. Show when button is clicked */}
             {showSelectBoligGrundPlan && (
                 <MotionDiv>
-                    <div className="mb-5 text-center">
-                        <p className="w-full font-bold">
+                    <div className="mb-5 text-center mx-auto">
+                        <p className="w-full font-bold text-center">
                             Vælg din boligs grundplan
                         </p>
                         <div className="flex flex-col gap-10">
